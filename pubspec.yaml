@@ -27,9 +27,9 @@ dependencies:
   dart_style: ^1.2.8
   #yaml: ^2.1.16
   rxdart: any
-  file_system_explorer:
-      git:
-        url: https://github.com/Norbert515/file_system_explorer.git
+#  file_system_explorer:
+#      git:
+#        url: https://github.com/Norbert515/file_system_explorer.git
   #flutter_desktop_widgets2:
   #  path: ../flutter_desktop_widgets2
   flutter_desktop_widgets2:
@@ -41,7 +41,7 @@ dependencies:
   mustache:
     git:
       url: "https://github.com/Norbert515/mustache.git"
-
+  file_picker: ^2.1.7
   ####################################################### WEB
   #flutter_web: any
 ####################################################### WEB

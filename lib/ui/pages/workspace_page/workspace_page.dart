@@ -1,4 +1,4 @@
-import 'package:file_system_explorer/file_system_explorer.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -261,14 +261,7 @@ class CodeWorkspace extends StatelessWidget {
                           ));
                           return;
                         }
-                        String path = await showPicker(
-                            context,
-                            searchFor: FlutterFileType.Folder,
-                            topInfo: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("Select a folder to write the code to",
-                            textAlign: TextAlign.center,),
-                        ));
+                        String path = await FilePicker.platform.getDirectoryPath();;
                         AppScope.of(context).saveToFolder(path);
                       },
                       child: Text(kIsWeb? "Copy to clipboard": "Export"),

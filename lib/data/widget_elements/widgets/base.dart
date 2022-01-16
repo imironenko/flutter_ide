@@ -6,7 +6,6 @@ import 'package:widget_maker_2_0/data/widget_elements/base/instanced_widget_elem
 import 'package:widget_maker_2_0/data/widget_elements/base/widget_element.dart';
 import 'package:widget_maker_2_0/material.dart';
 import 'package:provider/provider.dart';
-import 'package:widget_maker_2_0/ui/board_widget.dart';
 import 'package:widget_maker_2_0/data/app_scope/currently_dragging.dart';
 import 'package:widget_maker_2_0/ui/utils/at_cursor_alert.dart';
 import 'package:widget_maker_2_0/ui/utils/global_draggable.dart';
@@ -54,7 +53,7 @@ mixin ElementWidgetStateMixin<A extends WidgetElement, T extends ElementWidgetMi
     element = widgetBoard.getWidgetElementFromAnySource(widget.id);
     isSelected = widgetBoard.currentlySelectedValue == widget.id;
 
-    isInReference = context.ancestorWidgetOfExactType(InstancedWidgetElementWidget) != null;
+    isInReference = context.findAncestorWidgetOfExactType<InstancedWidgetElementWidget>() != null;
 
 
     playMode = project.playModeStream.value;

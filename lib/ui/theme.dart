@@ -10,7 +10,7 @@ class MyTheme extends StatelessWidget {
 
 
   static MyThemeData of(BuildContext context) {
-    final _MyInheritedTheme myInheritedTheme = context.inheritFromWidgetOfExactType(_MyInheritedTheme);
+    final _MyInheritedTheme myInheritedTheme =context.dependOnInheritedWidgetOfExactType(aspect:_MyInheritedTheme);
 
     return myInheritedTheme.myTheme.myThemeData;
   }

@@ -296,7 +296,7 @@ class GlobalDraggable<T> extends StatefulWidget {
   final DragEndCallback onDragEnd;
 
   @protected
-  MultiDragGestureRecognizer<MultiDragPointerState> createRecognizer(GestureMultiDragStartCallback onStart) {
+  MultiDragGestureRecognizer createRecognizer(GestureMultiDragStartCallback onStart) {
     switch (affinity) {
       case Axis.horizontal:
         return HorizontalMultiDragGestureRecognizer()..onStart = onStart;

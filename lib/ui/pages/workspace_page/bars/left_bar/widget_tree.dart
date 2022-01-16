@@ -71,7 +71,7 @@ class _WidgetTreeState extends State<WidgetTree> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text("Widget-Tree", style: Theme.of(context).textTheme.title,),
+            child: Text("Widget-Tree", style: Theme.of(context).textTheme.subtitle1,),
           ),
           Expanded(
             child: StreamBuilder<ItemsAndSelected>(
@@ -151,7 +151,7 @@ class _WidgetItem extends StatelessWidget {
         data: element.object.id,
         feedback: Container(
           padding: EdgeInsets.only(left: (element.index * 8).toDouble(), top: 4),
-          child: Text(element.object.name, style: Theme.of(context).textTheme.body1,),
+          child: Text(element.object.name, style: Theme.of(context).textTheme.bodyText1,),
         ),
         child: GlobalDragTarget<String>(
           onWillAccept: (it) => element.object.canAcceptChild(it),
@@ -176,7 +176,7 @@ class _WidgetItem extends StatelessWidget {
                         Icon(element.object.isCollapsed? Icons.arrow_drop_up : Icons.arrow_drop_down):
                         SizedBox(width: IconTheme.of(context).size,),
                     ),
-                    Text(element.object.name, style: Theme.of(context).textTheme.body1,),
+                    Text(element.object.name, style: Theme.of(context).textTheme.bodyText1,),
                   ],
                 ),
               ),

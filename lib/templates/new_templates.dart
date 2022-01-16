@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:widget_maker_2_0/data/bs/widget_board/widget_board.dart';
 import 'package:widget_maker_2_0/data/widget_elements/generated/final_widget_converter.dart';
@@ -26,7 +25,7 @@ WidgetBoard testTemplate() {
       fontFamily: "Roboto Slab",
     ),
     child: Form(
-      autovalidate: true,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Padding(
         padding: EdgeInsets.symmetric(),
         child: Column(

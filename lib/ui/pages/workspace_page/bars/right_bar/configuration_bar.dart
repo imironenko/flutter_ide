@@ -1,8 +1,6 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
 import 'package:widget_maker_2_0/data/app_scope/app_scope.dart';
 import 'package:widget_maker_2_0/data/bs/widget_board/widget_board.dart';
-import 'package:widget_maker_2_0/data/properties/basic_properties.dart';
 import 'package:widget_maker_2_0/data/widget_elements/base/widget_element.dart';
 import 'package:widget_maker_2_0/material.dart';
 import 'package:widget_maker_2_0/ui/widgets/dialogs/quick_widget_access_dialog.dart';
@@ -79,7 +77,7 @@ class _ConfigurationBarState extends State<ConfigurationBar> {
       children: <Widget>[
         Text(
           boardWidget.getWidgetElement(id).name,
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.subtitle1,
         ),
         Divider(),
         Row(
@@ -130,13 +128,13 @@ class _ConfigurationBarState extends State<ConfigurationBar> {
         children: <Widget>[
           Text(
             "Property Editor",
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.subtitle1,
           ),
           Expanded(
             child: Center(
               child: Text(
                 "Select a widget",
-                style: Theme.of(context).textTheme.subtitle,
+                style: Theme.of(context).textTheme.subtitle2,
               ),
             ),
           ),

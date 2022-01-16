@@ -15,7 +15,7 @@ class StringChanger extends StatelessValueChanger<String> {
       child: IntrinsicHeight(
         child: TextField(
           maxLines: null,
-          style: Theme.of(context).textTheme.body1,
+          style: Theme.of(context).textTheme.bodyText1,
           decoration: InputDecoration(
               contentPadding: EdgeInsets.all(8),
               border: OutlineInputBorder()

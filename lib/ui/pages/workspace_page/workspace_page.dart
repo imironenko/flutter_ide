@@ -12,7 +12,7 @@ import 'package:widget_maker_2_0/ui/widgets/dialogs/quick_widget_access_dialog.d
 
 import 'bars/context_tool_bar/context_tool_bar.dart';
 import 'bars/left_bar/left_bar.dart';
-import 'bars/navigation_bar.dart';
+import 'bars/navigation_bar.dart' as navbar;
 import 'bars/palette/palette_dialog.dart';
 import 'bars/right_bar/right_bar.dart';
 
@@ -26,13 +26,13 @@ class MShortCutManager extends ShortcutManager {
   /// [RawKeyboard] reports. If not specified, uses [RawKeyboard.keysPressed]
   /// instead.
   @protected
-  bool handleKeypress(
+  KeyEventResult handleKeypress(
     BuildContext context,
     RawKeyEvent event, {
     LogicalKeySet keysPressed,
   }) {
     if (event is! RawKeyDownEvent) {
-      return false;
+      return KeyEventResult.ignored;
     }
     assert(context != null);
     final LogicalKeySet keySet = keysPressed ?? LogicalKeySet.fromSet(RawKeyboard.instance.keysPressed);
@@ -60,11 +60,11 @@ class MShortCutManager extends ShortcutManager {
     if (matchedIntent != null) {
       final BuildContext primaryContext = WidgetsBinding.instance.focusManager.primaryFocus?.context;
       if (primaryContext == null) {
-        return false;
+        return KeyEventResult.ignored;
       }
-      return Actions.invoke(primaryContext, matchedIntent, nullOk: true);
+      return Actions.invoke(primaryContext, matchedIntent);
     }
-    return false;
+    return KeyEventResult.ignored;
   }
 
 }
@@ -131,7 +131,7 @@ class _WorkspacePageState extends State<WorkspacePage> {
             child: Column(
               children: <Widget>[
                 //TopNavigationBar(),
-                NavigationBar(
+                navbar.NavigationBar(
                   showVisual: showVisual,
                   onUpdate: (it) {
                     setState(() {

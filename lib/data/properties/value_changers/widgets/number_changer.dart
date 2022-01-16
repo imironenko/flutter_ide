@@ -1,4 +1,3 @@
-import 'package:flutter/scheduler.dart';
 import 'package:widget_maker_2_0/material.dart';
 
 import 'decoration.dart';
@@ -179,7 +178,7 @@ class NumberChangerState
             maxLines: 1,
             focusNode: focusNode,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.body1,
+            style: Theme.of(context).textTheme.bodyText1,
             controller: textEditingController,
             decoration: InputDecoration(
               disabledBorder: OutlineInputBorder(

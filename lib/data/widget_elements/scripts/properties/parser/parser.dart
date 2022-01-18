@@ -44,6 +44,7 @@ ParsedProp _parseProp(String? key, dynamic val) {
     }
     assert(false, type.runtimeType);
   }
+  throw "lib/data/widget_elements/script/parser/parser.dart 错误";
 }
 
 

@@ -13,7 +13,7 @@ class Trash extends StatelessWidget {
       child: DragTarget<String>(
         onWillAccept: (_) => true,
         onAccept: (it) {
-          AppScope.of(context).widgetBoard.removeWidget(it);
+          AppScope.of(context).widgetBoard!.removeWidget(it);
         },
         builder: (context, accepted, _) {
           if(accepted.isNotEmpty) {

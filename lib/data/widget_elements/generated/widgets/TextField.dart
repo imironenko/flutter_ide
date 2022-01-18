@@ -14,8 +14,8 @@ import 'package:widget_maker_2_0/data/widget_elements/widgets/textfield.dart';
 
 class TextFieldElement extends WidgetElement with NoChildElementMixin {
   TextFieldElement({
-    @required String id,
-    bool obscureText,
+    required String? id,
+    bool? obscureText,
   }) :
     obscureText = MBoolProperty(
         value: obscureText?? false,

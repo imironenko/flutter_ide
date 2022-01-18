@@ -11,7 +11,7 @@ class RightBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8),
-      color: MyTheme.of(context).background4dp,
+      color: MyTheme.of(context)!.background4dp,
       width: 350,
       height: double.infinity,
       child: Column(

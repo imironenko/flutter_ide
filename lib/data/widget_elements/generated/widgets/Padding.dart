@@ -14,8 +14,8 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class PaddingElement extends WidgetElement with SlotChildElementMixin {
   PaddingElement({
-    @required String id,
-    EdgeInsets padding,
+    required String? id,
+    EdgeInsets? padding,
   }) :
     padding = MEdgeInsetsProperty(
         value: padding?? const EdgeInsets.all(0),
@@ -63,7 +63,7 @@ class PaddingElement extends WidgetElement with SlotChildElementMixin {
  class PaddingElementWidget extends StatefulWidget with ElementWidgetMixin {
   PaddingElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _PaddingElementWidgetState createState() => _PaddingElementWidgetState();
@@ -75,12 +75,12 @@ class _PaddingElementWidgetState extends State<PaddingElementWidget> with Elemen
     return wrapWithDefault(
         child: Padding(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(PaddingElement.CHILD),
+               childId: element!.findIdForSlot(PaddingElement.CHILD),
                data: SlotData(slotName: PaddingElement.CHILD), 
              ),        
-         padding: element.padding.value,
+         padding: element!.padding.value!,
         )
-    );
+    )!;
   }
 
 } 

@@ -4,9 +4,9 @@ import 'package:widget_maker_2_0/data/code_builder.dart';
 import 'package:widget_maker_2_0/data/properties/wrappers/wrappers.dart';
 import 'basic_properties.dart';
 
-class MOffsetProperty extends MObjectProperty<Offset> {
+class MOffsetProperty extends MObjectProperty<Offset?> {
 
-  MOffsetProperty({ Offset value, String name, Offset defaultValue}):
+  MOffsetProperty({ Offset? value, String? name, Offset? defaultValue}):
         props = {
           "dx": MDoubleProperty(
             name: "dx",
@@ -37,15 +37,15 @@ class MOffsetProperty extends MObjectProperty<Offset> {
     return props.values.toList();
   }
   @override
-  Offset get value => internalValue == null? null: WOffset(
-    dx: props["dx"].value,
-    dy: props["dy"].value,
+  Offset? get value => internalValue == null? null: WOffset(
+    dx: props["dx"]!.value,
+    dy: props["dy"]!.value,
   );
 
   Map<String, dynamic> toMap() {
     return {
-      "dx": props["dx"].value.serialize(),
-      "dy": props["dy"].value.serialize(),
+      "dx": props["dx"]!.value.serialize(),
+      "dy": props["dy"]!.value.serialize(),
     };
   }
 

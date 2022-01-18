@@ -14,8 +14,8 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class ConstrainedBoxElement extends WidgetElement with SlotChildElementMixin {
   ConstrainedBoxElement({
-    @required String id,
-    BoxConstraints constraints,
+    required String? id,
+    BoxConstraints? constraints,
   }) :
     constraints = MBoxConstraintsProperty(
         value: constraints?? const BoxConstraints(),
@@ -63,7 +63,7 @@ class ConstrainedBoxElement extends WidgetElement with SlotChildElementMixin {
  class ConstrainedBoxElementWidget extends StatefulWidget with ElementWidgetMixin {
   ConstrainedBoxElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _ConstrainedBoxElementWidgetState createState() => _ConstrainedBoxElementWidgetState();
@@ -75,12 +75,12 @@ class _ConstrainedBoxElementWidgetState extends State<ConstrainedBoxElementWidge
     return wrapWithDefault(
         child: ConstrainedBox(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(ConstrainedBoxElement.CHILD),
+               childId: element!.findIdForSlot(ConstrainedBoxElement.CHILD),
                data: SlotData(slotName: ConstrainedBoxElement.CHILD), 
              ),        
-         constraints: element.constraints.value,
+         constraints: element!.constraints.value!,
         )
-    );
+    )!;
   }
 
 } 

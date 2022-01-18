@@ -14,8 +14,8 @@ import 'package:widget_maker_2_0/data/widget_elements/widgets/wpageview.dart';
 
 class WPageViewElement extends WidgetElement with SlotChildElementMixin {
   WPageViewElement({
-    @required String id,
-    bool pageSnapping,
+    required String? id,
+    bool? pageSnapping,
   }) :
     pageSnapping = MBoolProperty(
         value: pageSnapping?? true,
@@ -43,7 +43,7 @@ class WPageViewElement extends WidgetElement with SlotChildElementMixin {
   @override
   Widget generateWidget() {
     return PageViewElementWidget(
-      id: id,
+      id: id!,
     );
   }
 

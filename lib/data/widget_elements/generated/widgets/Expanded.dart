@@ -14,8 +14,8 @@ import 'package:widget_maker_2_0/data/widget_elements/widgets/expanded.dart';
 
 class ExpandedElement extends WidgetElement with SlotChildElementMixin {
   ExpandedElement({
-    @required String id,
-    int flex,
+    required String? id,
+    int? flex,
   }) :
     flex = MIntProperty(
         value: flex?? 1,

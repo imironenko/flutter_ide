@@ -6,15 +6,15 @@ import 'package:widget_maker_2_0/ui/theme.dart';
 class LeftBar extends StatelessWidget {
 
 
-  final VoidCallback onNewWidget;
-  final VoidCallback onTemplate;
+  final VoidCallback? onNewWidget;
+  final VoidCallback? onTemplate;
 
-  const LeftBar({Key key, this.onNewWidget, this.onTemplate}) : super(key: key);
+  const LeftBar({Key? key, this.onNewWidget, this.onTemplate}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: MyTheme.of(context).background4dp,
+      color: MyTheme.of(context)!.background4dp,
       width: 300,
       height: double.infinity,
       child: Column(

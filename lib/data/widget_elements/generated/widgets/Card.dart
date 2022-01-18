@@ -14,12 +14,12 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class CardElement extends WidgetElement with SlotChildElementMixin {
   CardElement({
-    @required String id,
-    Clip clipBehavior,
-    Color color,
-    double elevation,
-    EdgeInsets margin,
-    bool semanticContainer,
+    required String? id,
+    Clip? clipBehavior,
+    Color? color,
+    double? elevation,
+    EdgeInsets? margin,
+    bool? semanticContainer,
   }) :
     clipBehavior = MClipProperty(
         value: clipBehavior?? null,
@@ -103,7 +103,7 @@ class CardElement extends WidgetElement with SlotChildElementMixin {
  class CardElementWidget extends StatefulWidget with ElementWidgetMixin {
   CardElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _CardElementWidgetState createState() => _CardElementWidgetState();
@@ -115,16 +115,16 @@ class _CardElementWidgetState extends State<CardElementWidget> with ElementWidge
     return wrapWithDefault(
         child: Card(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(CardElement.CHILD),
+               childId: element!.findIdForSlot(CardElement.CHILD),
                data: SlotData(slotName: CardElement.CHILD), 
              ),        
-         clipBehavior: element.clipBehavior.value,
-         color: element.color.value,
-         elevation: element.elevation.value,
-         margin: element.margin.value,
-         semanticContainer: element.semanticContainer.value,
+         clipBehavior: element!.clipBehavior.value,
+         color: element!.color.value,
+         elevation: element!.elevation.value,
+         margin: element!.margin.value,
+         semanticContainer: element!.semanticContainer.value!,
         )
-    );
+    )!;
   }
 
 } 

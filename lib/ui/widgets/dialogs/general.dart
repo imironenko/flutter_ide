@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class DialogOption extends StatelessWidget {
-  const DialogOption({Key key, this.onTap, this.text, this.leading}) : super(key: key);
+  const DialogOption({Key? key, this.onTap, this.text, this.leading}) : super(key: key);
 
-  final VoidCallback onTap;
-  final String text;
-  final Widget leading;
+  final VoidCallback? onTap;
+  final String? text;
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class DialogOption extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               if(leading != null) Padding(child: leading, padding: EdgeInsets.only(right: 8),),
-               Text(text),
+               Text(text!),
             ],
           ),
         ),

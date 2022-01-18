@@ -14,11 +14,11 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class DividerElement extends WidgetElement with NoChildElementMixin {
   DividerElement({
-    @required String id,
-    double height,
-    double indent,
-    double endIndent,
-    Color color,
+    required String? id,
+    double? height,
+    double? indent,
+    double? endIndent,
+    Color? color,
   }) :
     height = MDoubleProperty(
         value: height?? 16,
@@ -87,7 +87,7 @@ class DividerElement extends WidgetElement with NoChildElementMixin {
  class DividerElementWidget extends StatefulWidget with ElementWidgetMixin {
   DividerElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _DividerElementWidgetState createState() => _DividerElementWidgetState();
@@ -99,12 +99,12 @@ class _DividerElementWidgetState extends State<DividerElementWidget> with Elemen
     return wrapWithDefault(
         child: Divider(
         
-         height: element.height.value,
-         indent: element.indent.value,
-         endIndent: element.endIndent.value,
-         color: element.color.value,
+         height: element!.height.value,
+         indent: element!.indent.value,
+         endIndent: element!.endIndent.value,
+         color: element!.color.value,
         )
-    );
+    )!;
   }
 
 } 

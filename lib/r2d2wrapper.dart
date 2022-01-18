@@ -7,13 +7,13 @@ import 'data/widget_elements/generated/registry.dart';
 ///
 /// Is a singleton
 class R2D2Wrapper {
-  static R2D2Wrapper _instance;
+  static R2D2Wrapper? _instance;
 
   factory R2D2Wrapper() {
     if(_instance == null) {
       _instance = R2D2Wrapper._();
     }
-    return _instance;
+    return _instance!;
   }
 
 

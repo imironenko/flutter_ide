@@ -7,13 +7,13 @@ import 'package:flutter_desktop_widgets2/flutter_desktop_widgets2.dart';
 import 'widgets/decoration.dart';
 import 'widgets/nullable_changer.dart';
 
-class ColorChanger extends StatelessValueChanger<Color> {
+class ColorChanger extends StatelessValueChanger<Color?> {
   ColorChanger(
-      {Key key, Color value, ValueChanged<Color> onUpdate, bool nullable})
+      {Key? key, Color? value, ValueChanged<Color?>? onUpdate, bool? nullable})
       : super(key: key, value: value, onUpdate: onUpdate, nullable: nullable);
 
-  void _update({int r, int g, int b}) {
-    Color color;
+  void _update({int? r, int? g, int? b}) {
+    Color? color;
     if (value == null) {
       color = Color.fromARGB(255, 255, 255, 255);
     } else {
@@ -21,13 +21,13 @@ class ColorChanger extends StatelessValueChanger<Color> {
     }
 
     if (r != null) {
-      onUpdate(color.withRed(r));
+      onUpdate!(color?.withRed(r));
       return;
     } else if (g != null) {
-      onUpdate(color.withGreen(g));
+      onUpdate!(color?.withGreen(g));
       return;
     } else if (b != null) {
-      onUpdate(color.withBlue(b));
+      onUpdate!(color?.withBlue(b));
       return;
     }
   }
@@ -44,7 +44,7 @@ class ColorChanger extends StatelessValueChanger<Color> {
           content: SingleChildScrollView(
             child: ColorPicker(
               pickerColor: value ?? Colors.white,
-              onColorChanged: onUpdate,
+              onColorChanged: onUpdate!,
               colorPickerWidth: 500.0,
               pickerAreaHeightPercent: 3.1,
               enableAlpha: true,
@@ -57,7 +57,7 @@ class ColorChanger extends StatelessValueChanger<Color> {
           content: SingleChildScrollView(
             child: ColorPicker(
               pickerColor: value ?? Colors.white,
-              onColorChanged: onUpdate,
+              onColorChanged: onUpdate!,
               pickerAreaHeightPercent: 0.8,
             ),
             // Use Material color picker:
@@ -96,7 +96,7 @@ class ColorChanger extends StatelessValueChanger<Color> {
       Expanded(
         child: IntrinsicHeight(
           child: TextField(
-            controller: TextEditingController(text: "#${value.value.toRadixString(16).toString()}"),
+            controller: TextEditingController(text: "#${value?.value.toRadixString(16).toString()}"),
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(8),
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white))
@@ -104,7 +104,7 @@ class ColorChanger extends StatelessValueChanger<Color> {
             onSubmitted: (it) {
               var i = int.tryParse(it, radix: 16);
               if(i == null) return;
-              onUpdate(Color(i));
+              onUpdate!(Color(i));
 
             },
           ),

@@ -13,9 +13,9 @@ class ConfigurationBar extends StatefulWidget {
 
 class _ConfigurationBarState extends State<ConfigurationBar> {
 
-  String id;
-  WidgetBoard boardWidget;
-  StreamSubscription subscription;
+  String? id;
+  WidgetBoard? boardWidget;
+  StreamSubscription? subscription;
   FocusNode node = FocusNode(debugLabel: "Configuration Bar");
   GlobalKey<NavigatorState> _navigatorKey = GlobalKey();
 
@@ -25,18 +25,18 @@ class _ConfigurationBarState extends State<ConfigurationBar> {
 
     boardWidget = AppScope.of(context).widgetBoard;
 
-    id = boardWidget.currentlySelectedValue;
-    boardWidget.registerUpdate(id, refresh);
+    id = boardWidget!.currentlySelectedValue;
+    boardWidget!.registerUpdate(id, refresh);
 
     if(subscription != null) {
-      subscription.cancel();
+      subscription!.cancel();
     }
-    subscription = boardWidget.currentlySelected.listen((it) {
-      boardWidget.removeUpdate(id, refresh);
+    subscription = boardWidget!.currentlySelected.listen((it) {
+      boardWidget!.removeUpdate(id, refresh);
       id = it;
-      boardWidget.registerUpdate(it, refresh);
+      boardWidget!.registerUpdate(it, refresh);
 
-      _navigatorKey.currentState.pushReplacement(NoTransitionRoute(
+      _navigatorKey.currentState!.pushReplacement(NoTransitionRoute(
         builder: (context) {
           return id == null? buildEmpty(context): buildPage(context);
         }
@@ -48,8 +48,8 @@ class _ConfigurationBarState extends State<ConfigurationBar> {
 
   @override
   void dispose() {
-    boardWidget.removeUpdate(id, refresh);
-    subscription.cancel();
+    boardWidget!.removeUpdate(id, refresh);
+    subscription!.cancel();
     super.dispose();
   }
 
@@ -76,40 +76,40 @@ class _ConfigurationBarState extends State<ConfigurationBar> {
       padding: const EdgeInsets.all(8),
       children: <Widget>[
         Text(
-          boardWidget.getWidgetElement(id).name,
+          boardWidget!.getWidgetElement(id)!.name,
           style: Theme.of(context).textTheme.subtitle1,
         ),
         Divider(),
         Row(
           children: <Widget>[
-            if(!boardWidget.getWidgetElement(id).isRoot)
+            if(!boardWidget!.getWidgetElement(id)!.isRoot)
               Expanded(
                 child: OutlineButton(
                   child: Text("Remove"),
                   onPressed: () {
-                    boardWidget.removeWidget(id);
+                    boardWidget!.removeWidget(id!);
                   },
                 ),
               ),
-            if(!boardWidget.getWidgetElement(id).isRoot)
+            if(!boardWidget!.getWidgetElement(id)!.isRoot)
               Expanded(
                 child: OutlineButton(
                   child: Text("Wrap"),
                   onPressed: () async {
                     var it = await quickChooseWidgetElement(context, filter: (WidgetElement element) {
-                      return element.children.length != 0;});
+                      return element.children!.length != 0;});
                     if(it != null) {
-                      boardWidget.wrap(id, it.widgetElement);
+                      boardWidget!.wrap(id, it.widgetElement);
                     }
                   },
                 ),
               ),
-            if (boardWidget.canMerge(id) && !boardWidget.getWidgetElement(id).isRoot)
+            if (boardWidget!.canMerge(id) && !boardWidget!.getWidgetElement(id)!.isRoot)
                Expanded(
                 child: OutlineButton(
                   child: Text("Replace with children", style: TextStyle(fontSize: 10),),
                   onPressed: () {
-                    boardWidget.replaceWithChildren(id);
+                    boardWidget!.replaceWithChildren(id!);
                   },
                 ),
               ),
@@ -146,7 +146,7 @@ class _ConfigurationBarState extends State<ConfigurationBar> {
   Widget buildList(BuildContext context) {
     return Column(
       key: ObjectKey(id),
-      children: boardWidget.getWidgetElement(id)?.attributes?.map((it) => it.getChanger(context, id))?.map((it) {
+      children: boardWidget!.getWidgetElement(id)?.attributes?.map((it) => it!.getChanger(context, id))?.map((it) {
         return it;
       })?.toList() ?? [],
     );

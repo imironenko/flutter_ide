@@ -14,18 +14,18 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class WAnimatedContainerElement extends WidgetElement with SlotChildElementMixin {
   WAnimatedContainerElement({
-    @required String id,
-    WDuration duration,
-    double width,
-    double height,
-    Color color,
-    Alignment alignment,
-    EdgeInsets padding,
-    Decoration decoration,
-    Decoration foregroundDecoration,
-    BoxConstraints constraints,
-    EdgeInsets margin,
-    Matrix4 transform,
+    required String? id,
+    WDuration? duration,
+    double? width,
+    double? height,
+    Color? color,
+    Alignment? alignment,
+    EdgeInsets? padding,
+    Decoration? decoration,
+    Decoration? foregroundDecoration,
+    BoxConstraints? constraints,
+    EdgeInsets? margin,
+    Matrix4? transform,
   }) :
     duration = MWDurationProperty(
         value: duration?? const WDuration(seconds:1),
@@ -87,7 +87,7 @@ class WAnimatedContainerElement extends WidgetElement with SlotChildElementMixin
         defaultValue: null
     ),
 
-    transform = MWIPProperty<Matrix4>(
+    transform = MWIPProperty<Matrix4?>(
         value: transform?? null,
         name: "transform",
         defaultValue: null
@@ -106,7 +106,7 @@ class WAnimatedContainerElement extends WidgetElement with SlotChildElementMixin
     final MDecorationProperty foregroundDecoration;
     final MBoxConstraintsProperty constraints;
     final MEdgeInsetsProperty margin;
-    final MWIPProperty<Matrix4> transform;
+    final MWIPProperty<Matrix4?> transform;
 
     static const String CHILD = "child";
 
@@ -163,7 +163,7 @@ class WAnimatedContainerElement extends WidgetElement with SlotChildElementMixin
  class WAnimatedContainerElementWidget extends StatefulWidget with ElementWidgetMixin {
   WAnimatedContainerElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _WAnimatedContainerElementWidgetState createState() => _WAnimatedContainerElementWidgetState();
@@ -175,22 +175,22 @@ class _WAnimatedContainerElementWidgetState extends State<WAnimatedContainerElem
     return wrapWithDefault(
         child: WAnimatedContainer(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(WAnimatedContainerElement.CHILD),
+               childId: element!.findIdForSlot(WAnimatedContainerElement.CHILD),
                data: SlotData(slotName: WAnimatedContainerElement.CHILD), 
              ),        
-         duration: element.duration.value,
-         width: element.width.value,
-         height: element.height.value,
-         color: element.color.value,
-         alignment: element.alignment.value,
-         padding: element.padding.value,
-         decoration: element.decoration.value,
-         foregroundDecoration: element.foregroundDecoration.value,
-         constraints: element.constraints.value,
-         margin: element.margin.value,
-         transform: element.transform.value,
+         duration: element!.duration.value,
+         width: element!.width.value,
+         height: element!.height.value,
+         color: element!.color.value,
+         alignment: element!.alignment.value,
+         padding: element!.padding.value,
+         decoration: element!.decoration.value,
+         foregroundDecoration: element!.foregroundDecoration.value,
+         constraints: element!.constraints.value,
+         margin: element!.margin.value,
+         transform: element!.transform.value,
         )
-    );
+    )!;
   }
 
 } 

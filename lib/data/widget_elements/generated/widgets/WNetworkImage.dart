@@ -14,11 +14,11 @@ import 'package:widget_maker_2_0/data/widget_elements/widgets/wnetworkimage.dart
 
 class WNetworkImageElement extends WidgetElement with NoChildElementMixin {
   WNetworkImageElement({
-    @required String id,
-    double width,
-    double height,
-    String src,
-    BoxFit fit,
+    required String? id,
+    double? width,
+    double? height,
+    String? src,
+    BoxFit? fit,
   }) :
     width = MDoubleProperty(
         value: width?? null,

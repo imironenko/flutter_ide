@@ -14,7 +14,7 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class GestureDetectorElement extends WidgetElement with SlotChildElementMixin {
   GestureDetectorElement({
-    @required String id,
+    required String? id,
   }) :
 
       super(id);
@@ -53,7 +53,7 @@ class GestureDetectorElement extends WidgetElement with SlotChildElementMixin {
  class GestureDetectorElementWidget extends StatefulWidget with ElementWidgetMixin {
   GestureDetectorElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _GestureDetectorElementWidgetState createState() => _GestureDetectorElementWidgetState();
@@ -65,12 +65,12 @@ class _GestureDetectorElementWidgetState extends State<GestureDetectorElementWid
     return wrapWithDefault(
         child: GestureDetector(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(GestureDetectorElement.CHILD),
+               childId: element!.findIdForSlot(GestureDetectorElement.CHILD),
                data: SlotData(slotName: GestureDetectorElement.CHILD), 
              ),        
 
         )
-    );
+    )!;
   }
 
 } 

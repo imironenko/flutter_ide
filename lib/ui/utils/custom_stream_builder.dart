@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class PowerStreamBuilder<T> extends StatelessWidget {
 
-  final AsyncWidgetBuilder<T> builder;
-  final T initialData;
-  final Stream<T> stream;
+  final AsyncWidgetBuilder<T>? builder;
+  final T? initialData;
+  final Stream<T>? stream;
   final bool customHandleError;
 
-  const PowerStreamBuilder({Key key, this.builder, this.initialData, this.stream, this.customHandleError = false}) : super(key: key);
+  const PowerStreamBuilder({Key? key, this.builder, this.initialData, this.stream, this.customHandleError = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +17,11 @@ class PowerStreamBuilder<T> extends StatelessWidget {
       builder: (context, snapshot) {
         if(!customHandleError) {
           if(snapshot.hasError) {
-            return ErrorWidget(snapshot.error);
+            return ErrorWidget(snapshot.error!);
           }
         }
 
-        return builder(context, snapshot);
+        return builder!(context, snapshot);
 
       },
 

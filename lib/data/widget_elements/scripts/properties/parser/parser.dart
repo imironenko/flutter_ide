@@ -24,7 +24,7 @@ List<ParsedProp> parseEnumProperties() {
 
 }
 
-ParsedProp _parseProp(String key, dynamic val) {
+ParsedProp _parseProp(String? key, dynamic val) {
   if (val is String) {
     // SomeProperty: enum
     assert(val == "enum");
@@ -47,20 +47,20 @@ ParsedProp _parseProp(String key, dynamic val) {
 }
 
 
-ObjectProp _parseObjectProp(String name, YamlMap map, String wrapper) {
-  Map<String, BaseProp> res = Map();
-  for(String key in map.keys) {
+ObjectProp _parseObjectProp(String? name, YamlMap map, String? wrapper) {
+  Map<String?, BaseProp> res = Map();
+  for(String? key in map.keys as Iterable<String?>) {
     if(map[key] is YamlMap) {
       Map propMap = map[key];
       res[key] = BaseProp(
           name: key,
-          type: (propMap["type"] as String),
+          type: (propMap["type"] as String?),
           extras: Map.of(propMap)..remove("type"),
       );
     } else {
       res[key] = BaseProp(
         name: key,
-        type: (map[key] as String)
+        type: (map[key] as String?)
       );
     }
   }

@@ -14,7 +14,7 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class MaterialElement extends WidgetElement with SlotChildElementMixin {
   MaterialElement({
-    @required String id,
+    required String? id,
   }) :
 
       super(id);
@@ -53,7 +53,7 @@ class MaterialElement extends WidgetElement with SlotChildElementMixin {
  class MaterialElementWidget extends StatefulWidget with ElementWidgetMixin {
   MaterialElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _MaterialElementWidgetState createState() => _MaterialElementWidgetState();
@@ -65,12 +65,12 @@ class _MaterialElementWidgetState extends State<MaterialElementWidget> with Elem
     return wrapWithDefault(
         child: Material(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(MaterialElement.CHILD),
+               childId: element!.findIdForSlot(MaterialElement.CHILD),
                data: SlotData(slotName: MaterialElement.CHILD), 
              ),        
 
         )
-    );
+    )!;
   }
 
 } 

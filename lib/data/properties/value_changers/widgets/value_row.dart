@@ -3,9 +3,9 @@ import 'package:widget_maker_2_0/data/properties/basic_properties.dart';
 
 class PropertyVariableSelector extends StatelessWidget {
 
-  const PropertyVariableSelector({Key key, this.onTap}) : super(key: key);
+  const PropertyVariableSelector({Key? key, this.onTap}) : super(key: key);
 
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +22,13 @@ class PropertyVariableSelector extends StatelessWidget {
 
 class PropertyText extends StatelessWidget {
 
-  final String text;
+  final String? text;
 
-  const PropertyText({Key key, this.text}) : super(key: key);
+  const PropertyText({Key? key, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(width: 100, child: Text(MProperty.capitalize(text), style: TextStyle(
+    return SizedBox(width: 100, child: Text(MProperty.capitalize(text)!, style: TextStyle(
       fontSize: 16
     ),));
   }
@@ -36,15 +36,15 @@ class PropertyText extends StatelessWidget {
 
 class ValueRow extends StatelessWidget {
 
-  final String text;
-  final Widget child;
+  final String? text;
+  final Widget? child;
   final VoidCallback onVariableTap;
 
   const ValueRow({
-    Key key,
-    @required this.text,
-    @required this.child,
-    @required this.onVariableTap
+    Key? key,
+    required this.text,
+    required this.child,
+    required this.onVariableTap
   }) : super(key: key);
 
 
@@ -55,7 +55,7 @@ class ValueRow extends StatelessWidget {
         children: [
           PropertyText(text: text),
           SizedBox(width: 16,),
-          Expanded(child: child),
+          Expanded(child: child!),
           PropertyVariableSelector(
             onTap: onVariableTap,
           ),

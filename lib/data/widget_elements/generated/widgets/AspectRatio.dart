@@ -14,8 +14,8 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class AspectRatioElement extends WidgetElement with SlotChildElementMixin {
   AspectRatioElement({
-    @required String id,
-    double aspectRatio,
+    required String? id,
+    double? aspectRatio,
   }) :
     aspectRatio = MDoubleProperty(
         value: aspectRatio?? 16/9,
@@ -63,7 +63,7 @@ class AspectRatioElement extends WidgetElement with SlotChildElementMixin {
  class AspectRatioElementWidget extends StatefulWidget with ElementWidgetMixin {
   AspectRatioElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _AspectRatioElementWidgetState createState() => _AspectRatioElementWidgetState();
@@ -75,12 +75,12 @@ class _AspectRatioElementWidgetState extends State<AspectRatioElementWidget> wit
     return wrapWithDefault(
         child: AspectRatio(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(AspectRatioElement.CHILD),
+               childId: element!.findIdForSlot(AspectRatioElement.CHILD),
                data: SlotData(slotName: AspectRatioElement.CHILD), 
              ),        
-         aspectRatio: element.aspectRatio.value,
+         aspectRatio: element!.aspectRatio.value!,
         )
-    );
+    )!;
   }
 
 } 

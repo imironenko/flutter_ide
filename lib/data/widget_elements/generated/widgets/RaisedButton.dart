@@ -14,10 +14,10 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class RaisedButtonElement extends WidgetElement with SlotChildElementMixin {
   RaisedButtonElement({
-    @required String id,
-    double elevation,
-    EdgeInsets padding,
-    Color color,
+    required String? id,
+    double? elevation,
+    EdgeInsets? padding,
+    Color? color,
   }) :
     elevation = MDoubleProperty(
         value: elevation?? null,
@@ -83,7 +83,7 @@ class RaisedButtonElement extends WidgetElement with SlotChildElementMixin {
  class RaisedButtonElementWidget extends StatefulWidget with ElementWidgetMixin {
   RaisedButtonElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _RaisedButtonElementWidgetState createState() => _RaisedButtonElementWidgetState();
@@ -95,15 +95,15 @@ class _RaisedButtonElementWidgetState extends State<RaisedButtonElementWidget> w
     return wrapWithDefault(
         child: RaisedButton(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(RaisedButtonElement.CHILD),
+               childId: element!.findIdForSlot(RaisedButtonElement.CHILD),
                data: SlotData(slotName: RaisedButtonElement.CHILD), 
                widgetWrapper: (context, child) => sizeWidgetWrapper(context, Size(100.0,60.0), child)
              ),        
-         elevation: element.elevation.value,
-         padding: element.padding.value,
-         color: element.color.value,
+         elevation: element!.elevation.value,
+         padding: element!.padding.value,
+         color: element!.color.value,
         )
-    );
+    )!;
   }
 
 } 

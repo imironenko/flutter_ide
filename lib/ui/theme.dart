@@ -2,26 +2,26 @@ import 'package:widget_maker_2_0/material.dart';
 
 class MyTheme extends StatelessWidget {
 
-  const MyTheme({Key key, this.myThemeData, this.child}) : super(key: key);
+  const MyTheme({Key? key, this.myThemeData, this.child}) : super(key: key);
 
-  final MyThemeData myThemeData;
+  final MyThemeData? myThemeData;
 
-  final Widget child;
+  final Widget? child;
 
 
-  static MyThemeData of(BuildContext context) {
-    final _MyInheritedTheme myInheritedTheme =context.dependOnInheritedWidgetOfExactType(aspect:_MyInheritedTheme);
+  static MyThemeData? of(BuildContext context) {
+    final _MyInheritedTheme myInheritedTheme =context.dependOnInheritedWidgetOfExactType(aspect:_MyInheritedTheme) as _MyInheritedTheme;
 
-    return myInheritedTheme.myTheme.myThemeData;
+    return myInheritedTheme.myTheme!.myThemeData;
   }
 
   @override
   Widget build(BuildContext context) {
     return Theme(
-      data: myThemeData.themeData,
+      data: myThemeData!.themeData!,
       child: _MyInheritedTheme(
         myTheme: this,
-        child: child,
+        child: child!,
       ),
     );
   }
@@ -32,12 +32,12 @@ class _MyInheritedTheme extends InheritedWidget {
 
 
   final Widget child;
-  final MyTheme myTheme;
+  final MyTheme? myTheme;
 
-  const _MyInheritedTheme({this.child, this.myTheme}): super(child: child);
+  const _MyInheritedTheme({required this.child, this.myTheme}): super(child: child);
 
   @override
-  bool updateShouldNotify(_MyInheritedTheme oldWidget) => myTheme.myThemeData != oldWidget.myTheme.myThemeData;
+  bool updateShouldNotify(_MyInheritedTheme oldWidget) => myTheme!.myThemeData != oldWidget.myTheme!.myThemeData;
 
 }
 
@@ -46,7 +46,7 @@ class MyThemeData {
 
 
 
-  factory MyThemeData({ThemeData themeData}) {
+  factory MyThemeData({required ThemeData themeData}) {
 
 
     var bg = themeData.backgroundColor;
@@ -95,19 +95,19 @@ class MyThemeData {
     this.selectedColor
   });
 
-  final ThemeData themeData;
+  final ThemeData? themeData;
 
 
-  final Color background0dp;
-  final Color background1dp;
-  final Color background2dp;
-  final Color background3dp;
-  final Color background4dp;
-  final Color background6dp;
-  final Color background8dp;
-  final Color background12dp;
-  final Color background16dp;
-  final Color background24dp;
+  final Color? background0dp;
+  final Color? background1dp;
+  final Color? background2dp;
+  final Color? background3dp;
+  final Color? background4dp;
+  final Color? background6dp;
+  final Color? background8dp;
+  final Color? background12dp;
+  final Color? background16dp;
+  final Color? background24dp;
 
-  final Color selectedColor;
+  final Color? selectedColor;
 }

@@ -17,7 +17,7 @@ class NewProjectDialog extends StatelessWidget {
     return Dialog(
       child: Container(
         padding: EdgeInsets.all(8),
-        color: MyTheme.of(context).background16dp,
+        color: MyTheme.of(context)!.background16dp,
         width: 600,
         height: 500,
         child: Column(

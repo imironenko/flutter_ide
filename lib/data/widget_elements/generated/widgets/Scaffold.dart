@@ -14,8 +14,8 @@ import 'package:widget_maker_2_0/data/widget_elements/widgets/scaffold.dart';
 
 class ScaffoldElement extends WidgetElement with SlotChildElementMixin {
   ScaffoldElement({
-    @required String id,
-    Color backgroundColor,
+    required String? id,
+    Color? backgroundColor,
   }) :
     backgroundColor = MColorProperty(
         value: backgroundColor?? null,

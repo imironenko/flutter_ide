@@ -18,15 +18,15 @@ enum _DecorationType {
   none,
 }
 
-class MDecorationProperty extends MProperty<Decoration> {
+class MDecorationProperty extends MProperty<Decoration?> {
 
   MDecorationProperty({
-    String name,
-    Decoration value,
+    String? name,
+    Decoration? value,
     bool isNamed= true,
     bool isRequired = false,
     bool nullable = true,
-    Decoration defaultValue,
+    Decoration? defaultValue,
   }): super(
       name: name,
       value: value,
@@ -61,7 +61,7 @@ class MDecorationProperty extends MProperty<Decoration> {
   }
 
   @override
-  Widget buildFinalChanger(BuildContext context, String id) {
+  Widget buildFinalChanger(BuildContext context, String? id) {
     return StatefulBuilder(
       builder: (context, stateSetter) {
         return MultiChanger(
@@ -70,7 +70,7 @@ class MDecorationProperty extends MProperty<Decoration> {
           options: _DecorationType.values,
           names: names,
           changer: getDecorationChanger(context, id),
-          onChange: (it) => onChange(it, stateSetter),
+          onChange: (dynamic it) => onChange(it, stateSetter),
          /* value: value,
           onChange: (it) {
             updateValue(it, context, id);
@@ -80,16 +80,18 @@ class MDecorationProperty extends MProperty<Decoration> {
     );
   }
 
-  Widget getDecorationChanger(BuildContext context, String id) {
+  Widget getDecorationChanger(BuildContext context, String? id) {
     if(_selected == _DecorationType.BoxDecoration) {
       return _mBoxDecorationProperty.buildChanger(context, id);
     }
 
     return Text("Not Box");
   }
+
   @override
-  Expression toCode() {
+  Expression? toCode() {
     // TODO: implement toCode
+    throw UnimplementedError();
   }
 
 }
@@ -107,7 +109,7 @@ class MBoxDecorationProperty extends MProperty<BoxDecoration> with SingleChanger
   MBoxDecorationProperty():
     color = MColorProperty(
       name: "color",
-      value: null
+      value: null, defaultValue: null
     ),
     image = MDecorationImageProperty(),
     border = MBorderProperty(),
@@ -122,20 +124,20 @@ class MBoxDecorationProperty extends MProperty<BoxDecoration> with SingleChanger
   List<MProperty> get properties => [/*image, */border,/* borderRadius, gradient*/];
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return ObjectChanger(
       emptyConstructor: () => const BoxDecoration(),
       properties: properties,
       name: "Box Decoration",
       value: value,
-      onChange: (it) => updateValue(it, context, id),
+      onChange: (dynamic it) => updateValue(it, context, id),
       id: id,
 
     );
   }
 
   @override
-  Expression toCode() {
+  Expression? toCode() {
     // TODO: implement toCode
     return null;
   }
@@ -144,19 +146,19 @@ class MBoxDecorationProperty extends MProperty<BoxDecoration> with SingleChanger
 
 class MShapeDecorationProperty extends MProperty<ShapeDecoration> with SingleChangerMixin<ShapeDecoration> {
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget? buildChanger(BuildContext context, String? id) {
     // TODO: implement buildChanger
     return null;
   }
 
   @override
-  Expression toCode() {
+  Expression? toCode() {
     // TODO: implement toCode
     return null;
   }
 
   @override
-  MProperty<ShapeDecoration> copy() {
+  MProperty<ShapeDecoration>? copy() {
     // TODO: implement copy
     return null;
   }
@@ -167,19 +169,19 @@ class MDecorationImageProperty extends MProperty<DecorationImage> with SingleCha
 
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget? buildChanger(BuildContext context, String? id) {
     // TODO: implement buildChanger
     return null;
   }
 
   @override
-  Expression toCode() {
+  Expression? toCode() {
     // TODO: implement toCode
     return null;
   }
 
   @override
-  MProperty<DecorationImage> copy() {
+  MProperty<DecorationImage>? copy() {
     // TODO: implement copy
     return null;
   }
@@ -201,25 +203,25 @@ class MBorderProperty extends MProperty<Border> with SingleChangerMixin<Border> 
 
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return ObjectChanger(
       properties: [top, right, bottom, left],
       id: id,
       value: value,
       emptyConstructor: () => Border(),
       name: "Border",
-      onChange: (it) => updateValue(it, context ,id),
+      onChange: (dynamic it) => updateValue(it, context ,id),
     );
   }
 
   @override
-  Expression toCode() {
+  Expression? toCode() {
     // TODO: implement toCode
     return null;
   }
 
   @override
-  MProperty<Border> copy() {
+  MProperty<Border>? copy() {
     // TODO: implement copy
     return null;
   }
@@ -239,25 +241,25 @@ class MBorderSideProperty extends MProperty<BorderSide> with SingleChangerMixin<
       style = MBorderStyleProperty();
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return ObjectChanger(
       name: "Border Side",
       emptyConstructor: () => BorderSide(),
       value: value,
       properties: [color, width, style],
-      onChange: (it) => updateValue(it, context, id),
+      onChange: (dynamic it) => updateValue(it, context, id),
       id: id,
     );
   }
 
   @override
-  Expression toCode() {
+  Expression? toCode() {
     // TODO: implement toCode
     return null;
   }
 
   @override
-  MProperty<BorderSide> copy() {
+  MProperty<BorderSide>? copy() {
     // TODO: implement copy
     return null;
   }
@@ -266,19 +268,19 @@ class MBorderSideProperty extends MProperty<BorderSide> with SingleChangerMixin<
 
 class MBorderRadiusGeometryProperty extends MProperty<BorderRadiusGeometry> with SingleChangerMixin<BorderRadiusGeometry> {
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget? buildChanger(BuildContext context, String? id) {
     // TODO: implement buildChanger
     return null;
   }
 
   @override
-  Expression toCode() {
+  Expression? toCode() {
     // TODO: implement toCode
     return null;
   }
 
   @override
-  MProperty<BorderRadiusGeometry> copy() {
+  MProperty<BorderRadiusGeometry>? copy() {
     // TODO: implement copy
     return null;
   }
@@ -287,19 +289,19 @@ class MBorderRadiusGeometryProperty extends MProperty<BorderRadiusGeometry> with
 
 class MGradientProperty extends MProperty<Gradient> with SingleChangerMixin<Gradient> {
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget? buildChanger(BuildContext context, String? id) {
     // TODO: implement buildChanger
     return null;
   }
 
   @override
-  Expression toCode() {
+  Expression? toCode() {
     // TODO: implement toCode
     return null;
   }
 
   @override
-  MProperty<Gradient> copy() {
+  MProperty<Gradient>? copy() {
     // TODO: implement copy
     return null;
   }

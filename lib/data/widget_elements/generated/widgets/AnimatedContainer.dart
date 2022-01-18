@@ -13,18 +13,18 @@ import 'package:flutter/material.dart';
 
 class AnimatedContainerElement extends WidgetElement with SingleChildElement {
   AnimatedContainerElement({
-    @required String id,
-        WDuration duration = const WDuration(seconds:1),
-        double width,
-        double height,
-        Color color = Colors.indigo,
-        Alignment alignment = Alignment.center,
-        EdgeInsets padding = const EdgeInsets.all(0),
-        Decoration decoration,
-        Decoration foregroundDecoration,
-        BoxConstraints constraints,
-        EdgeInsets margin,
-        Matrix4 transform,
+    required String? id,
+        WDuration? duration = const WDuration(seconds:1),
+        double? width,
+        double? height,
+        Color? color = Colors.indigo,
+        Alignment? alignment = Alignment.center,
+        EdgeInsets? padding = const EdgeInsets.all(0),
+        Decoration? decoration,
+        Decoration? foregroundDecoration,
+        BoxConstraints? constraints,
+        EdgeInsets? margin,
+        Matrix4? transform,
   }) :
     duration = MWDurationProperty(
         value: duration,
@@ -134,7 +134,7 @@ class AnimatedContainerElement extends WidgetElement with SingleChildElement {
  class AnimatedContainerElementWidget extends StatefulWidget with ElementWidgetMixin {
   AnimatedContainerElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _AnimatedContainerElementWidgetState createState() => _AnimatedContainerElementWidgetState();
@@ -146,22 +146,22 @@ class _AnimatedContainerElementWidgetState extends State<AnimatedContainerElemen
     return wrapWithDefault(
         child: AnimatedContainer(
           child: getChildOrDragTarget(
-               childId: element.childId,
+               childId: element!.childId,
                data: null, 
              ),        
-         duration: element.duration.value,
-         width: element.width.value,
-         height: element.height.value,
-         color: element.color.value,
-         alignment: element.alignment.value,
-         padding: element.padding.value,
-         decoration: element.decoration.value,
-         foregroundDecoration: element.foregroundDecoration.value,
-         constraints: element.constraints.value,
-         margin: element.margin.value,
-         transform: element.transform.value,
+         duration: element!.duration.value!,
+         width: element!.width.value,
+         height: element!.height.value,
+         color: element!.color.value,
+         alignment: element!.alignment.value,
+         padding: element!.padding.value,
+         decoration: element!.decoration.value,
+         foregroundDecoration: element!.foregroundDecoration.value,
+         constraints: element!.constraints.value,
+         margin: element!.margin.value,
+         transform: element!.transform.value,
         )
-    );
+    )!;
   }
 
 } 

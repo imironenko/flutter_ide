@@ -11,7 +11,7 @@ import 'package:widget_maker_2_0/data/widget_elements/base/literal_widget.dart';
 
 class AddPropertyProperty extends MProperty with SingleChangerMixin {
 
-  AddPropertyProperty({String name}): super(name: name);
+  AddPropertyProperty({String? name}): super(name: name);
 
 
   @override
@@ -21,12 +21,12 @@ class AddPropertyProperty extends MProperty with SingleChangerMixin {
     );
   }
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return Material(
       child: RoundContainer(
         child: InkWell(
           onTap: () async {
-            PropertyType type = await showDialogAtContext(
+            PropertyType? type = await showDialogAtContext(
                 context: context,
                 size: Size(240, 400),
                 top: false,
@@ -45,7 +45,7 @@ class AddPropertyProperty extends MProperty with SingleChangerMixin {
                   );
                 }
             );
-            LiteralWidgetElement it = AppScope.of(context).widgetBoard.getWidgetElementFromAnySource(id);
+            LiteralWidgetElement it = AppScope.of(context).widgetBoard!.getWidgetElementFromAnySource(id) as LiteralWidgetElement;
             it.addProperty(type, "test");
             updateValue(null, context, id);
           },

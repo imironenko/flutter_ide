@@ -1,10 +1,10 @@
 import 'package:widget_maker_2_0/data/properties/value_changers/base.dart';
 import 'package:widget_maker_2_0/material.dart';
 
-class StringChanger extends StatelessValueChanger<String> {
+class StringChanger extends StatelessValueChanger<String?> {
 
 
-  StringChanger({Key key, String value, ValueChanged<String> onUpdate, bool nullable})
+  StringChanger({Key? key, String? value, ValueChanged<String?>? onUpdate, bool? nullable})
     : super(key: key, value: value, onUpdate: onUpdate, nullable: nullable);
 
 
@@ -31,13 +31,13 @@ class StringChanger extends StatelessValueChanger<String> {
 class AutoFocusTextField extends StatefulWidget {
 
 
-  final ValueChanged<String> onChanged;
-  final TextEditingController controller;
-  final TextStyle style;
-  final int maxLines;
-  final InputDecoration decoration;
+  final ValueChanged<String>? onChanged;
+  final TextEditingController? controller;
+  final TextStyle? style;
+  final int? maxLines;
+  final InputDecoration? decoration;
 
-  const AutoFocusTextField({Key key, this.onChanged, this.controller, this.style, this.maxLines, this.decoration}) : super(key: key);
+  const AutoFocusTextField({Key? key, this.onChanged, this.controller, this.style, this.maxLines, this.decoration}) : super(key: key);
 
   @override
   _AutoFocusTextFieldState createState() => _AutoFocusTextFieldState();
@@ -45,7 +45,7 @@ class AutoFocusTextField extends StatefulWidget {
 
 class _AutoFocusTextFieldState extends State<AutoFocusTextField> {
 
-  FocusNode node;
+  FocusNode? node;
   bool alreadyRequestedFocus = false;
 
   @override
@@ -65,7 +65,7 @@ class _AutoFocusTextFieldState extends State<AutoFocusTextField> {
 
   @override
   void dispose() {
-    node.dispose();
+    node!.dispose();
     super.dispose();
   }
 

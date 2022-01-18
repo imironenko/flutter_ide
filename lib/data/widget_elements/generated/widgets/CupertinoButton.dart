@@ -14,12 +14,12 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class CupertinoButtonElement extends WidgetElement with SlotChildElementMixin {
   CupertinoButtonElement({
-    @required String id,
-    Color color,
-    Color disabledColor,
-    double minSize,
-    EdgeInsets padding,
-    double pressedOpacity,
+    required String? id,
+    Color? color,
+    Color? disabledColor,
+    double? minSize,
+    EdgeInsets? padding,
+    double? pressedOpacity,
   }) :
     color = MColorProperty(
         value: color?? null,
@@ -103,7 +103,7 @@ class CupertinoButtonElement extends WidgetElement with SlotChildElementMixin {
  class CupertinoButtonElementWidget extends StatefulWidget with ElementWidgetMixin {
   CupertinoButtonElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _CupertinoButtonElementWidgetState createState() => _CupertinoButtonElementWidgetState();
@@ -115,17 +115,17 @@ class _CupertinoButtonElementWidgetState extends State<CupertinoButtonElementWid
     return wrapWithDefault(
         child: CupertinoButton(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(CupertinoButtonElement.CHILD),
+               childId: element!.findIdForSlot(CupertinoButtonElement.CHILD),
                data: SlotData(slotName: CupertinoButtonElement.CHILD), 
                widgetWrapper: (context, child) => sizeWidgetWrapper(context, Size(100.0,60.0), child)
-             ),        
-         color: element.color.value,
-         disabledColor: element.disabledColor.value,
-         minSize: element.minSize.value,
-         padding: element.padding.value,
-         pressedOpacity: element.pressedOpacity.value,
+             )!,        
+         color: element!.color.value,
+         disabledColor: element!.disabledColor.value!,
+         minSize: element!.minSize.value,
+         padding: element!.padding.value,
+         pressedOpacity: element!.pressedOpacity.value,
         )
-    );
+    )!;
   }
 
 } 

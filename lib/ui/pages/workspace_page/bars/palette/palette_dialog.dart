@@ -4,7 +4,7 @@ import 'package:widget_maker_2_0/r2d2wrapper.dart';
 import 'package:widget_maker_2_0/ui/pages/workspace_page/bars/palette/palette_bar.dart';
 import 'package:widget_maker_2_0/ui/utils/desktop_scroll_behavior.dart';
 
-Future<PaletteItem> showPaletteDialog(BuildContext context) {
+Future<PaletteItem?> showPaletteDialog(BuildContext context) {
   return showDialogAndRestoreFocus(context: context, builder: (context) {
     return PaletteDialog();
   });
@@ -74,7 +74,7 @@ class _PaletteDialogState extends State<PaletteDialog> {
                             behavior: DesktopBehavior(),
                             child: GridView.extent(
                               maxCrossAxisExtent: 300,
-                              children: r2d2.categories[category].map((it) {
+                              children: r2d2.categories[category]!.map((it) {
                                 return _WidgetItem(
                                   item: it,
                                   onTap: () {
@@ -100,7 +100,7 @@ class _PaletteDialogState extends State<PaletteDialog> {
   Widget getGridViewForCategory(String category) {
     return SliverGrid.extent(
       maxCrossAxisExtent: 300,
-      children: r2d2.categories[category].map((it) {
+      children: r2d2.categories[category]!.map((it) {
         return _WidgetItem(
           item: it,
           onTap: () {
@@ -115,10 +115,10 @@ class _PaletteDialogState extends State<PaletteDialog> {
 
 class _WidgetItem extends StatelessWidget {
 
-  final PaletteItem item;
-  final VoidCallback onTap;
+  final PaletteItem? item;
+  final VoidCallback? onTap;
 
-  const _WidgetItem({Key key, this.item, this.onTap}) : super(key: key);
+  const _WidgetItem({Key? key, this.item, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -135,9 +135,9 @@ class _WidgetItem extends StatelessWidget {
             children: <Widget>[
               Expanded(child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Center(child: item.visualRepresentation),
+                child: Center(child: item!.visualRepresentation),
               )),
-              Text(item.name),
+              Text(item!.name!),
             ],
           ),
         ),

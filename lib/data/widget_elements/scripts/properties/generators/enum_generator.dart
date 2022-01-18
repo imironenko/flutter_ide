@@ -17,7 +17,7 @@ class EnumGenerator {
     });
   }
 
-  static String generateEnumCode(String enumName) {
+  static String generateEnumCode(String? enumName) {
     String source = File("properties/templates/enum_property.tmpl").readAsStringSync();
 
     var template = Template(source, htmlEscapeValues: false);

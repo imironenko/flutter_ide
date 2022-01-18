@@ -12,8 +12,8 @@ import 'package:widget_maker_2_0/utils/utils.dart';
 
 class ItemsAndSelected {
 
-  final int selectedPosition;
-  final List<IndexedObject<WidgetElement>> items;
+  final int? selectedPosition;
+  final List<IndexedObject<WidgetElement>>? items;
 
   ItemsAndSelected({this.selectedPosition, this.items});
 }
@@ -27,7 +27,7 @@ class WidgetTree extends StatefulWidget {
 class _WidgetTreeState extends State<WidgetTree> {
 
 
-  WidgetBoard get widgetBoard => AppScope.of(context).widgetBoard;
+  WidgetBoard? get widgetBoard => AppScope.of(context).widgetBoard;
   FocusNode node = FocusNode(debugLabel: "Widget Tree");
 
   @override
@@ -46,19 +46,19 @@ class _WidgetTreeState extends State<WidgetTree> {
     if(selectedPosition == null || selectedPosition < 0) return false;
     IndexedObject<WidgetElement> toTest = items[index];
     IndexedObject<WidgetElement> selected = items[selectedPosition];
-    if(toTest.index <= selected.index) return false;
-    for(int i = selected.index - 1; i >= 0; i--) {
-      if(toTest.treePart[i] != selected.treePart[i])
+    if(toTest.index! <= selected.index!) return false;
+    for(int i = selected.index! - 1; i >= 0; i--) {
+      if(toTest.treePart![i] != selected.treePart![i])
         return false;
     }
     return true;
   }
 
-  ValueStream<ItemsAndSelected> get _theStream => widgetBoard.widgetElementsFlatAndCurrentlySelectedPosition
+  ValueStream<ItemsAndSelected> get _theStream => widgetBoard!.widgetElementsFlatAndCurrentlySelectedPosition
     .map((it) {
       return ItemsAndSelected(
         items: it.items,
-        selectedPosition: it.items.indexWhere((it2) => it2.object.id == it.currentlySelected)
+        selectedPosition: it.items!.indexWhere((it2) => it2.object!.id == it.currentlySelected)
       );
     }).shareValue();
 
@@ -83,7 +83,7 @@ class _WidgetTreeState extends State<WidgetTree> {
                 }
                 if(!snapshot.hasData)
                   return SizedBox();
-                var items = snapshot.requireData.items;
+                var items = snapshot.requireData.items!;
                 var selectedPosition = snapshot.requireData.selectedPosition;
                 return SelectableList(
                   itemCount: items.length,
@@ -92,20 +92,20 @@ class _WidgetTreeState extends State<WidgetTree> {
                   selectedIndex: selectedPosition,
                   focusNode: node,
                   onSelectChange: (it) {
-                    var id = items[it].object.id;
-                    widgetBoard.setSelected(id);
+                    var id = items[it].object!.id;
+                    widgetBoard!.setSelected(id);
 
                   },
                   itemBuilder: (context, index) {
                     return _WidgetItem(
                       element: items[index],
                       selected: selectedPosition == index,
-                      parentSelected: isParentSelected(index, selectedPosition, items),
+                      parentSelected: isParentSelected(index, selectedPosition!, items),
                       onToggle: () {
-                        AppScope.of(context).widgetBoard.toggleCollapsed(items[index].object.id);
+                        AppScope.of(context).widgetBoard!.toggleCollapsed(items[index].object!.id);
                       },
                       onTap: () {
-                        AppScope.of(context).widgetBoard.setSelected(items[index].object.id);
+                        AppScope.of(context).widgetBoard!.setSelected(items[index].object!.id);
                         //FocusScope.of(context).requestFocus(node);
                       },
                     );
@@ -123,14 +123,14 @@ class _WidgetTreeState extends State<WidgetTree> {
 class _WidgetItem extends StatelessWidget {
 
 
-  const _WidgetItem({Key key, this.element, this.onTap, this.onToggle, this.selected, this.parentSelected})
-      : assert(!(selected && parentSelected)) ,super(key: key);
+  const _WidgetItem({Key? key, this.element, this.onTap, this.onToggle, required this.selected, this.parentSelected})
+      : assert(!(selected && parentSelected!)) ,super(key: key);
 
-  final IndexedObject<WidgetElement> element;
-  final VoidCallback onTap;
-  final VoidCallback onToggle;
+  final IndexedObject<WidgetElement>? element;
+  final VoidCallback? onTap;
+  final VoidCallback? onToggle;
   final bool selected;
-  final bool parentSelected;
+  final bool? parentSelected;
 
 
   @override
@@ -148,35 +148,35 @@ class _WidgetItem extends StatelessWidget {
           }
           Provider.of<CurrentlyDraggingState>(context).setDragging(false);
         },
-        data: element.object.id,
+        data: element!.object!.id,
         feedback: Container(
-          padding: EdgeInsets.only(left: (element.index * 8).toDouble(), top: 4),
-          child: Text(element.object.name, style: Theme.of(context).textTheme.bodyText1,),
+          padding: EdgeInsets.only(left: (element!.index! * 8).toDouble(), top: 4),
+          child: Text(element!.object!.name, style: Theme.of(context).textTheme.bodyText1,),
         ),
         child: GlobalDragTarget<String>(
-          onWillAccept: (it) => element.object.canAcceptChild(it),
+          onWillAccept: (it) => element!.object!.canAcceptChild(it!),
           onAccept: (childId) {
             // TODO implement data for her - for example lists need to pass index data
-            AppScope.of(context).widgetBoard.acceptChild(element.object.id, childId, null);
+            AppScope.of(context).widgetBoard!.acceptChild(element!.object!.id, childId, null);
           },
           builder: (context, accepted, rejected) {
             return InkWell(
               onTap: onTap,
               child: Container(
                 alignment: Alignment.centerLeft,
-                color: selected || accepted.isNotEmpty? Colors.blue : parentSelected?
+                color: selected || accepted.isNotEmpty? Colors.blue : parentSelected!?
                 Colors.blue.withOpacity(0.1): null,
-                padding: EdgeInsets.only(left: (element.index * 8).toDouble() + 8 /* Normal Padding */),
+                padding: EdgeInsets.only(left: (element!.index! * 8).toDouble() + 8 /* Normal Padding */),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     GestureDetector(
                       onTap: onToggle,
-                      child: element.object.hasChildSlots && element.object.children.expand((it) => it.childrenIds).isNotEmpty?
-                        Icon(element.object.isCollapsed? Icons.arrow_drop_up : Icons.arrow_drop_down):
+                      child: element!.object!.hasChildSlots && element!.object!.children!.expand((it) => it.childrenIds!).isNotEmpty?
+                        Icon(element!.object!.isCollapsed? Icons.arrow_drop_up : Icons.arrow_drop_down):
                         SizedBox(width: IconTheme.of(context).size,),
                     ),
-                    Text(element.object.name, style: Theme.of(context).textTheme.bodyText1,),
+                    Text(element!.object!.name, style: Theme.of(context).textTheme.bodyText1,),
                   ],
                 ),
               ),

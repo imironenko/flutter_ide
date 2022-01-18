@@ -12,7 +12,7 @@ import 'package:widget_maker_2_0/data/widget_elements/widgets/meta.dart';
 class CanvasElement extends WidgetElement with SingleChildElement {
 
   CanvasElement({
-    @required String id,
+    required String id,
     CanvasSize canvasSize = const CanvasSize(
       width: 411,
       height: 731,
@@ -50,11 +50,11 @@ class CanvasElement extends WidgetElement with SingleChildElement {
   String get name => "Canvas";
 
   @override
-  String writeCode2(Map<String, WidgetElement> allElements) {
+  String writeCode2(Map<String?, WidgetElement> allElements) {
     if(!allElements.containsKey(childId)) {
       return "Text(\"Nothing here yet!\")";
     }
-    return allElements[childId].writeCode2(allElements);
+    return allElements[childId]!.writeCode2(allElements);
   }
 
 }

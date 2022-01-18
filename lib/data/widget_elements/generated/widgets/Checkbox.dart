@@ -14,11 +14,11 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class CheckboxElement extends WidgetElement with NoChildElementMixin {
   CheckboxElement({
-    @required String id,
-    Color activeColor,
-    Color checkColor,
-    bool tristate,
-    bool value,
+    required String? id,
+    Color? activeColor,
+    Color? checkColor,
+    bool? tristate,
+    bool? value,
   }) :
     activeColor = MColorProperty(
         value: activeColor?? null,
@@ -88,7 +88,7 @@ class CheckboxElement extends WidgetElement with NoChildElementMixin {
  class CheckboxElementWidget extends StatefulWidget with ElementWidgetMixin {
   CheckboxElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _CheckboxElementWidgetState createState() => _CheckboxElementWidgetState();
@@ -100,12 +100,12 @@ class _CheckboxElementWidgetState extends State<CheckboxElementWidget> with Elem
     return wrapWithDefault(
         child: Checkbox(
         
-         activeColor: element.activeColor.value,
-         checkColor: element.checkColor.value,
-         tristate: element.tristate.value,
-         value: element.value.value,
+         activeColor: element!.activeColor.value,
+         checkColor: element!.checkColor.value,
+         tristate: element!.tristate.value!,
+         value: element!.value.value,
         )
-    );
+    )!;
   }
 
 } 

@@ -14,16 +14,16 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class AppBarElement extends WidgetElement with SlotChildElementMixin {
   AppBarElement({
-    @required String id,
-    bool automaticallyImplyLeading,
-    Color backgroundColor,
-    Brightness brightness,
-    double bottomOpacity,
-    double toolbarOpacity,
-    bool centerTitle,
-    double titleSpacing,
-    bool primary,
-    double elevation,
+    required String? id,
+    bool? automaticallyImplyLeading,
+    Color? backgroundColor,
+    Brightness? brightness,
+    double? bottomOpacity,
+    double? toolbarOpacity,
+    bool? centerTitle,
+    double? titleSpacing,
+    bool? primary,
+    double? elevation,
   }) :
     automaticallyImplyLeading = MBoolProperty(
         value: automaticallyImplyLeading?? true,
@@ -145,7 +145,7 @@ class AppBarElement extends WidgetElement with SlotChildElementMixin {
  class AppBarElementWidget extends StatefulWidget with ElementWidgetMixin {
   AppBarElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _AppBarElementWidgetState createState() => _AppBarElementWidgetState();
@@ -157,23 +157,23 @@ class _AppBarElementWidgetState extends State<AppBarElementWidget> with ElementW
     return wrapWithDefault(
         child: AppBar(
           title: getChildOrDragTarget(
-               childId: element.findIdForSlot(AppBarElement.TITLE),
+               childId: element!.findIdForSlot(AppBarElement.TITLE),
                data: SlotData(slotName: AppBarElement.TITLE), 
              ),          leading: getChildOrDragTarget(
-               childId: element.findIdForSlot(AppBarElement.LEADING),
+               childId: element!.findIdForSlot(AppBarElement.LEADING),
                data: SlotData(slotName: AppBarElement.LEADING), 
              ),        
-         automaticallyImplyLeading: element.automaticallyImplyLeading.value,
-         backgroundColor: element.backgroundColor.value,
-         brightness: element.brightness.value,
-         bottomOpacity: element.bottomOpacity.value,
-         toolbarOpacity: element.toolbarOpacity.value,
-         centerTitle: element.centerTitle.value,
-         titleSpacing: element.titleSpacing.value,
-         primary: element.primary.value,
-         elevation: element.elevation.value,
+         automaticallyImplyLeading: element!.automaticallyImplyLeading.value!,
+         backgroundColor: element!.backgroundColor.value,
+         brightness: element!.brightness.value,
+         bottomOpacity: element!.bottomOpacity.value!,
+         toolbarOpacity: element!.toolbarOpacity.value!,
+         centerTitle: element!.centerTitle.value,
+         titleSpacing: element!.titleSpacing.value,
+         primary: element!.primary.value!,
+         elevation: element!.elevation.value,
         )
-    );
+    )!;
   }
 
 } 

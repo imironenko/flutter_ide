@@ -14,7 +14,7 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class LinearProgressIndicatorElement extends WidgetElement with NoChildElementMixin {
   LinearProgressIndicatorElement({
-    @required String id,
+    required String? id,
   }) :
 
       super(id);
@@ -47,7 +47,7 @@ class LinearProgressIndicatorElement extends WidgetElement with NoChildElementMi
  class LinearProgressIndicatorElementWidget extends StatefulWidget with ElementWidgetMixin {
   LinearProgressIndicatorElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _LinearProgressIndicatorElementWidgetState createState() => _LinearProgressIndicatorElementWidgetState();
@@ -61,7 +61,7 @@ class _LinearProgressIndicatorElementWidgetState extends State<LinearProgressInd
         
 
         )
-    );
+    )!;
   }
 
 } 

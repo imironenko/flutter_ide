@@ -14,8 +14,8 @@ import 'package:widget_maker_2_0/data/properties/meta_properties.dart';
 class Canvas {
 
   Canvas({
-    @required this.id,
-    @required this.wrapperId
+    required this.id,
+    required this.wrapperId
   });
 
   /// This id of this canvas, must be unique
@@ -24,8 +24,8 @@ class Canvas {
   /// The id of the wrapper element.
   final String wrapperId;
 
-  Offset position;
-  CanvasSize size;
+  Offset? position;
+  CanvasSize? size;
 
 
 

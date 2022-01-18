@@ -3,12 +3,12 @@ import 'package:widget_maker_2_0/data/properties/value_changers/widgets/number_c
 import 'package:widget_maker_2_0/material.dart';
 
 
-class ConstraintsChanger extends StatelessValueChanger<BoxConstraints>{
+class ConstraintsChanger extends StatelessValueChanger<BoxConstraints?>{
 
-  ConstraintsChanger({Key key, BoxConstraints constraints, ValueChanged<BoxConstraints> onUpdate}) :
-        super(key: key, value: constraints, onUpdate: onUpdate);
+  ConstraintsChanger({Key? key, BoxConstraints? constraints, ValueChanged<BoxConstraints?>? onUpdate}) :
+        super(key: key, value: constraints, onUpdate: onUpdate,nullable: true);
 
-  void _update({double minWidth, double maxWidth, double minHeight, double maxHeight}) {
+  void _update({double? minWidth, double? maxWidth, double? minHeight, double? maxHeight}) {
     var oldConstraints;
     if(value == null) {
       oldConstraints = BoxConstraints();
@@ -23,7 +23,7 @@ class ConstraintsChanger extends StatelessValueChanger<BoxConstraints>{
       maxHeight: maxHeight,
     );
 
-    onUpdate(newConstraints);
+    onUpdate!(newConstraints);
   }
 
 

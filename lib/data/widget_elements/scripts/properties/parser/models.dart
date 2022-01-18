@@ -2,7 +2,7 @@
 /// A parsed property fom the YAML
 abstract class ParsedProp {
 
-  final String name;
+  final String? name;
 
   ParsedProp(this.name);
 
@@ -12,7 +12,7 @@ abstract class ParsedProp {
 /// An enum
 class ParsedEnum extends ParsedProp {
 
-  ParsedEnum(String name): super(name);
+  ParsedEnum(String? name): super(name);
 
   String get serialize => "";
 
@@ -34,10 +34,10 @@ class ParsedDifferentConstructorProp extends ParsedProp {
 /// A composite object, which is itself made of different objects
 class ObjectProp extends ParsedProp {
 
-  final Map<String, BaseProp> subProperties;
-  final String wrapper;
+  final Map<String?, BaseProp> subProperties;
+  final String? wrapper;
 
-  ObjectProp(String name, this.subProperties, this.wrapper): super(name);
+  ObjectProp(String? name, this.subProperties, this.wrapper): super(name);
 
 
   Map<String, dynamic> toMap() {
@@ -45,7 +45,7 @@ class ObjectProp extends ParsedProp {
       'name': name,
       'wrapper': wrapper,
       'props': subProperties.keys.map((key) {
-        var value = subProperties[key];
+        var value = subProperties[key]!;
         return value.toMap()..["objectPropName"] = name;
       }).toList()
     };
@@ -58,13 +58,13 @@ class ObjectProp extends ParsedProp {
 
 class BaseProp extends ParsedProp {
 
-  final String type;
+  final String? type;
   final Map<dynamic, dynamic> extras;
 
 
-  BaseProp({this.type, String name, this.extras = const {}}): super(name);
+  BaseProp({this.type, String? name, this.extras = const {}}): super(name);
 
-  String get uppercaseType => type.firstUpper();
+  String get uppercaseType => type!.firstUpper();
 
   bool get isPrimitive => type == "String" || type == "int" || type == "bool" || type == "double";
 

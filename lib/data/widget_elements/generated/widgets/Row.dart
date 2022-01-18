@@ -14,12 +14,12 @@ import 'package:widget_maker_2_0/data/widget_elements/widgets/row.dart';
 
 class RowElement extends WidgetElement with SlotChildElementMixin {
   RowElement({
-    @required String id,
-    CrossAxisAlignment crossAxisAlignment,
-    MainAxisSize mainAxisSize,
-    MainAxisAlignment mainAxisAlignment,
-    TextBaseline textBaseline,
-    TextDirection textDirection,
+    required String? id,
+    CrossAxisAlignment? crossAxisAlignment,
+    MainAxisSize? mainAxisSize,
+    MainAxisAlignment? mainAxisAlignment,
+    TextBaseline? textBaseline,
+    TextDirection? textDirection,
   }) :
     crossAxisAlignment = MCrossAxisAlignmentProperty(
         value: crossAxisAlignment?? CrossAxisAlignment.center,

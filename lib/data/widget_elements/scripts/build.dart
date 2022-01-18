@@ -16,7 +16,7 @@ void main() async {
   YamlMap widgets = parsedYaml["widgets"];
 
   List<ParsedWidget> parsedWidgets = [];
-  for(String widget in widgets.keys) {
+  for(String? widget in widgets.keys as Iterable<String?>) {
 
     YamlMap props = widgets[widget];
 

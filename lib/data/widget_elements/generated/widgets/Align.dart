@@ -14,10 +14,10 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class AlignElement extends WidgetElement with SlotChildElementMixin {
   AlignElement({
-    @required String id,
-    double heightFactor,
-    double widthFactor,
-    Alignment alignment,
+    required String? id,
+    double? heightFactor,
+    double? widthFactor,
+    Alignment? alignment,
   }) :
     heightFactor = MDoubleProperty(
         value: heightFactor?? null,
@@ -83,7 +83,7 @@ class AlignElement extends WidgetElement with SlotChildElementMixin {
  class AlignElementWidget extends StatefulWidget with ElementWidgetMixin {
   AlignElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _AlignElementWidgetState createState() => _AlignElementWidgetState();
@@ -95,14 +95,14 @@ class _AlignElementWidgetState extends State<AlignElementWidget> with ElementWid
     return wrapWithDefault(
         child: Align(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(AlignElement.CHILD),
+               childId: element!.findIdForSlot(AlignElement.CHILD),
                data: SlotData(slotName: AlignElement.CHILD), 
              ),        
-         heightFactor: element.heightFactor.value,
-         widthFactor: element.widthFactor.value,
-         alignment: element.alignment.value,
+         heightFactor: element!.heightFactor.value,
+         widthFactor: element!.widthFactor.value,
+         alignment: element!.alignment.value!,
         )
-    );
+    )!;
   }
 
 } 

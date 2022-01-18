@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 
 
-Map convertWidget(Widget widget) {
+Map? convertWidget(Widget? widget) {
   if(widget == null) return null;
   switch(widget.runtimeType) {
     case Container:

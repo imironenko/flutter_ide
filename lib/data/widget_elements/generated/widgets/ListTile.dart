@@ -14,11 +14,11 @@ import 'package:widget_maker_2_0/data/widget_elements/widgets/listtile.dart';
 
 class ListTileElement extends WidgetElement with SlotChildElementMixin {
   ListTileElement({
-    @required String id,
-    bool isThreeLine,
-    bool dense,
-    EdgeInsets contentPadding,
-    bool enabled,
+    required String? id,
+    bool? isThreeLine,
+    bool? dense,
+    EdgeInsets? contentPadding,
+    bool? enabled,
   }) :
     isThreeLine = MBoolProperty(
         value: isThreeLine?? false,

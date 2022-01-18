@@ -14,17 +14,17 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class WContainerElement extends WidgetElement with SlotChildElementMixin {
   WContainerElement({
-    @required String id,
-    double width,
-    double height,
-    Color color,
-    Alignment alignment,
-    EdgeInsets padding,
-    Decoration decoration,
-    Decoration foregroundDecoration,
-    BoxConstraints constraints,
-    EdgeInsets margin,
-    Matrix4 transform,
+    required String? id,
+    double? width,
+    double? height,
+    Color? color,
+    Alignment? alignment,
+    EdgeInsets? padding,
+    Decoration? decoration,
+    Decoration? foregroundDecoration,
+    BoxConstraints? constraints,
+    EdgeInsets? margin,
+    Matrix4? transform,
   }) :
     width = MDoubleProperty(
         value: width?? null,
@@ -80,7 +80,7 @@ class WContainerElement extends WidgetElement with SlotChildElementMixin {
         defaultValue: null
     ),
 
-    transform = MWIPProperty<Matrix4>(
+    transform = MWIPProperty<Matrix4?>(
         value: transform?? null,
         name: "transform",
         defaultValue: null
@@ -98,7 +98,7 @@ class WContainerElement extends WidgetElement with SlotChildElementMixin {
     final MDecorationProperty foregroundDecoration;
     final MBoxConstraintsProperty constraints;
     final MEdgeInsetsProperty margin;
-    final MWIPProperty<Matrix4> transform;
+    final MWIPProperty<Matrix4?> transform;
 
     static const String CHILD = "child";
 
@@ -153,7 +153,7 @@ class WContainerElement extends WidgetElement with SlotChildElementMixin {
  class WContainerElementWidget extends StatefulWidget with ElementWidgetMixin {
   WContainerElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _WContainerElementWidgetState createState() => _WContainerElementWidgetState();
@@ -165,21 +165,21 @@ class _WContainerElementWidgetState extends State<WContainerElementWidget> with 
     return wrapWithDefault(
         child: WContainer(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(WContainerElement.CHILD),
+               childId: element!.findIdForSlot(WContainerElement.CHILD),
                data: SlotData(slotName: WContainerElement.CHILD), 
              ),        
-         width: element.width.value,
-         height: element.height.value,
-         color: element.color.value,
-         alignment: element.alignment.value,
-         padding: element.padding.value,
-         decoration: element.decoration.value,
-         foregroundDecoration: element.foregroundDecoration.value,
-         constraints: element.constraints.value,
-         margin: element.margin.value,
-         transform: element.transform.value,
+         width: element!.width.value,
+         height: element!.height.value,
+         color: element!.color.value,
+         alignment: element!.alignment.value,
+         padding: element!.padding.value,
+         decoration: element!.decoration.value,
+         foregroundDecoration: element!.foregroundDecoration.value,
+         constraints: element!.constraints.value,
+         margin: element!.margin.value,
+         transform: element!.transform.value,
         )
-    );
+    )!;
   }
 
 } 

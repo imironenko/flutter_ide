@@ -5,9 +5,9 @@ class IndexedObject<T> {
 
   IndexedObject({this.index, this.object, this.treePart});
 
-  final int index;
-  final T object;
-  final List<int> treePart;
+  final int? index;
+  final T? object;
+  final List<int>? treePart;
 
 }
 

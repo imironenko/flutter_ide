@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 class CurrentlyDragging extends StatefulWidget {
 
 
-  final Widget child;
+  final Widget? child;
 
-  const CurrentlyDragging({Key key, this.child}) : super(key: key);
+  const CurrentlyDragging({Key? key, this.child}) : super(key: key);
 
   @override
   CurrentlyDraggingState createState() => CurrentlyDraggingState();

@@ -3,10 +3,10 @@ import 'package:widget_maker_2_0/data/properties/value_changers/widgets/number_c
 import 'package:widget_maker_2_0/material.dart';
 import 'package:widget_maker_2_0/data/properties/meta_properties.dart';
 
-class CanvasSizeChanger extends StatelessValueChanger<CanvasSize>{
+class CanvasSizeChanger extends StatelessValueChanger<CanvasSize?>{
 
-  CanvasSizeChanger({Key key, CanvasSize canvasSize, ValueChanged<CanvasSize> onUpdate}) :
-        super(key: key, value: canvasSize, onUpdate: onUpdate);
+  CanvasSizeChanger({Key? key, required CanvasSize canvasSize, ValueChanged<CanvasSize?>? onUpdate}) :
+        super(key: key, value: canvasSize, onUpdate: onUpdate,nullable: true);
 
   @override
   Widget build(BuildContext context) {
@@ -17,30 +17,30 @@ class CanvasSizeChanger extends StatelessValueChanger<CanvasSize>{
           items: CanvasSize.sizes.keys.map((canvasSize) {
             return DropdownMenuItem<CanvasSize>(
               value: canvasSize,
-              child: Text(CanvasSize.sizes[canvasSize]),
+              child: Text(CanvasSize.sizes[canvasSize]!),
             );
           }).toList(),
           onChanged: (it) {
-            onUpdate(it);
+            onUpdate!(it);
           },
         ),
         Row(
           children: <Widget>[
             Expanded(
               child: NumberChanger(
-                value: value.width,
+                value: value!.width,
                 name: "width",
                 onUpdate: (it) {
-                  onUpdate(value.copyWith(width: it));
+                  onUpdate!(value!.copyWith(width: it));
                 },
               ),
             ),
             Expanded(
               child: NumberChanger(
-                value: value.height,
+                value: value!.height,
                 name: "height",
                 onUpdate: (it) {
-                  onUpdate(value.copyWith(height: it));
+                  onUpdate!(value!.copyWith(height: it));
                 },
               ),
             ),

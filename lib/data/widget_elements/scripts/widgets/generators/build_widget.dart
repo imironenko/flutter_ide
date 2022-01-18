@@ -39,8 +39,8 @@ String generateWidget(ParsedWidget parsedWidget) {
 
   String widgetNameElement = parsedWidget.elementName;
 
-  String widgetName = parsedWidget.name;
-  String useWidget = parsedWidget.generalInfo?.useWidget;
+  String? widgetName = parsedWidget.name;
+  String? useWidget = parsedWidget.generalInfo?.useWidget;
 
   if(useWidget != null)
     return "// Can be found in the widgets folder";
@@ -61,7 +61,7 @@ class _${widgetNameElement}WidgetState extends State<${widgetNameElement}Widget>
     return wrapWithDefault(
         child: ${useWidget?? widgetName}(
 ${widgetChildrenArguments(parsedWidget)}        
-${widgetConstructorArguments(parsedWidget.properties).join("\n")}
+${widgetConstructorArguments(parsedWidget.properties!).join("\n")}
         )
     );
   }
@@ -97,19 +97,19 @@ String makeFirstBig(String it) {
 
 
 String getMaybeSlots(ParsedWidget widget) {
-  if(!(widget.generalInfo.layoutModel is SlotChildLayoutModel))
+  if(!(widget.generalInfo!.layoutModel is SlotChildLayoutModel))
     return "";
 
-  SlotChildLayoutModel layoutModel = widget.generalInfo.layoutModel;
+  SlotChildLayoutModel layoutModel = widget.generalInfo!.layoutModel as SlotChildLayoutModel;
 
-  String slots = layoutModel.slotNames.map((slot) {
-    return "  static const String ${slot.name.toUpperCase()} = \"${slot.name}\";";
+  String slots = layoutModel.slotNames!.map((slot) {
+    return "  static const String ${slot.name!.toUpperCase()} = \"${slot.name}\";";
   }).join("\n");
 
   String getSlots = """
   @override
   List<ChildSlot> constructChildSlots() => [
-${layoutModel.slotNames.map((it) => "   ${it.toCode()}(slotName: ${it.name.toUpperCase()}),").join("\n")}
+${layoutModel.slotNames!.map((it) => "   ${it.toCode()}(slotName: ${it.name!.toUpperCase()}),").join("\n")}
   ];  
   """;
 
@@ -118,7 +118,7 @@ ${layoutModel.slotNames.map((it) => "   ${it.toCode()}(slotName: ${it.name.toUpp
 
 String widgetChildrenArguments(ParsedWidget widget) {
   String res = "";
-  for(MapEntry<Slot, IdAndData> entry in widget.generalInfo.layoutModel.getPropertyAccess().entries) {
+  for(MapEntry<Slot, IdAndData> entry in widget.generalInfo!.layoutModel!.getPropertyAccess().entries) {
     res += "          ${entry.key.name}: getChildOrDragTarget(\n"
         "               childId: element.${entry.value.id},\n"
         "               data: ${entry.value.data}, \n${getMaxEmptySize(entry.value) ?? ""}"
@@ -127,8 +127,8 @@ String widgetChildrenArguments(ParsedWidget widget) {
   return res;
 }
 
-String getMaxEmptySize(IdAndData it) {
+String? getMaxEmptySize(IdAndData it) {
   if(it.maxEmptySize == null) return null;
   //return "               emptySize: Size(${it.maxEmptySize.width}, ${it.maxEmptySize.height})\n";
-  return "               widgetWrapper: (context, child) => sizeWidgetWrapper(context, Size(${it.maxEmptySize.width},${it.maxEmptySize.height}), child)\n";
+  return "               widgetWrapper: (context, child) => sizeWidgetWrapper(context, Size(${it.maxEmptySize!.width},${it.maxEmptySize!.height}), child)\n";
 }

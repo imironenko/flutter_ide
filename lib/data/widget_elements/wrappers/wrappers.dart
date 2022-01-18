@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class WCircleAvatar extends StatelessWidget {
 
   const WCircleAvatar({
-    Key key,
+    Key? key,
     this.child,
     this.backgroundColor,
     this.imageUrl,
@@ -14,13 +14,13 @@ class WCircleAvatar extends StatelessWidget {
     this.maxRadius,
   });
 
-  final Widget child;
-  final Color backgroundColor;
-  final String imageUrl;
-  final Color foregroundColor;
-  final double radius;
-  final double minRadius;
-  final double maxRadius;
+  final Widget? child;
+  final Color? backgroundColor;
+  final String? imageUrl;
+  final Color? foregroundColor;
+  final double? radius;
+  final double? minRadius;
+  final double? maxRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class WNetworkImage extends StatelessWidget {
 
   const WNetworkImage(
     this.src, {
-    Key key,
+    Key? key,
     this.scale = 1.0,
     this.frameBuilder,
     this.loadingBuilder,
@@ -65,24 +65,24 @@ class WNetworkImage extends StatelessWidget {
 
   final String src;
   final double scale;
-  final ImageFrameBuilder frameBuilder;
-  final ImageLoadingBuilder loadingBuilder;
-  final String semanticLabel;
+  final ImageFrameBuilder? frameBuilder;
+  final ImageLoadingBuilder? loadingBuilder;
+  final String? semanticLabel;
   final bool excludeFromSemantics;
-  final double width;
-  final double height;
-  final Color color;
-  final BlendMode colorBlendMode;
-  final BoxFit fit;
+  final double? width;
+  final double? height;
+  final Color? color;
+  final BlendMode? colorBlendMode;
+  final BoxFit? fit;
   final Alignment alignment;
   final ImageRepeat repeat;
-  final Rect centerSlice;
+  final Rect? centerSlice;
   final bool matchTextDirection;
   final bool gaplessPlayback;
   final FilterQuality filterQuality;
-  final Map<String, String> headers;
-  final int cacheWidth;
-  final int cacheHeight;
+  final Map<String, String>? headers;
+  final int? cacheWidth;
+  final int? cacheHeight;
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +113,7 @@ class WNetworkImage extends StatelessWidget {
 class WContainer extends StatelessWidget {
 
   const WContainer({
-    Key key,
+    Key? key,
     this.alignment,
     this.padding,
     this.color,
@@ -128,17 +128,17 @@ class WContainer extends StatelessWidget {
   }): super(key: key);
 
 
-  final Alignment alignment;
-  final EdgeInsetsGeometry padding;
-  final Color color;
-  final Decoration decoration;
-  final Decoration foregroundDecoration;
-  final double width;
-  final double height;
-  final BoxConstraints constraints;
-  final EdgeInsetsGeometry margin;
-  final Matrix4 transform;
-  final Widget child;
+  final Alignment? alignment;
+  final EdgeInsetsGeometry? padding;
+  final Color? color;
+  final Decoration? decoration;
+  final Decoration? foregroundDecoration;
+  final double? width;
+  final double? height;
+  final BoxConstraints? constraints;
+  final EdgeInsetsGeometry? margin;
+  final Matrix4? transform;
+  final Widget? child;
 
 
   @override
@@ -162,7 +162,7 @@ class WContainer extends StatelessWidget {
 class WAnimatedContainer extends StatelessWidget {
 
   const WAnimatedContainer({
-    Key key,
+    Key? key,
     this.alignment,
     this.padding,
     this.color,
@@ -175,24 +175,24 @@ class WAnimatedContainer extends StatelessWidget {
     this.transform,
     this.child,
     this.curve = Curves.linear,
-    @required this.duration,
+    required this.duration,
     this.onEnd,
   }): super(key: key);
 
-  final Alignment alignment;
-  final EdgeInsetsGeometry padding;
-  final Color color;
-  final Decoration decoration;
-  final Decoration foregroundDecoration;
-  final double width;
-  final double height;
-  final BoxConstraints constraints;
-  final EdgeInsetsGeometry margin;
-  final Matrix4 transform;
-  final Widget child;
+  final Alignment? alignment;
+  final EdgeInsetsGeometry? padding;
+  final Color? color;
+  final Decoration? decoration;
+  final Decoration? foregroundDecoration;
+  final double? width;
+  final double? height;
+  final BoxConstraints? constraints;
+  final EdgeInsetsGeometry? margin;
+  final Matrix4? transform;
+  final Widget? child;
   final Curve curve;
-  final Duration duration;
-  final VoidCallback onEnd;
+  final Duration? duration;
+  final VoidCallback? onEnd;
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +209,7 @@ class WAnimatedContainer extends StatelessWidget {
       transform: transform,
       child: child,
       curve: curve,
-      duration: duration,
+      duration: duration!,
       onEnd: onEnd,
     );
   }
@@ -218,7 +218,7 @@ class WAnimatedContainer extends StatelessWidget {
 class WPageView extends StatelessWidget {
 
   const WPageView({
-    Key key,
+    Key? key,
     this.scrollDirection = Axis.horizontal,
     this.reverse = false,
     this.controller,
@@ -231,10 +231,10 @@ class WPageView extends StatelessWidget {
 
   final Axis scrollDirection;
   final bool reverse;
-  final PageController controller;
-  final ScrollPhysics physics;
+  final PageController? controller;
+  final ScrollPhysics? physics;
   final bool pageSnapping;
-  final ValueChanged<int> onPageChanged;
+  final ValueChanged<int>? onPageChanged;
   final List<Widget> children;
   final DragStartBehavior dragStartBehavior;
 

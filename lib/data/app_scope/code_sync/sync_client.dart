@@ -6,8 +6,8 @@ import 'package:widget_maker_2_0/data/bs/widget_board/widget_board.dart';
 
 class SyncServer {
 
-  WebSocket _webSocket;
-  WebSocket _otherWebSocket;
+  WebSocket? _webSocket;
+  WebSocket? _otherWebSocket;
 
   final ValueChanged<WidgetBoard> set;
 

@@ -14,9 +14,9 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class SizedBoxElement extends WidgetElement with SlotChildElementMixin {
   SizedBoxElement({
-    @required String id,
-    double width,
-    double height,
+    required String? id,
+    double? width,
+    double? height,
   }) :
     width = MDoubleProperty(
         value: width?? 100,
@@ -75,7 +75,7 @@ class SizedBoxElement extends WidgetElement with SlotChildElementMixin {
  class SizedBoxElementWidget extends StatefulWidget with ElementWidgetMixin {
   SizedBoxElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _SizedBoxElementWidgetState createState() => _SizedBoxElementWidgetState();
@@ -87,13 +87,13 @@ class _SizedBoxElementWidgetState extends State<SizedBoxElementWidget> with Elem
     return wrapWithDefault(
         child: SizedBox(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(SizedBoxElement.CHILD),
+               childId: element!.findIdForSlot(SizedBoxElement.CHILD),
                data: SlotData(slotName: SizedBoxElement.CHILD), 
              ),        
-         width: element.width.value,
-         height: element.height.value,
+         width: element!.width.value,
+         height: element!.height.value,
         )
-    );
+    )!;
   }
 
 } 

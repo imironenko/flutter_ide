@@ -16,13 +16,13 @@ class ContextToolBar extends StatefulWidget {
 class _ContextToolBarState extends State<ContextToolBar> {
 
 
-  ContextToolbarInteractor contextToolbarInteractor;
+  late ContextToolbarInteractor contextToolbarInteractor;
 
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    contextToolbarInteractor = ContextToolbarInteractor(AppScope.of(context).widgetBoard);
+    contextToolbarInteractor = ContextToolbarInteractor(AppScope.of(context).widgetBoard!);
   }
 
 
@@ -30,7 +30,7 @@ class _ContextToolBarState extends State<ContextToolBar> {
   Widget build(BuildContext context) {
     return Container(
       height: 32,
-      color: MyTheme.of(context).background2dp,
+      color: MyTheme.of(context)!.background2dp,
       child: PowerStreamBuilder<CurrentSelectionContext>(
         stream: contextToolbarInteractor.currentSelectionContext,
         initialData: CurrentSelectionContext.widgetBoard,
@@ -50,7 +50,7 @@ class _ContextToolBarState extends State<ContextToolBar> {
               return LiteralWidgetToolbar();
           }
           // Linter, let me alone please I checked every possible case!
-          return null;
+          // return null;
         },
       ),
     );

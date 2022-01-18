@@ -14,9 +14,9 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class CircularProgressIndicatorElement extends WidgetElement with NoChildElementMixin {
   CircularProgressIndicatorElement({
-    @required String id,
-    double strokeWidth,
-    Color backgroundColor,
+    required String? id,
+    double? strokeWidth,
+    Color? backgroundColor,
   }) :
     strokeWidth = MDoubleProperty(
         value: strokeWidth?? 4,
@@ -67,7 +67,7 @@ class CircularProgressIndicatorElement extends WidgetElement with NoChildElement
  class CircularProgressIndicatorElementWidget extends StatefulWidget with ElementWidgetMixin {
   CircularProgressIndicatorElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _CircularProgressIndicatorElementWidgetState createState() => _CircularProgressIndicatorElementWidgetState();
@@ -79,10 +79,10 @@ class _CircularProgressIndicatorElementWidgetState extends State<CircularProgres
     return wrapWithDefault(
         child: CircularProgressIndicator(
         
-         strokeWidth: element.strokeWidth.value,
-         backgroundColor: element.backgroundColor.value,
+         strokeWidth: element!.strokeWidth.value!,
+         backgroundColor: element!.backgroundColor.value,
         )
-    );
+    )!;
   }
 
 } 

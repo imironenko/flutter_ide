@@ -18,7 +18,7 @@ Future<List<String>> getEnumValues(String enumName) async {
 
   final port = ReceivePort();
   final isolate = await Isolate.spawnUri(uri, [], port.sendPort, automaticPackageResolution: true);
-  final String response = await port.first;
+  final String? response = await (port.first as FutureOr<String?>);
 
   port.close();
   isolate.kill();

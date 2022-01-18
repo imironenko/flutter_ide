@@ -14,11 +14,11 @@ class LiteralWidgetToolbar extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () async {
-              String selectedId = AppScope.of(context).widgetBoard.currentlySelectedValue;
+              String? selectedId = AppScope.of(context).widgetBoard!.currentlySelectedValue;
               LiteralWidgetElement literalWidgetElement = AppScope
-                  .of(context).widgetBoard.getWidgetElement(selectedId)
+                  .of(context).widgetBoard!.getWidgetElement(selectedId)
               as LiteralWidgetElement;
-              AppScope.of(context).widgetBoard.makeInstanceable(literalWidgetElement.id);
+              AppScope.of(context).widgetBoard!.makeInstanceable(literalWidgetElement.id);
             },
             child: Text("Make instancable"),
           ),

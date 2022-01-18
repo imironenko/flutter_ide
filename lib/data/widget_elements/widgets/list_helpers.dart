@@ -10,7 +10,7 @@ import 'package:widget_maker_2_0/ui/utils/global_draggable.dart';
 import 'base.dart';
 
 class Arrow extends StatelessWidget {
-  const Arrow({Key key, @required this.axis, @required this.color})
+  const Arrow({Key? key, required this.axis, required this.color})
       : super(key: key);
 
   final Axis axis;
@@ -71,7 +71,7 @@ class ArrowPainter extends CustomPainter {
 
 mixin ListElementWidgetStateMixin<A extends WidgetElement, T extends ElementWidgetMixin> on ElementWidgetStateMixin<A,T> {
 
-  List<String> get childrenIds => element.children.where((it) => it.slotName == "children").first.childrenIds;
+  List<String?>? get childrenIds => element!.children!.where((it) => it.slotName == "children").first.childrenIds;
 
 
   Widget getArrow(Axis axis) {
@@ -119,9 +119,9 @@ mixin ListElementWidgetStateMixin<A extends WidgetElement, T extends ElementWidg
           // Thus, when moving an item inside the list
           // the position needs to accommodate for the past position
           // of the element that is moving
-          int oldPosition;
-          if(element.containsChild(id)) {
-            SlotData oldData = element.getDataForChild(id);
+          int? oldPosition;
+          if(element!.containsChild(id)) {
+            SlotData oldData = element!.getDataForChild(id);
             assert(oldData.data is int);
             oldPosition = oldData.data;
           }
@@ -141,7 +141,7 @@ mixin ListElementWidgetStateMixin<A extends WidgetElement, T extends ElementWidg
             insertAt--;
           }
 
-          AppScope.of(context).widgetBoard.acceptChild(widget.id, id, SlotData(
+          AppScope.of(context).widgetBoard!.acceptChild(widget.id, id, SlotData(
             slotName: "children",
             data: insertAt,
           ));
@@ -167,7 +167,7 @@ mixin ListElementWidgetStateMixin<A extends WidgetElement, T extends ElementWidg
 
 
   bool hasExpanded() {
-    return childrenIds.map((it) => widgetBoard.getWidgetElement(it)).any((widgetElement) => widgetElement is ExpandedElement);
+    return childrenIds!.map((it) => widgetBoard!.getWidgetElement(it)).any((widgetElement) => widgetElement is ExpandedElement);
   }
 
 
@@ -196,13 +196,13 @@ mixin ListElementWidgetStateMixin<A extends WidgetElement, T extends ElementWidg
 
   List<Widget> getRowChildren(Axis axis) {
     List<Widget> items = [];
-    for (int i = 0; i < childrenIds.length; i++) {
-      var widgetElement = widgetBoard.getWidgetElement(childrenIds[i]);
+    for (int i = 0; i < childrenIds!.length; i++) {
+      var widgetElement = widgetBoard!.getWidgetElement(childrenIds![i]);
 
       Widget result = Stack(
         children: <Widget>[
-          widgetBoard
-              .getWidgetElement(childrenIds[i])
+          widgetBoard!
+              .getWidgetElement(childrenIds![i])!
               .generateWidget(),
           Positioned.fill(
             child: _getOverlay(axis, i),
@@ -215,10 +215,10 @@ mixin ListElementWidgetStateMixin<A extends WidgetElement, T extends ElementWidg
         // No problem row can register for expanded updates to
 
         // TODO care for memory leak
-        widgetBoard.registerUpdate(widgetElement.id, rebuild);
+        widgetBoard!.registerUpdate(widgetElement.id, rebuild);
 
         result = Expanded(
-          flex: widgetElement.flex.value,
+          flex: widgetElement.flex.value!,
           child: result,
         );
       }
@@ -228,10 +228,10 @@ mixin ListElementWidgetStateMixin<A extends WidgetElement, T extends ElementWidg
         // No problem row can register for expanded updates to
 
         // TODO care for memory leak
-        widgetBoard.registerUpdate(widgetElement.id, rebuild);
+        widgetBoard!.registerUpdate(widgetElement.id, rebuild);
 
         result = Flexible(
-          flex: widgetElement.flex.value,
+          flex: widgetElement.flex.value!,
           child: result,
         );
       }
@@ -250,11 +250,11 @@ mixin ListElementWidgetStateMixin<A extends WidgetElement, T extends ElementWidg
 
   @override
   void dispose() {
-    widgetBoard.removeUpdate(widget.id, refresh);
+    widgetBoard!.removeUpdate(widget.id, refresh);
     super.dispose();
   }
 
   void acceptChild(RowElement element, String childId) {
-    childrenIds.add(childId);
+    childrenIds!.add(childId);
   }
 }

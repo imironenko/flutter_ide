@@ -14,7 +14,7 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class TextFormFieldElement extends WidgetElement with NoChildElementMixin {
   TextFormFieldElement({
-    @required String id,
+    required String? id,
   }) :
 
       super(id);
@@ -47,7 +47,7 @@ class TextFormFieldElement extends WidgetElement with NoChildElementMixin {
  class TextFormFieldElementWidget extends StatefulWidget with ElementWidgetMixin {
   TextFormFieldElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _TextFormFieldElementWidgetState createState() => _TextFormFieldElementWidgetState();
@@ -61,7 +61,7 @@ class _TextFormFieldElementWidgetState extends State<TextFormFieldElementWidget>
         
 
         )
-    );
+    )!;
   }
 
 } 

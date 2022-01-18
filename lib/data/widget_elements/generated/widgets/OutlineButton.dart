@@ -14,9 +14,9 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class OutlineButtonElement extends WidgetElement with SlotChildElementMixin {
   OutlineButtonElement({
-    @required String id,
-    Color color,
-    EdgeInsets padding,
+    required String? id,
+    Color? color,
+    EdgeInsets? padding,
   }) :
     color = MColorProperty(
         value: color?? null,
@@ -73,7 +73,7 @@ class OutlineButtonElement extends WidgetElement with SlotChildElementMixin {
  class OutlineButtonElementWidget extends StatefulWidget with ElementWidgetMixin {
   OutlineButtonElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _OutlineButtonElementWidgetState createState() => _OutlineButtonElementWidgetState();
@@ -85,14 +85,14 @@ class _OutlineButtonElementWidgetState extends State<OutlineButtonElementWidget>
     return wrapWithDefault(
         child: OutlineButton(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(OutlineButtonElement.CHILD),
+               childId: element!.findIdForSlot(OutlineButtonElement.CHILD),
                data: SlotData(slotName: OutlineButtonElement.CHILD), 
                widgetWrapper: (context, child) => sizeWidgetWrapper(context, Size(100.0,60.0), child)
              ),        
-         color: element.color.value,
-         padding: element.padding.value,
+         color: element!.color.value,
+         padding: element!.padding.value,
         )
-    );
+    )!;
   }
 
 } 

@@ -6,7 +6,7 @@ import 'base.dart';
 class TextFieldElementWidget extends StatefulWidget with ElementWidgetMixin {
   TextFieldElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _TextFieldElementWidgetState createState() => _TextFieldElementWidgetState();
@@ -19,10 +19,10 @@ class _TextFieldElementWidgetState extends State<TextFieldElementWidget> with El
         child: AbsorbPointer(
           absorbing: playMode? false: true,
           child: TextField(
-            obscureText: element.obscureText.value,
+            obscureText: element!.obscureText.value!,
           ),
         )
-    );
+    )!;
   }
 
 }

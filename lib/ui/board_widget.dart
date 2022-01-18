@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 class BoardWidget extends StatefulWidget {
 
 
-  const BoardWidget({Key key, this.child}) : super(key: key);
-  final Widget child;
+  const BoardWidget({Key? key, this.child}) : super(key: key);
+  final Widget? child;
 
 /*
   static WidgetBoard of(BuildContext context, {bool listen = true}) {
@@ -25,8 +25,8 @@ class BoardWidget extends StatefulWidget {
 
 class _BoardWidgetState extends State<BoardWidget> {
 
-  WidgetBoard widgetBoard;
-  SyncServer server;
+  WidgetBoard? widgetBoard;
+  SyncServer? server;
 
   @override
   void initState() {
@@ -34,13 +34,13 @@ class _BoardWidgetState extends State<BoardWidget> {
     widgetBoard = WidgetBoard();
 
     server = SyncServer(_override);
-    server.connect();
+    server!.connect();
   }
 
 
   void _override(WidgetBoard newBoard) {
     setState(() {
-      widgetBoard.dispose();
+      widgetBoard!.dispose();
       widgetBoard = newBoard;
     });
   }
@@ -48,9 +48,9 @@ class _BoardWidgetState extends State<BoardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<SyncServer>.value(
+    return Provider<SyncServer?>.value(
       value: server,
-      child: Provider<WidgetBoard>.value(
+      child: Provider<WidgetBoard?>.value(
         child: widget.child,
         value: widgetBoard,
       ),

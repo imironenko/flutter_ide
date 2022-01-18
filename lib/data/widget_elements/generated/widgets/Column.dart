@@ -14,10 +14,10 @@ import 'package:widget_maker_2_0/data/widget_elements/widgets/column.dart';
 
 class ColumnElement extends WidgetElement with SlotChildElementMixin {
   ColumnElement({
-    @required String id,
-    CrossAxisAlignment crossAxisAlignment,
-    MainAxisSize mainAxisSize,
-    MainAxisAlignment mainAxisAlignment,
+    required String? id,
+    CrossAxisAlignment? crossAxisAlignment,
+    MainAxisSize? mainAxisSize,
+    MainAxisAlignment? mainAxisAlignment,
   }) :
     crossAxisAlignment = MCrossAxisAlignmentProperty(
         value: crossAxisAlignment?? CrossAxisAlignment.center,

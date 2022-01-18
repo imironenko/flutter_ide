@@ -14,8 +14,8 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class RotatedBoxElement extends WidgetElement with SlotChildElementMixin {
   RotatedBoxElement({
-    @required String id,
-    int quarterTurns,
+    required String? id,
+    int? quarterTurns,
   }) :
     quarterTurns = MIntProperty(
         value: quarterTurns?? 0,
@@ -63,7 +63,7 @@ class RotatedBoxElement extends WidgetElement with SlotChildElementMixin {
  class RotatedBoxElementWidget extends StatefulWidget with ElementWidgetMixin {
   RotatedBoxElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _RotatedBoxElementWidgetState createState() => _RotatedBoxElementWidgetState();
@@ -75,12 +75,12 @@ class _RotatedBoxElementWidgetState extends State<RotatedBoxElementWidget> with 
     return wrapWithDefault(
         child: RotatedBox(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(RotatedBoxElement.CHILD),
+               childId: element!.findIdForSlot(RotatedBoxElement.CHILD),
                data: SlotData(slotName: RotatedBoxElement.CHILD), 
              ),        
-         quarterTurns: element.quarterTurns.value,
+         quarterTurns: element!.quarterTurns.value!,
         )
-    );
+    )!;
   }
 
 } 

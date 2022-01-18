@@ -3,16 +3,16 @@ import 'package:widget_maker_2_0/data/properties/basic_properties.dart';
 
 class SelectVariableDialog extends StatelessWidget {
 
-  const SelectVariableDialog({Key key, this.properties}) : super(key: key);
+  const SelectVariableDialog({Key? key, this.properties}) : super(key: key);
 
-  final List<MProperty> properties;
+  final List<MProperty>? properties;
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Container(
         child: ListView(
-          children: properties.map((it) {
+          children: properties!.map((it) {
             return GestureDetector(
               onTap: () {
                 Navigator.of(context).pop(it);

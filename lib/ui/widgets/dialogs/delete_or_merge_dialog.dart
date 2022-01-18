@@ -8,7 +8,7 @@ enum DeleteOperation {
 }
 
 
-Future<DeleteOperation> showDeleteOperationDialog(BuildContext context) {
+Future<DeleteOperation?> showDeleteOperationDialog(BuildContext context) {
   return showDialogAtCursor<DeleteOperation>(
     size: Size(200,100),
     builder: (context) {

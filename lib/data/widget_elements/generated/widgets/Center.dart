@@ -14,7 +14,7 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class CenterElement extends WidgetElement with SlotChildElementMixin {
   CenterElement({
-    @required String id,
+    required String? id,
   }) :
 
       super(id);
@@ -53,7 +53,7 @@ class CenterElement extends WidgetElement with SlotChildElementMixin {
  class CenterElementWidget extends StatefulWidget with ElementWidgetMixin {
   CenterElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _CenterElementWidgetState createState() => _CenterElementWidgetState();
@@ -65,12 +65,12 @@ class _CenterElementWidgetState extends State<CenterElementWidget> with ElementW
     return wrapWithDefault(
         child: Center(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(CenterElement.CHILD),
+               childId: element!.findIdForSlot(CenterElement.CHILD),
                data: SlotData(slotName: CenterElement.CHILD), 
              ),        
 
         )
-    );
+    )!;
   }
 
 } 

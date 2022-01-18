@@ -30,93 +30,93 @@ class WidgetElementDeserializer2 {
     }
 
 
-    static void _deserializeWidgetElement(Widget widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+    static void _deserializeWidgetElement(Widget? widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
 
         switch(widget.runtimeType) {
 
-            case Text: _parseText(widget, widgetBoard, parentId, slotData);
+            case Text: _parseText(widget as Text, widgetBoard, parentId, slotData);
                 break;
-            case AppBar: _parseAppBar(widget, widgetBoard, parentId, slotData);
+            case AppBar: _parseAppBar(widget as AppBar, widgetBoard, parentId, slotData);
                 break;
-            case CupertinoNavigationBar: _parseCupertinoNavigationBar(widget, widgetBoard, parentId, slotData);
+            case CupertinoNavigationBar: _parseCupertinoNavigationBar(widget as CupertinoNavigationBar, widgetBoard, parentId, slotData);
                 break;
-            case Icon: _parseIcon(widget, widgetBoard, parentId, slotData);
+            case Icon: _parseIcon(widget as Icon, widgetBoard, parentId, slotData);
                 break;
-            case Form: _parseForm(widget, widgetBoard, parentId, slotData);
+            case Form: _parseForm(widget as Form, widgetBoard, parentId, slotData);
                 break;
-            case Material: _parseMaterial(widget, widgetBoard, parentId, slotData);
+            case Material: _parseMaterial(widget as Material, widgetBoard, parentId, slotData);
                 break;
-            case Flexible: _parseFlexible(widget, widgetBoard, parentId, slotData);
+            case Flexible: _parseFlexible(widget as Flexible, widgetBoard, parentId, slotData);
                 break;
-            case TextFormField: _parseTextFormField(widget, widgetBoard, parentId, slotData);
+            case TextFormField: _parseTextFormField(widget as TextFormField?, widgetBoard, parentId, slotData);
                 break;
-            case GestureDetector: _parseGestureDetector(widget, widgetBoard, parentId, slotData);
+            case GestureDetector: _parseGestureDetector(widget as GestureDetector, widgetBoard, parentId, slotData);
                 break;
-            case WNetworkImage: _parseWNetworkImage(widget, widgetBoard, parentId, slotData);
+            case WNetworkImage: _parseWNetworkImage(widget as WNetworkImage, widgetBoard, parentId, slotData);
                 break;
-            case SizedBox: _parseSizedBox(widget, widgetBoard, parentId, slotData);
+            case SizedBox: _parseSizedBox(widget as SizedBox, widgetBoard, parentId, slotData);
                 break;
-            case CircularProgressIndicator: _parseCircularProgressIndicator(widget, widgetBoard, parentId, slotData);
+            case CircularProgressIndicator: _parseCircularProgressIndicator(widget as CircularProgressIndicator, widgetBoard, parentId, slotData);
                 break;
-            case LinearProgressIndicator: _parseLinearProgressIndicator(widget, widgetBoard, parentId, slotData);
+            case LinearProgressIndicator: _parseLinearProgressIndicator(widget as LinearProgressIndicator?, widgetBoard, parentId, slotData);
                 break;
-            case CupertinoActivityIndicator: _parseCupertinoActivityIndicator(widget, widgetBoard, parentId, slotData);
+            case CupertinoActivityIndicator: _parseCupertinoActivityIndicator(widget as CupertinoActivityIndicator, widgetBoard, parentId, slotData);
                 break;
-            case FloatingActionButton: _parseFloatingActionButton(widget, widgetBoard, parentId, slotData);
+            case FloatingActionButton: _parseFloatingActionButton(widget as FloatingActionButton, widgetBoard, parentId, slotData);
                 break;
-            case Scaffold: _parseScaffold(widget, widgetBoard, parentId, slotData);
+            case Scaffold: _parseScaffold(widget as Scaffold, widgetBoard, parentId, slotData);
                 break;
-            case ListTile: _parseListTile(widget, widgetBoard, parentId, slotData);
+            case ListTile: _parseListTile(widget as ListTile, widgetBoard, parentId, slotData);
                 break;
-            case Center: _parseCenter(widget, widgetBoard, parentId, slotData);
+            case Center: _parseCenter(widget as Center, widgetBoard, parentId, slotData);
                 break;
-            case Padding: _parsePadding(widget, widgetBoard, parentId, slotData);
+            case Padding: _parsePadding(widget as Padding, widgetBoard, parentId, slotData);
                 break;
-            case RotatedBox: _parseRotatedBox(widget, widgetBoard, parentId, slotData);
+            case RotatedBox: _parseRotatedBox(widget as RotatedBox, widgetBoard, parentId, slotData);
                 break;
-            case AspectRatio: _parseAspectRatio(widget, widgetBoard, parentId, slotData);
+            case AspectRatio: _parseAspectRatio(widget as AspectRatio, widgetBoard, parentId, slotData);
                 break;
-            case TextField: _parseTextField(widget, widgetBoard, parentId, slotData);
+            case TextField: _parseTextField(widget as TextField, widgetBoard, parentId, slotData);
                 break;
-            case FractionallySizedBox: _parseFractionallySizedBox(widget, widgetBoard, parentId, slotData);
+            case FractionallySizedBox: _parseFractionallySizedBox(widget as FractionallySizedBox, widgetBoard, parentId, slotData);
                 break;
-            case Divider: _parseDivider(widget, widgetBoard, parentId, slotData);
+            case Divider: _parseDivider(widget as Divider, widgetBoard, parentId, slotData);
                 break;
-            case Align: _parseAlign(widget, widgetBoard, parentId, slotData);
+            case Align: _parseAlign(widget as Align, widgetBoard, parentId, slotData);
                 break;
-            case UnconstrainedBox: _parseUnconstrainedBox(widget, widgetBoard, parentId, slotData);
+            case UnconstrainedBox: _parseUnconstrainedBox(widget as UnconstrainedBox, widgetBoard, parentId, slotData);
                 break;
-            case ConstrainedBox: _parseConstrainedBox(widget, widgetBoard, parentId, slotData);
+            case ConstrainedBox: _parseConstrainedBox(widget as ConstrainedBox, widgetBoard, parentId, slotData);
                 break;
-            case WContainer: _parseWContainer(widget, widgetBoard, parentId, slotData);
+            case WContainer: _parseWContainer(widget as WContainer, widgetBoard, parentId, slotData);
                 break;
-            case AbsorbPointer: _parseAbsorbPointer(widget, widgetBoard, parentId, slotData);
+            case AbsorbPointer: _parseAbsorbPointer(widget as AbsorbPointer, widgetBoard, parentId, slotData);
                 break;
-            case WCircleAvatar: _parseWCircleAvatar(widget, widgetBoard, parentId, slotData);
+            case WCircleAvatar: _parseWCircleAvatar(widget as WCircleAvatar, widgetBoard, parentId, slotData);
                 break;
-            case Card: _parseCard(widget, widgetBoard, parentId, slotData);
+            case Card: _parseCard(widget as Card, widgetBoard, parentId, slotData);
                 break;
-            case Checkbox: _parseCheckbox(widget, widgetBoard, parentId, slotData);
+            case Checkbox: _parseCheckbox(widget as Checkbox, widgetBoard, parentId, slotData);
                 break;
-            case Chip: _parseChip(widget, widgetBoard, parentId, slotData);
+            case Chip: _parseChip(widget as Chip, widgetBoard, parentId, slotData);
                 break;
-            case WPageView: _parseWPageView(widget, widgetBoard, parentId, slotData);
+            case WPageView: _parseWPageView(widget as WPageView, widgetBoard, parentId, slotData);
                 break;
-            case Column: _parseColumn(widget, widgetBoard, parentId, slotData);
+            case Column: _parseColumn(widget as Column, widgetBoard, parentId, slotData);
                 break;
-            case Row: _parseRow(widget, widgetBoard, parentId, slotData);
+            case Row: _parseRow(widget as Row, widgetBoard, parentId, slotData);
                 break;
-            case Expanded: _parseExpanded(widget, widgetBoard, parentId, slotData);
+            case Expanded: _parseExpanded(widget as Expanded, widgetBoard, parentId, slotData);
                 break;
-            case MaterialButton: _parseMaterialButton(widget, widgetBoard, parentId, slotData);
+            case MaterialButton: _parseMaterialButton(widget as MaterialButton, widgetBoard, parentId, slotData);
                 break;
-            case OutlineButton: _parseOutlineButton(widget, widgetBoard, parentId, slotData);
+            case OutlineButton: _parseOutlineButton(widget as OutlineButton, widgetBoard, parentId, slotData);
                 break;
-            case RaisedButton: _parseRaisedButton(widget, widgetBoard, parentId, slotData);
+            case RaisedButton: _parseRaisedButton(widget as RaisedButton, widgetBoard, parentId, slotData);
                 break;
-            case CupertinoButton: _parseCupertinoButton(widget, widgetBoard, parentId, slotData);
+            case CupertinoButton: _parseCupertinoButton(widget as CupertinoButton, widgetBoard, parentId, slotData);
                 break;
-            case WAnimatedContainer: _parseWAnimatedContainer(widget, widgetBoard, parentId, slotData);
+            case WAnimatedContainer: _parseWAnimatedContainer(widget as WAnimatedContainer, widgetBoard, parentId, slotData);
                 break;
             default:
                 if(widget != null) {
@@ -127,7 +127,7 @@ class WidgetElementDeserializer2 {
     }
 
 
-        static void _parseText(Text widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseText(Text widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = TextElement(
                 id: Uuid().v1(),
                 data: widget.data,
@@ -141,7 +141,7 @@ class WidgetElementDeserializer2 {
 
         }
 
-        static void _parseAppBar(AppBar widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseAppBar(AppBar widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = AppBarElement(
                 id: Uuid().v1(),
                 automaticallyImplyLeading: widget.automaticallyImplyLeading,
@@ -164,7 +164,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.leading, widgetBoard, element.id, SlotData(slotName: 'leading', data: null));
         }
 
-        static void _parseCupertinoNavigationBar(CupertinoNavigationBar widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseCupertinoNavigationBar(CupertinoNavigationBar widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = CupertinoNavigationBarElement(
                 id: Uuid().v1(),
                 backgroundColor: widget.backgroundColor,
@@ -181,7 +181,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.trailing, widgetBoard, element.id, SlotData(slotName: 'trailing', data: null));
         }
 
-        static void _parseIcon(Icon widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseIcon(Icon widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = IconElement(
                 id: Uuid().v1(),
                 icon: widget.icon,
@@ -194,7 +194,7 @@ class WidgetElementDeserializer2 {
 
         }
 
-        static void _parseForm(Form widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseForm(Form widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = FormElement(
                 id: Uuid().v1(),
 
@@ -206,7 +206,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseMaterial(Material widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseMaterial(Material widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = MaterialElement(
                 id: Uuid().v1(),
 
@@ -218,7 +218,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseFlexible(Flexible widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseFlexible(Flexible widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = FlexibleElement(
                 id: Uuid().v1(),
                 flex: widget.flex,
@@ -231,7 +231,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseTextFormField(TextFormField widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseTextFormField(TextFormField? widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = TextFormFieldElement(
                 id: Uuid().v1(),
 
@@ -241,7 +241,7 @@ class WidgetElementDeserializer2 {
 
         }
 
-        static void _parseGestureDetector(GestureDetector widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseGestureDetector(GestureDetector widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = GestureDetectorElement(
                 id: Uuid().v1(),
 
@@ -253,7 +253,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseWNetworkImage(WNetworkImage widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseWNetworkImage(WNetworkImage widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = WNetworkImageElement(
                 id: Uuid().v1(),
                 width: widget.width,
@@ -267,7 +267,7 @@ class WidgetElementDeserializer2 {
 
         }
 
-        static void _parseSizedBox(SizedBox widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseSizedBox(SizedBox widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = SizedBoxElement(
                 id: Uuid().v1(),
                 width: widget.width,
@@ -281,7 +281,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseCircularProgressIndicator(CircularProgressIndicator widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseCircularProgressIndicator(CircularProgressIndicator widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = CircularProgressIndicatorElement(
                 id: Uuid().v1(),
                 strokeWidth: widget.strokeWidth,
@@ -293,7 +293,7 @@ class WidgetElementDeserializer2 {
 
         }
 
-        static void _parseLinearProgressIndicator(LinearProgressIndicator widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseLinearProgressIndicator(LinearProgressIndicator? widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = LinearProgressIndicatorElement(
                 id: Uuid().v1(),
 
@@ -303,7 +303,7 @@ class WidgetElementDeserializer2 {
 
         }
 
-        static void _parseCupertinoActivityIndicator(CupertinoActivityIndicator widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseCupertinoActivityIndicator(CupertinoActivityIndicator widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = CupertinoActivityIndicatorElement(
                 id: Uuid().v1(),
                 animating: widget.animating,
@@ -315,7 +315,7 @@ class WidgetElementDeserializer2 {
 
         }
 
-        static void _parseFloatingActionButton(FloatingActionButton widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseFloatingActionButton(FloatingActionButton widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = FloatingActionButtonElement(
                 id: Uuid().v1(),
                 elevation: widget.elevation,
@@ -334,7 +334,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseScaffold(Scaffold widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseScaffold(Scaffold widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = ScaffoldElement(
                 id: Uuid().v1(),
                 backgroundColor: widget.backgroundColor,
@@ -351,12 +351,12 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.floatingActionButton, widgetBoard, element.id, SlotData(slotName: 'floatingActionButton', data: null));
         }
 
-        static void _parseListTile(ListTile widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseListTile(ListTile widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = ListTileElement(
                 id: Uuid().v1(),
                 isThreeLine: widget.isThreeLine,
                 dense: widget.dense,
-                contentPadding: widget.contentPadding,
+                contentPadding: widget.contentPadding as EdgeInsets?,
                 enabled: widget.enabled,
 
             );
@@ -373,7 +373,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.trailing, widgetBoard, element.id, SlotData(slotName: 'trailing', data: null));
         }
 
-        static void _parseCenter(Center widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseCenter(Center widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = CenterElement(
                 id: Uuid().v1(),
 
@@ -385,10 +385,10 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parsePadding(Padding widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parsePadding(Padding widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = PaddingElement(
                 id: Uuid().v1(),
-                padding: widget.padding,
+                padding: widget.padding as EdgeInsets?,
 
             );
 
@@ -398,7 +398,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseRotatedBox(RotatedBox widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseRotatedBox(RotatedBox widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = RotatedBoxElement(
                 id: Uuid().v1(),
                 quarterTurns: widget.quarterTurns,
@@ -411,7 +411,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseAspectRatio(AspectRatio widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseAspectRatio(AspectRatio widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = AspectRatioElement(
                 id: Uuid().v1(),
                 aspectRatio: widget.aspectRatio,
@@ -424,7 +424,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseTextField(TextField widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseTextField(TextField widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = TextFieldElement(
                 id: Uuid().v1(),
                 obscureText: widget.obscureText,
@@ -435,12 +435,12 @@ class WidgetElementDeserializer2 {
 
         }
 
-        static void _parseFractionallySizedBox(FractionallySizedBox widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseFractionallySizedBox(FractionallySizedBox widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = FractionallySizedBoxElement(
                 id: Uuid().v1(),
                 heightFactor: widget.heightFactor,
                 widthFactor: widget.widthFactor,
-                alignment: widget.alignment,
+                alignment: widget.alignment as Alignment?,
 
             );
 
@@ -450,7 +450,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseDivider(Divider widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseDivider(Divider widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = DividerElement(
                 id: Uuid().v1(),
                 height: widget.height,
@@ -464,12 +464,12 @@ class WidgetElementDeserializer2 {
 
         }
 
-        static void _parseAlign(Align widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseAlign(Align widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = AlignElement(
                 id: Uuid().v1(),
                 heightFactor: widget.heightFactor,
                 widthFactor: widget.widthFactor,
-                alignment: widget.alignment,
+                alignment: widget.alignment as Alignment?,
 
             );
 
@@ -479,12 +479,12 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseUnconstrainedBox(UnconstrainedBox widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseUnconstrainedBox(UnconstrainedBox widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = UnconstrainedBoxElement(
                 id: Uuid().v1(),
                 constrainedAxis: widget.constrainedAxis,
                 textDirection: widget.textDirection,
-                alignment: widget.alignment,
+                alignment: widget.alignment as Alignment?,
 
             );
 
@@ -494,7 +494,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseConstrainedBox(ConstrainedBox widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseConstrainedBox(ConstrainedBox widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = ConstrainedBoxElement(
                 id: Uuid().v1(),
                 constraints: widget.constraints,
@@ -507,18 +507,18 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseWContainer(WContainer widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseWContainer(WContainer widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = WContainerElement(
                 id: Uuid().v1(),
                 width: widget.width,
                 height: widget.height,
                 color: widget.color,
                 alignment: widget.alignment,
-                padding: widget.padding,
+                padding: widget.padding as EdgeInsets?,
                 decoration: widget.decoration,
                 foregroundDecoration: widget.foregroundDecoration,
                 constraints: widget.constraints,
-                margin: widget.margin,
+                margin: widget.margin as EdgeInsets?,
                 transform: widget.transform,
 
             );
@@ -529,7 +529,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseAbsorbPointer(AbsorbPointer widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseAbsorbPointer(AbsorbPointer widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = AbsorbPointerElement(
                 id: Uuid().v1(),
 
@@ -541,7 +541,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseWCircleAvatar(WCircleAvatar widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseWCircleAvatar(WCircleAvatar widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = WCircleAvatarElement(
                 id: Uuid().v1(),
                 radius: widget.radius,
@@ -555,13 +555,13 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseCard(Card widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseCard(Card widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = CardElement(
                 id: Uuid().v1(),
                 clipBehavior: widget.clipBehavior,
                 color: widget.color,
                 elevation: widget.elevation,
-                margin: widget.margin,
+                margin: widget.margin as EdgeInsets?,
                 semanticContainer: widget.semanticContainer,
 
             );
@@ -572,7 +572,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseCheckbox(Checkbox widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseCheckbox(Checkbox widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = CheckboxElement(
                 id: Uuid().v1(),
                 activeColor: widget.activeColor,
@@ -586,7 +586,7 @@ class WidgetElementDeserializer2 {
 
         }
 
-        static void _parseChip(Chip widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseChip(Chip widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = ChipElement(
                 id: Uuid().v1(),
                 backgroundColor: widget.backgroundColor,
@@ -594,9 +594,9 @@ class WidgetElementDeserializer2 {
                 deleteButtonTooltipMessage: widget.deleteButtonTooltipMessage,
                 deleteIconColor: widget.deleteIconColor,
                 elevation: widget.elevation,
-                labelPadding: widget.labelPadding,
+                labelPadding: widget.labelPadding as EdgeInsets?,
                 labelStyle: widget.labelStyle,
-                padding: widget.padding,
+                padding: widget.padding as EdgeInsets?,
                 shadowColor: widget.shadowColor,
 
             );
@@ -611,7 +611,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.label, widgetBoard, element.id, SlotData(slotName: 'label', data: null));
         }
 
-        static void _parseWPageView(WPageView widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseWPageView(WPageView widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = WPageViewElement(
                 id: Uuid().v1(),
                 pageSnapping: widget.pageSnapping,
@@ -629,7 +629,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.children, widgetBoard, element.id, SlotData(slotName: 'children', data: null));
         }
 
-        static void _parseColumn(Column widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseColumn(Column widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = ColumnElement(
                 id: Uuid().v1(),
                 crossAxisAlignment: widget.crossAxisAlignment,
@@ -649,7 +649,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.children, widgetBoard, element.id, SlotData(slotName: 'children', data: null));
         }
 
-        static void _parseRow(Row widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseRow(Row widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = RowElement(
                 id: Uuid().v1(),
                 crossAxisAlignment: widget.crossAxisAlignment,
@@ -671,7 +671,7 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.children, widgetBoard, element.id, SlotData(slotName: 'children', data: null));
         }
 
-        static void _parseExpanded(Expanded widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseExpanded(Expanded widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = ExpandedElement(
                 id: Uuid().v1(),
                 flex: widget.flex,
@@ -684,12 +684,12 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseMaterialButton(MaterialButton widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseMaterialButton(MaterialButton widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = MaterialButtonElement(
                 id: Uuid().v1(),
                 color: widget.color,
                 elevation: widget.elevation,
-                padding: widget.padding,
+                padding: widget.padding as EdgeInsets?,
 
             );
 
@@ -699,11 +699,11 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseOutlineButton(OutlineButton widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseOutlineButton(OutlineButton widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = OutlineButtonElement(
                 id: Uuid().v1(),
                 color: widget.color,
-                padding: widget.padding,
+                padding: widget.padding as EdgeInsets?,
 
             );
 
@@ -713,11 +713,11 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseRaisedButton(RaisedButton widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseRaisedButton(RaisedButton widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = RaisedButtonElement(
                 id: Uuid().v1(),
                 elevation: widget.elevation,
-                padding: widget.padding,
+                padding: widget.padding as EdgeInsets?,
                 color: widget.color,
 
             );
@@ -728,13 +728,13 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseCupertinoButton(CupertinoButton widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseCupertinoButton(CupertinoButton widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = CupertinoButtonElement(
                 id: Uuid().v1(),
                 color: widget.color,
                 disabledColor: widget.disabledColor,
                 minSize: widget.minSize,
-                padding: widget.padding,
+                padding: widget.padding as EdgeInsets?,
                 pressedOpacity: widget.pressedOpacity,
 
             );
@@ -745,19 +745,19 @@ class WidgetElementDeserializer2 {
                 //_deserializeWidgetElement(widget.child, widgetBoard, element.id, SlotData(slotName: 'child', data: null));
         }
 
-        static void _parseWAnimatedContainer(WAnimatedContainer widget, WidgetBoard widgetBoard, String parentId, SlotData slotData) {
+        static void _parseWAnimatedContainer(WAnimatedContainer widget, WidgetBoard widgetBoard, String? parentId, SlotData? slotData) {
             var element = WAnimatedContainerElement(
                 id: Uuid().v1(),
-                duration: widget.duration,
+                duration: widget.duration as WDuration?,
                 width: widget.width,
                 height: widget.height,
                 color: widget.color,
                 alignment: widget.alignment,
-                padding: widget.padding,
+                padding: widget.padding as EdgeInsets?,
                 decoration: widget.decoration,
                 foregroundDecoration: widget.foregroundDecoration,
                 constraints: widget.constraints,
-                margin: widget.margin,
+                margin: widget.margin as EdgeInsets?,
                 transform: widget.transform,
 
             );

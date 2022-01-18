@@ -9,7 +9,7 @@ import 'package:widget_maker_2_0/ui/utils/first_build_focus.dart';
 
 typedef WidgetElementFilter = bool Function(WidgetElement e);
 
-Future<PaletteItem> quickChooseWidgetElement(BuildContext context, {WidgetElementFilter filter}) {
+Future<PaletteItem?> quickChooseWidgetElement(BuildContext context, {WidgetElementFilter? filter}) {
   return showDialogAtCursor<PaletteItem>(
     context: context,
     size: Size(400,300),
@@ -22,9 +22,9 @@ Future<PaletteItem> quickChooseWidgetElement(BuildContext context, {WidgetElemen
 class QuickWidgetAccessDialog extends StatefulWidget {
 
 
-  final WidgetElementFilter filter;
+  final WidgetElementFilter? filter;
 
-  const QuickWidgetAccessDialog({Key key, this.filter}) : super(key: key);
+  const QuickWidgetAccessDialog({Key? key, this.filter}) : super(key: key);
 
   @override
   _QuickWidgetAccessDialogState createState() => _QuickWidgetAccessDialogState();
@@ -36,7 +36,7 @@ class _QuickWidgetAccessDialogState extends State<QuickWidgetAccessDialog> {
   final controller = TextEditingController();
   String filterString = "";
 
-  int selectedIndex;
+  int? selectedIndex;
   int get shadowSelection => selectedIndex?? 0;
 
   FocusNode listFocus = FocusNode(debugLabel: "List Focus");
@@ -61,8 +61,8 @@ class _QuickWidgetAccessDialogState extends State<QuickWidgetAccessDialog> {
   }
 
   List<PaletteItem> get items => r.allItems
-      .where((item) => item.name.toLowerCase().contains(filterString.toLowerCase()))
-      .where(widget.filter == null? (it) => true : (it) => widget.filter(it.widgetElement))
+      .where((item) => item.name!.toLowerCase().contains(filterString.toLowerCase()))
+      .where(widget.filter == null? (it) => true : (it) => widget.filter!(it.widgetElement))
       .toList();
 
   R2D2Wrapper r = R2D2Wrapper();
@@ -70,7 +70,7 @@ class _QuickWidgetAccessDialogState extends State<QuickWidgetAccessDialog> {
 
   bool onEnter() {
     if(selectedIndex != null) {
-      Navigator.pop(context, items[selectedIndex]);
+      Navigator.pop(context, items[selectedIndex!]);
     } else {
       if (items.length == 1)
         Navigator.pop(context, items.single);
@@ -100,7 +100,7 @@ class _QuickWidgetAccessDialogState extends State<QuickWidgetAccessDialog> {
         },
         onEnter: onEnter,
         child: Container(
-          color: MyTheme.of(context).background16dp,
+          color: MyTheme.of(context)!.background16dp,
           width: 400,
           height: 300,
           child: Column(
@@ -157,25 +157,25 @@ class _QuickWidgetAccessDialogState extends State<QuickWidgetAccessDialog> {
 
 class _QuickAccessPaletteItemWidget extends StatelessWidget {
 
-  const _QuickAccessPaletteItemWidget({Key key, this.paletteItem, this.onTap, this.selected}) : super(key: key);
+  const _QuickAccessPaletteItemWidget({Key? key, this.paletteItem, this.onTap, this.selected}) : super(key: key);
 
-  final PaletteItem paletteItem;
-  final VoidCallback onTap;
-  final bool selected;
+  final PaletteItem? paletteItem;
+  final VoidCallback? onTap;
+  final bool? selected;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        color: selected? MyTheme.of(context).selectedColor: null,
+        color: selected!? MyTheme.of(context)!.selectedColor: null,
         height: 32,
         child: Row(
           children: <Widget>[
-            Icon(paletteItem.icon),
+            Icon(paletteItem!.icon),
             SizedBox(width: 8,),
             Expanded(
-              child: Text(paletteItem.name),
+              child: Text(paletteItem!.name!),
             ),
           ],
         ),

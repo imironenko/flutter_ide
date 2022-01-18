@@ -14,7 +14,7 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class FormElement extends WidgetElement with SlotChildElementMixin {
   FormElement({
-    @required String id,
+    required String? id,
   }) :
 
       super(id);
@@ -53,7 +53,7 @@ class FormElement extends WidgetElement with SlotChildElementMixin {
  class FormElementWidget extends StatefulWidget with ElementWidgetMixin {
   FormElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _FormElementWidgetState createState() => _FormElementWidgetState();
@@ -65,12 +65,12 @@ class _FormElementWidgetState extends State<FormElementWidget> with ElementWidge
     return wrapWithDefault(
         child: Form(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(FormElement.CHILD),
+               childId: element!.findIdForSlot(FormElement.CHILD),
                data: SlotData(slotName: FormElement.CHILD), 
-             ),        
+             )!,        
 
         )
-    );
+    )!;
   }
 
 } 

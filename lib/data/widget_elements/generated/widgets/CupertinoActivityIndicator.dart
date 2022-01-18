@@ -14,9 +14,9 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class CupertinoActivityIndicatorElement extends WidgetElement with NoChildElementMixin {
   CupertinoActivityIndicatorElement({
-    @required String id,
-    bool animating,
-    double radius,
+    required String? id,
+    bool? animating,
+    double? radius,
   }) :
     animating = MBoolProperty(
         value: animating?? true,
@@ -67,7 +67,7 @@ class CupertinoActivityIndicatorElement extends WidgetElement with NoChildElemen
  class CupertinoActivityIndicatorElementWidget extends StatefulWidget with ElementWidgetMixin {
   CupertinoActivityIndicatorElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _CupertinoActivityIndicatorElementWidgetState createState() => _CupertinoActivityIndicatorElementWidgetState();
@@ -79,10 +79,10 @@ class _CupertinoActivityIndicatorElementWidgetState extends State<CupertinoActiv
     return wrapWithDefault(
         child: CupertinoActivityIndicator(
         
-         animating: element.animating.value,
-         radius: element.radius.value,
+         animating: element!.animating.value!,
+         radius: element!.radius.value!,
         )
-    );
+    )!;
   }
 
 } 

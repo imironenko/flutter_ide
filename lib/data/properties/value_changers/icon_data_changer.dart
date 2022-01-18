@@ -5,10 +5,10 @@ import 'package:widget_maker_2_0/ui/theme.dart';
 import 'package:widget_maker_2_0/data/properties/icon_property/m_icons.dart';
 import 'package:flutter_desktop_widgets2/flutter_desktop_widgets2.dart';
 
-class IconDataChanger extends StatelessValueChanger<IconData> {
+class IconDataChanger extends StatelessValueChanger<IconData?> {
 
-  IconDataChanger({Key key, IconData value, ValueChanged<IconData> onUpdate})
-    : super(key: key, value: value, onUpdate: onUpdate);
+  IconDataChanger({Key? key, IconData? value, ValueChanged<IconData?>? onUpdate})
+    : super(key: key, value: value, onUpdate: onUpdate,nullable: true);
 
 
   @override
@@ -25,7 +25,7 @@ class IconDataChanger extends StatelessValueChanger<IconData> {
                 return IconGrid();
               }
             );
-            onUpdate(iconData);
+            onUpdate!(iconData);
           },
           child: Icon(value),
         ),
@@ -44,12 +44,12 @@ class IconGrid extends StatelessWidget {
           return Container(
             width: 60,
             height: 60,
-            color: MyTheme.of(context).background24dp,
+            color: MyTheme.of(context)!.background24dp,
             child: InkWell(
               child: Column(
                 children: <Widget>[
                   Icon(it.icon),
-                  Text(it.name,
+                  Text(it.name!,
                     style: TextStyle(
                       fontSize: 9,
                     ),

@@ -7,7 +7,7 @@ import 'package:widget_maker_2_0/data/properties/basic_properties.dart';
 
 
 class SlotData {
-  final String slotName;
+  final String? slotName;
   final data;
 
   SlotData({this.slotName, this.data});
@@ -19,82 +19,82 @@ class SlotData {
 /// TODO make abstract
 abstract class ChildSlot {
 
-  ChildSlot({@required this.slotName, this.childrenIds});
+  ChildSlot({required this.slotName, this.childrenIds});
 
   /// This is the name of the property.
   ///
   /// Common examples: child, children, body, title
   final String slotName;
-  final List<String> childrenIds;
+  final List<String?>? childrenIds;
 
-  bool get isSingleChild => childrenIds.length <= 1;
+  bool get isSingleChild => childrenIds!.length <= 1;
 
-  bool get hasChild => childrenIds != null && childrenIds.length > 0;
+  bool get hasChild => childrenIds != null && childrenIds!.length > 0;
 
-  void insert(String id, [SlotData data]);
-  void remove(String id, [SlotData data]);
+  void insert(String? id, [SlotData? data]);
+  void remove(String? id, [SlotData? data]);
 
-  dynamic getDataForChild(String id);
+  dynamic getDataForChild(String? id);
 
-  Expression generateCode(Map<String, WidgetElement> allElements);
+  Expression generateCode(Map<String?, WidgetElement> allElements);
 }
 
 
 class SingleChildSlot extends ChildSlot {
 
 
-  SingleChildSlot({@required String slotName, String childId})
+  SingleChildSlot({required String slotName, String? childId})
     :super(slotName: slotName, childrenIds: childId == null? []: [childId]);
 
   @override
-  void insert(String id, [data]) {
-    assert(childrenIds.length <= 1);
+  void insert(String? id, [data]) {
+    assert(childrenIds!.length <= 1);
     childrenIds..clear()..add(id);
   }
   @override
-  void remove(String id, [data]) {
-    assert(childrenIds.first == id,
-    "Tried to remove child $id, but this only contained ${childrenIds.first}");
-    childrenIds.clear();
+  void remove(String? id, [data]) {
+    assert(childrenIds!.first == id,
+    "Tried to remove child $id, but this only contained ${childrenIds!.first}");
+    childrenIds!.clear();
   }
 
-  dynamic getDataForChild(String id) => null;
+  dynamic getDataForChild(String? id) => null;
 
-  Expression generateCode(Map<String, WidgetElement> allElements) {
-    assert(childrenIds.length == 0 || childrenIds.length == 1);
-    return CodeExpression(Code("${allElements[childrenIds[0]]?.writeCode2(allElements)}"));
+  Expression generateCode(Map<String?, WidgetElement> allElements) {
+    assert(childrenIds!.length == 0 || childrenIds!.length == 1);
+    return CodeExpression(Code("${allElements[childrenIds![0]]?.writeCode2(allElements)}"));
   }
 
 }
 
 class ListChildSlot extends ChildSlot {
 
-  ListChildSlot({@required String slotName, List<String> childrenIds})
+  ListChildSlot({required String slotName, List<String>? childrenIds})
       :super(slotName: slotName, childrenIds: childrenIds?? []);
 
   @override
-  void insert(String id, [SlotData data]) {
+  void insert(String? id, [SlotData? data]) {
     if(data == null) {
-      childrenIds.add(id);
+      childrenIds!.add(id);
     } else {
       if(data.data == null) {
-        childrenIds.add(id);
+        childrenIds!.add(id);
       } else {
         assert(data.data is int);
-        childrenIds.insert(data.data, id);
+        childrenIds!.insert(data.data, id);
       }
     }
   }
   @override
-  void remove(String id, [data]) {
-    childrenIds.remove(id);
+  void remove(String? id, [data]) {
+    childrenIds!.remove(id);
   }
 
-  dynamic getDataForChild(String id) {
-    return childrenIds.indexOf(id);
+  dynamic getDataForChild(String? id) {
+    return childrenIds!.indexOf(id);
   }
-  Expression generateCode(Map<String, WidgetElement> allElements) {
-    return literalList(childrenIds.map((it) => allElements[it]).map((it) => it.toExpression(allElements)));
+  Expression generateCode(Map<String?, WidgetElement> allElements) {
+    return literalList(childrenIds!.map((it) => allElements[it]).map((it) => it!.toExpression(allElements)));
     //return CodeExpression(Code("${allElements[childrenIds[0]]?.writeCode2(allElements)}"));
   }
 }
@@ -116,18 +116,18 @@ abstract class WidgetElement {
   }
 
   bool get isRoot => false;
-  String id;
+  String? id;
 
   /// Should return a widget which adapts to the properties defined here
   ///
   /// The id should be passed to that widget and it should listen for changes which
   /// happen to this element
   Widget generateWidget();
-  List<MProperty> get attributes;
-  List<ChildSlot> children;
+  List<MProperty?>? get attributes;
+  List<ChildSlot>? children;
   List<ChildSlot> constructChildSlots();
   String get name;
-  bool get hasChildSlots => children.length > 0;
+  bool get hasChildSlots => children!.length > 0;
 
   /// Indicates whether this widget element is collapsed in the widget-tree
   ///
@@ -136,32 +136,32 @@ abstract class WidgetElement {
   /// as of now, canvases are not implemented so this is here in the meantime.
   bool isCollapsed = false;
 
-  void removeChild(String childId);
+  void removeChild(String? childId);
 
-  dynamic getDataForChild(String childId);
+  dynamic getDataForChild(String? childId);
 
   bool containsChild(String childId);
 
   /// Data are extra information about the drag target (for example the row
   /// adds the position to insert at)
-  void acceptChild(String childId, [SlotData data]);
+  void acceptChild(String? childId, [SlotData? data]);
 
-  bool canAcceptChild(String childId, [SlotData data]) => true;
+  bool canAcceptChild(String childId, [SlotData? data]) => true;
 
   /// This is only used for templates to make the syntax nicer.
   void tAccept(WidgetBoard b, WidgetElement child, [dynamic data]) {
     b.acceptNewChild(id, child, data);
   }
 
-  Expression toExpression(Map<String, WidgetElement> allElements) {
-    return propertyConstructor(name.replaceAll(" ", ""), attributes,
-        children.where((it) => it.hasChild).toList().asMap().map((key, value) {
+  Expression toExpression(Map<String?, WidgetElement> allElements) {
+    return propertyConstructor(name.replaceAll(" ", ""), attributes!,
+        children!.where((it) => it.hasChild).toList().asMap().map((key, value) {
           return MapEntry(value.slotName, value.generateCode(allElements));
         })
     );
 
   }
-  String writeCode2(Map<String, WidgetElement> allElements) {
+  String writeCode2(Map<String?, WidgetElement> allElements) {
     final emitter = DartEmitter();
     return toExpression(allElements).accept(emitter).toString();
   }
@@ -176,12 +176,12 @@ mixin SingleChildElement on WidgetElement {
   List<ChildSlot> constructChildSlots() => [SingleChildSlot(slotName: "child")];
 
 
-  String get childId => childSlot.childrenIds.length == 1? childSlot.childrenIds.first: null;
-  ChildSlot get childSlot => children[0];
+  String? get childId => childSlot.childrenIds!.length == 1? childSlot.childrenIds!.first: null;
+  ChildSlot get childSlot => children![0];
 
   String get slotName => "child";
 
-  void acceptChild(String childId, [SlotData data]) {
+  void acceptChild(String? childId, [SlotData? data]) {
     childSlot.insert(childId, data);
   }
 
@@ -191,13 +191,13 @@ mixin SingleChildElement on WidgetElement {
   }
 
   @override
-  bool canAcceptChild(String childId, [SlotData data]) => this.childId == null;
+  bool canAcceptChild(String childId, [SlotData? data]) => this.childId == null;
 
-  void removeChild(String childId) {
+  void removeChild(String? childId) {
     childSlot.remove(childId);
   }
 
-  dynamic getDataForChild(String childId) => null;
+  dynamic getDataForChild(String? childId) => null;
 
 
 }
@@ -211,7 +211,7 @@ mixin NoChildElementMixin on WidgetElement {
   List<ChildSlot> get children => [];
 
   @override
-  void acceptChild(String childId, [data]) {
+  void acceptChild(String? childId, [data]) {
     assert(false, "$name does not want to accept children");
   }
 
@@ -222,11 +222,11 @@ mixin NoChildElementMixin on WidgetElement {
   bool canAcceptChild(String childId, [data]) => false;
 
   @override
-  void removeChild(String childId) {
+  void removeChild(String? childId) {
     assert(false);
   }
 
-  dynamic getDataForChild(String childId) => null;
+  dynamic getDataForChild(String? childId) => null;
 }
 
 
@@ -238,11 +238,11 @@ mixin SlotChildElementMixin on WidgetElement {
   List<ChildSlot> constructChildSlots();
 
   /// Helper method for slots with a single child
-  String findIdForSlot(String slot) {
-    for(ChildSlot it in children) {
+  String? findIdForSlot(String slot) {
+    for(ChildSlot it in children!) {
       if(it.slotName == slot) {
         assert(it.isSingleChild, "Was not single child slot");
-        return it.childrenIds.length > 0? it.childrenIds[0] : null;
+        return it.childrenIds!.length > 0? it.childrenIds![0] : null;
       }
     }
     return null;
@@ -253,24 +253,24 @@ mixin SlotChildElementMixin on WidgetElement {
 
   @override
   bool containsChild(String childId) {
-    return children.expand((it) => it.childrenIds).contains(childId);
+    return children!.expand((it) => it.childrenIds!).contains(childId);
   }
 
   // TODO Don't accept until a clear widget tree slot system is ready
   // Can accept if there is only one slot tho
   @override
-  bool canAcceptChild(String childId, [SlotData data]) => children.length == 1;
+  bool canAcceptChild(String childId, [SlotData? data]) => children!.length == 1;
 
   @override
-  void acceptChild(String childId, [SlotData data]) {
+  void acceptChild(String? childId, [SlotData? data]) {
 
     // TODO nesting data, first which slot, then which pos
 
     // If no data, just put it in the first slot
     if(data == null) {
-      children.first.insert(childId, data);
+      children!.first.insert(childId, data);
     } else {
-      children
+      children!
           .where((it) => it.slotName == data.slotName)
           .first
           .insert(childId, data);
@@ -278,9 +278,9 @@ mixin SlotChildElementMixin on WidgetElement {
   }
 
   @override
-  dynamic getDataForChild(String childId) {
-    for(ChildSlot it in children) {
-      if(it.childrenIds.contains(childId)) {
+  dynamic getDataForChild(String? childId) {
+    for(ChildSlot it in children!) {
+      if(it.childrenIds!.contains(childId)) {
         return SlotData(
           slotName: it.slotName,
           data: it.getDataForChild(childId),
@@ -291,10 +291,10 @@ mixin SlotChildElementMixin on WidgetElement {
   }
 
   @override
-  void removeChild(String childId) {
-    for(ChildSlot it in children) {
-      if(it.childrenIds.contains(childId)) {
-        it.childrenIds.remove(childId);
+  void removeChild(String? childId) {
+    for(ChildSlot it in children!) {
+      if(it.childrenIds!.contains(childId)) {
+        it.childrenIds!.remove(childId);
         return;
       }
     }

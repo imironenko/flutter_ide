@@ -14,16 +14,16 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class ChipElement extends WidgetElement with SlotChildElementMixin {
   ChipElement({
-    @required String id,
-    Color backgroundColor,
-    Clip clipBehavior,
-    String deleteButtonTooltipMessage,
-    Color deleteIconColor,
-    double elevation,
-    EdgeInsets labelPadding,
-    TextStyle labelStyle,
-    EdgeInsets padding,
-    Color shadowColor,
+    required String? id,
+    Color? backgroundColor,
+    Clip? clipBehavior,
+    String? deleteButtonTooltipMessage,
+    Color? deleteIconColor,
+    double? elevation,
+    EdgeInsets? labelPadding,
+    TextStyle? labelStyle,
+    EdgeInsets? padding,
+    Color? shadowColor,
   }) :
     backgroundColor = MColorProperty(
         value: backgroundColor?? null,
@@ -147,7 +147,7 @@ class ChipElement extends WidgetElement with SlotChildElementMixin {
  class ChipElementWidget extends StatefulWidget with ElementWidgetMixin {
   ChipElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _ChipElementWidgetState createState() => _ChipElementWidgetState();
@@ -159,26 +159,26 @@ class _ChipElementWidgetState extends State<ChipElementWidget> with ElementWidge
     return wrapWithDefault(
         child: Chip(
           avatar: getChildOrDragTarget(
-               childId: element.findIdForSlot(ChipElement.AVATAR),
+               childId: element!.findIdForSlot(ChipElement.AVATAR),
                data: SlotData(slotName: ChipElement.AVATAR), 
              ),          deleteIcon: getChildOrDragTarget(
-               childId: element.findIdForSlot(ChipElement.DELETEICON),
+               childId: element!.findIdForSlot(ChipElement.DELETEICON),
                data: SlotData(slotName: ChipElement.DELETEICON), 
              ),          label: getChildOrDragTarget(
-               childId: element.findIdForSlot(ChipElement.LABEL),
+               childId: element!.findIdForSlot(ChipElement.LABEL),
                data: SlotData(slotName: ChipElement.LABEL), 
-             ),        
-         backgroundColor: element.backgroundColor.value,
-         clipBehavior: element.clipBehavior.value,
-         deleteButtonTooltipMessage: element.deleteButtonTooltipMessage.value,
-         deleteIconColor: element.deleteIconColor.value,
-         elevation: element.elevation.value,
-         labelPadding: element.labelPadding.value,
-         labelStyle: element.labelStyle.value,
-         padding: element.padding.value,
-         shadowColor: element.shadowColor.value,
+             )!,        
+         backgroundColor: element!.backgroundColor.value,
+         clipBehavior: element!.clipBehavior.value!,
+         deleteButtonTooltipMessage: element!.deleteButtonTooltipMessage.value,
+         deleteIconColor: element!.deleteIconColor.value,
+         elevation: element!.elevation.value,
+         labelPadding: element!.labelPadding.value,
+         labelStyle: element!.labelStyle.value,
+         padding: element!.padding.value,
+         shadowColor: element!.shadowColor.value,
         )
-    );
+    )!;
   }
 
 } 

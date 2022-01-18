@@ -14,7 +14,7 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class AbsorbPointerElement extends WidgetElement with SlotChildElementMixin {
   AbsorbPointerElement({
-    @required String id,
+    required String? id,
   }) :
 
       super(id);
@@ -53,7 +53,7 @@ class AbsorbPointerElement extends WidgetElement with SlotChildElementMixin {
  class AbsorbPointerElementWidget extends StatefulWidget with ElementWidgetMixin {
   AbsorbPointerElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _AbsorbPointerElementWidgetState createState() => _AbsorbPointerElementWidgetState();
@@ -65,12 +65,12 @@ class _AbsorbPointerElementWidgetState extends State<AbsorbPointerElementWidget>
     return wrapWithDefault(
         child: AbsorbPointer(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(AbsorbPointerElement.CHILD),
+               childId: element!.findIdForSlot(AbsorbPointerElement.CHILD),
                data: SlotData(slotName: AbsorbPointerElement.CHILD), 
              ),        
 
         )
-    );
+    )!;
   }
 
 } 

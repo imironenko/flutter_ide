@@ -2,11 +2,11 @@ import 'package:widget_maker_2_0/material.dart';
 
 class TopBar extends StatelessWidget {
 
-  const TopBar({Key key, this.showVisual, this.onUpdate}) : super(key: key);
+  const TopBar({Key? key, this.showVisual, this.onUpdate}) : super(key: key);
 
-  final bool showVisual;
+  final bool? showVisual;
 
-  final ValueChanged<bool> onUpdate;
+  final ValueChanged<bool>? onUpdate;
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +28,12 @@ class TopBar extends StatelessWidget {
               Spacer(),
               IconButton(
                 icon: Icon(Icons.transform),
-                onPressed: () => onUpdate(true),
+                onPressed: () => onUpdate!(true),
               ),
               VerticalDivider(),
               IconButton(
                 icon: Icon(Icons.code),
-                onPressed: () => onUpdate(false),
+                onPressed: () => onUpdate!(false),
               ),
               Spacer(),
             ],

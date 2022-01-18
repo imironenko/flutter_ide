@@ -4,8 +4,8 @@ import 'package:widget_maker_2_0/data/properties/enum_properties.dart';
 /// All the enum properties
 /// GENERATED DO NOT TOUCH
 
-class MAxisProperty extends MEnumProperty<Axis> {
-  MAxisProperty({ Axis value, String name, bool isNamed = true, bool isRequired = false, Axis defaultValue})
+class MAxisProperty extends MEnumProperty<Axis?> {
+  MAxisProperty({ Axis? value, String? name, bool isNamed = true, bool isRequired = false, Axis? defaultValue})
       : super(value: value, name: name, possibleValues: Axis.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MAxisProperty copy() {
@@ -17,8 +17,8 @@ class MAxisProperty extends MEnumProperty<Axis> {
     );
   }
 }
-class MMainAxisAlignmentProperty extends MEnumProperty<MainAxisAlignment> {
-  MMainAxisAlignmentProperty({ MainAxisAlignment value, String name, bool isNamed = true, bool isRequired = false, MainAxisAlignment defaultValue})
+class MMainAxisAlignmentProperty extends MEnumProperty<MainAxisAlignment?> {
+  MMainAxisAlignmentProperty({ MainAxisAlignment? value, String? name, bool isNamed = true, bool isRequired = false, MainAxisAlignment? defaultValue})
       : super(value: value, name: name, possibleValues: MainAxisAlignment.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MMainAxisAlignmentProperty copy() {
@@ -30,8 +30,8 @@ class MMainAxisAlignmentProperty extends MEnumProperty<MainAxisAlignment> {
     );
   }
 }
-class MMainAxisSizeProperty extends MEnumProperty<MainAxisSize> {
-  MMainAxisSizeProperty({ MainAxisSize value, String name, bool isNamed = true, bool isRequired = false, MainAxisSize defaultValue})
+class MMainAxisSizeProperty extends MEnumProperty<MainAxisSize?> {
+  MMainAxisSizeProperty({ MainAxisSize? value, String? name, bool isNamed = true, bool isRequired = false, MainAxisSize? defaultValue})
       : super(value: value, name: name, possibleValues: MainAxisSize.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MMainAxisSizeProperty copy() {
@@ -43,8 +43,8 @@ class MMainAxisSizeProperty extends MEnumProperty<MainAxisSize> {
     );
   }
 }
-class MCrossAxisAlignmentProperty extends MEnumProperty<CrossAxisAlignment> {
-  MCrossAxisAlignmentProperty({ CrossAxisAlignment value, String name, bool isNamed = true, bool isRequired = false, CrossAxisAlignment defaultValue})
+class MCrossAxisAlignmentProperty extends MEnumProperty<CrossAxisAlignment?> {
+  MCrossAxisAlignmentProperty({ CrossAxisAlignment? value, String? name, bool isNamed = true, bool isRequired = false, CrossAxisAlignment? defaultValue})
       : super(value: value, name: name, possibleValues: CrossAxisAlignment.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MCrossAxisAlignmentProperty copy() {
@@ -56,8 +56,8 @@ class MCrossAxisAlignmentProperty extends MEnumProperty<CrossAxisAlignment> {
     );
   }
 }
-class MVerticalDirectionProperty extends MEnumProperty<VerticalDirection> {
-  MVerticalDirectionProperty({ VerticalDirection value, String name, bool isNamed = true, bool isRequired = false, VerticalDirection defaultValue})
+class MVerticalDirectionProperty extends MEnumProperty<VerticalDirection?> {
+  MVerticalDirectionProperty({ VerticalDirection? value, String? name, bool isNamed = true, bool isRequired = false, VerticalDirection? defaultValue})
       : super(value: value, name: name, possibleValues: VerticalDirection.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MVerticalDirectionProperty copy() {
@@ -69,8 +69,8 @@ class MVerticalDirectionProperty extends MEnumProperty<VerticalDirection> {
     );
   }
 }
-class MTextBaselineProperty extends MEnumProperty<TextBaseline> {
-  MTextBaselineProperty({ TextBaseline value, String name, bool isNamed = true, bool isRequired = false, TextBaseline defaultValue})
+class MTextBaselineProperty extends MEnumProperty<TextBaseline?> {
+  MTextBaselineProperty({ TextBaseline? value, String? name, bool isNamed = true, bool isRequired = false, TextBaseline? defaultValue})
       : super(value: value, name: name, possibleValues: TextBaseline.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MTextBaselineProperty copy() {
@@ -82,8 +82,8 @@ class MTextBaselineProperty extends MEnumProperty<TextBaseline> {
     );
   }
 }
-class MTextDirectionProperty extends MEnumProperty<TextDirection> {
-  MTextDirectionProperty({ TextDirection value, String name, bool isNamed = true, bool isRequired = false, TextDirection defaultValue})
+class MTextDirectionProperty extends MEnumProperty<TextDirection?> {
+  MTextDirectionProperty({ TextDirection? value, String? name, bool isNamed = true, bool isRequired = false, TextDirection? defaultValue})
       : super(value: value, name: name, possibleValues: TextDirection.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MTextDirectionProperty copy() {
@@ -95,8 +95,8 @@ class MTextDirectionProperty extends MEnumProperty<TextDirection> {
     );
   }
 }
-class MTextOverflowProperty extends MEnumProperty<TextOverflow> {
-  MTextOverflowProperty({ TextOverflow value, String name, bool isNamed = true, bool isRequired = false, TextOverflow defaultValue})
+class MTextOverflowProperty extends MEnumProperty<TextOverflow?> {
+  MTextOverflowProperty({ TextOverflow? value, String? name, bool isNamed = true, bool isRequired = false, TextOverflow? defaultValue})
       : super(value: value, name: name, possibleValues: TextOverflow.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MTextOverflowProperty copy() {
@@ -108,8 +108,8 @@ class MTextOverflowProperty extends MEnumProperty<TextOverflow> {
     );
   }
 }
-class MTextAlignProperty extends MEnumProperty<TextAlign> {
-  MTextAlignProperty({ TextAlign value, String name, bool isNamed = true, bool isRequired = false, TextAlign defaultValue})
+class MTextAlignProperty extends MEnumProperty<TextAlign?> {
+  MTextAlignProperty({ TextAlign? value, String? name, bool isNamed = true, bool isRequired = false, TextAlign? defaultValue})
       : super(value: value, name: name, possibleValues: TextAlign.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MTextAlignProperty copy() {
@@ -121,8 +121,8 @@ class MTextAlignProperty extends MEnumProperty<TextAlign> {
     );
   }
 }
-class MBoxFitProperty extends MEnumProperty<BoxFit> {
-  MBoxFitProperty({ BoxFit value, String name, bool isNamed = true, bool isRequired = false, BoxFit defaultValue})
+class MBoxFitProperty extends MEnumProperty<BoxFit?> {
+  MBoxFitProperty({ BoxFit? value, String? name, bool isNamed = true, bool isRequired = false, BoxFit? defaultValue})
       : super(value: value, name: name, possibleValues: BoxFit.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MBoxFitProperty copy() {
@@ -134,8 +134,8 @@ class MBoxFitProperty extends MEnumProperty<BoxFit> {
     );
   }
 }
-class MBrightnessProperty extends MEnumProperty<Brightness> {
-  MBrightnessProperty({ Brightness value, String name, bool isNamed = true, bool isRequired = false, Brightness defaultValue})
+class MBrightnessProperty extends MEnumProperty<Brightness?> {
+  MBrightnessProperty({ Brightness? value, String? name, bool isNamed = true, bool isRequired = false, Brightness? defaultValue})
       : super(value: value, name: name, possibleValues: Brightness.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MBrightnessProperty copy() {
@@ -147,8 +147,8 @@ class MBrightnessProperty extends MEnumProperty<Brightness> {
     );
   }
 }
-class MFontWeightProperty extends MEnumProperty<FontWeight> {
-  MFontWeightProperty({ FontWeight value, String name, bool isNamed = true, bool isRequired = false, FontWeight defaultValue})
+class MFontWeightProperty extends MEnumProperty<FontWeight?> {
+  MFontWeightProperty({ FontWeight? value, String? name, bool isNamed = true, bool isRequired = false, FontWeight? defaultValue})
       : super(value: value, name: name, possibleValues: FontWeight.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MFontWeightProperty copy() {
@@ -160,8 +160,8 @@ class MFontWeightProperty extends MEnumProperty<FontWeight> {
     );
   }
 }
-class MFontStyleProperty extends MEnumProperty<FontStyle> {
-  MFontStyleProperty({ FontStyle value, String name, bool isNamed = true, bool isRequired = false, FontStyle defaultValue})
+class MFontStyleProperty extends MEnumProperty<FontStyle?> {
+  MFontStyleProperty({ FontStyle? value, String? name, bool isNamed = true, bool isRequired = false, FontStyle? defaultValue})
       : super(value: value, name: name, possibleValues: FontStyle.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MFontStyleProperty copy() {
@@ -173,8 +173,8 @@ class MFontStyleProperty extends MEnumProperty<FontStyle> {
     );
   }
 }
-class MBorderStyleProperty extends MEnumProperty<BorderStyle> {
-  MBorderStyleProperty({ BorderStyle value, String name, bool isNamed = true, bool isRequired = false, BorderStyle defaultValue})
+class MBorderStyleProperty extends MEnumProperty<BorderStyle?> {
+  MBorderStyleProperty({ BorderStyle? value, String? name, bool isNamed = true, bool isRequired = false, BorderStyle? defaultValue})
       : super(value: value, name: name, possibleValues: BorderStyle.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MBorderStyleProperty copy() {
@@ -186,8 +186,8 @@ class MBorderStyleProperty extends MEnumProperty<BorderStyle> {
     );
   }
 }
-class MClipProperty extends MEnumProperty<Clip> {
-  MClipProperty({ Clip value, String name, bool isNamed = true, bool isRequired = false, Clip defaultValue})
+class MClipProperty extends MEnumProperty<Clip?> {
+  MClipProperty({ Clip? value, String? name, bool isNamed = true, bool isRequired = false, Clip? defaultValue})
       : super(value: value, name: name, possibleValues: Clip.values, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
   @override
   MClipProperty copy() {

@@ -5,9 +5,9 @@ import 'package:widget_maker_2_0/data/string_builder.dart';
 import 'basic_properties.dart';
 import 'icon_property/m_icons.dart';
 
-class MIconDataProperty extends MProperty<IconData> with SingleChangerMixin {
+class MIconDataProperty extends MProperty<IconData?> with SingleChangerMixin {
   MIconDataProperty(
-      {@required IconData value, @required String name, bool isNamed = true, bool isRequired = false, @required IconData defaultValue})
+      {required IconData? value, required String? name, bool isNamed = true, bool isRequired = false, required IconData defaultValue})
       : super(value: value, name: name, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
 
   @override
@@ -21,7 +21,7 @@ class MIconDataProperty extends MProperty<IconData> with SingleChangerMixin {
   }
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return IconDataChanger(
       value: value,
       onUpdate: (it) {
@@ -33,15 +33,15 @@ class MIconDataProperty extends MProperty<IconData> with SingleChangerMixin {
   @override
   Expression toCode() {
     if(value == null) return literalNull;
-    return refer("Icons").property(MIconContainer.iconDataToName[value]);
+    return refer("Icons").property(MIconContainer.iconDataToName[value!]!);
   }
 }
 
 
 class MIconData {
 
-  final IconData icon;
-  final String name;
+  final IconData? icon;
+  final String? name;
 
   const MIconData({this.icon, this.name});
 }

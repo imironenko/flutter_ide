@@ -7,7 +7,7 @@ import 'base.dart';
 class ListTileElementWidget extends StatefulWidget with ElementWidgetMixin {
   ListTileElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _ListTileElementWidgetState createState() => _ListTileElementWidgetState();
@@ -19,7 +19,7 @@ class _ListTileElementWidgetState extends State<ListTileElementWidget> with Elem
     return wrapWithDefault(
         child: ListTile(
           leading: getChildOrDragTarget(
-            childId: element.findIdForSlot(ListTileElement.LEADING),
+            childId: element!.findIdForSlot(ListTileElement.LEADING),
             data: SlotData(slotName: ListTileElement.LEADING),
             widgetWrapper: (context, widget) {
               return LayoutBuilder(
@@ -33,11 +33,11 @@ class _ListTileElementWidgetState extends State<ListTileElementWidget> with Elem
               );
             }
           ),title: getChildOrDragTarget(
-          childId: element.findIdForSlot(ListTileElement.TITLE),
+          childId: element!.findIdForSlot(ListTileElement.TITLE),
           data: SlotData(slotName: ListTileElement.TITLE),
           widgetWrapper: (context, widget) => sizeWidgetWrapper(context, Size(double.infinity, 50), widget),
         ),          subtitle: getChildOrDragTarget(
-          childId: element.findIdForSlot(ListTileElement.SUBTITLE),
+          childId: element!.findIdForSlot(ListTileElement.SUBTITLE),
           data: SlotData(slotName: ListTileElement.SUBTITLE),
           widgetWrapper: (context, widget) => sizeWidgetWrapper(context, Size(double.infinity, 50), widget),
         ),          trailing: getChildOrDragTarget(
@@ -52,15 +52,15 @@ class _ListTileElementWidgetState extends State<ListTileElementWidget> with Elem
                 },
               );
             },
-          childId: element.findIdForSlot(ListTileElement.TRAILING),
+          childId: element!.findIdForSlot(ListTileElement.TRAILING),
           data: SlotData(slotName: ListTileElement.TRAILING),
         ),
-          isThreeLine: element.isThreeLine.value,
-          dense: element.dense.value,
-          contentPadding: element.contentPadding.value,
-          enabled: element.enabled.value,
+          isThreeLine: element!.isThreeLine.value!,
+          dense: element!.dense.value,
+          contentPadding: element!.contentPadding.value,
+          enabled: element!.enabled.value!,
         )
-    );
+    )!;
   }
 
 }

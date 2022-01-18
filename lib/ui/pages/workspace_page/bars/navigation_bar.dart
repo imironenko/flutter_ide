@@ -8,7 +8,7 @@ class TopNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 36,
-      color: MyTheme.of(context).background4dp,
+      color: MyTheme.of(context)!.background4dp,
       child: Row(
         children: <Widget>[
           _NavigationItem(
@@ -37,17 +37,17 @@ class TopNavigationBar extends StatelessWidget {
 
 class _NavigationItem extends StatelessWidget {
 
-  const _NavigationItem({Key key, this.text, this.onTap}) : super(key: key);
+  const _NavigationItem({Key? key, this.text, this.onTap}) : super(key: key);
 
-  final String text;
-  final VoidCallback onTap;
+  final String? text;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(text),
+        child: Text(text!),
       ),
       onTap: onTap,
     );
@@ -59,10 +59,10 @@ class _NavigationItem extends StatelessWidget {
 class NavigationBar extends StatelessWidget {
 
 
-  final bool showVisual;
-  final ValueChanged<bool> onUpdate;
+  final bool? showVisual;
+  final ValueChanged<bool>? onUpdate;
 
-  const NavigationBar({Key key, this.showVisual, this.onUpdate}) : super(key: key);
+  const NavigationBar({Key? key, this.showVisual, this.onUpdate}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +93,7 @@ class NavigationBar extends StatelessWidget {
                     Expanded(
                       child: IconButton(
                         icon: Icon(Icons.transform, size: 16),
-                        onPressed: () => onUpdate(true),
+                        onPressed: () => onUpdate!(true),
                         tooltip: "Designer",
                       ),
                     ),
@@ -111,7 +111,7 @@ class NavigationBar extends StatelessWidget {
                     Expanded(
                       child: IconButton(
                         icon: Icon(Icons.code, size: 16),
-                        onPressed: () => onUpdate(false),
+                        onPressed: () => onUpdate!(false),
                         tooltip: "Code",
                       ),
                     ),

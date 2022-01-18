@@ -19,27 +19,27 @@ Expression constructor(String name, Iterable<Expression> positionalArguments, [
 }
 
 
-Expression propertyConstructor(String name, Iterable<MProperty> attributes, [Map<String, Expression> added]) {
+Expression propertyConstructor(String name, Iterable<MProperty?> attributes, [Map<String, Expression>? added]) {
 
-  Map<String, Expression> named = attributes.where((it) {
-    assert(it.isNamed != null, "${it.runtimeType} return null for isNamed");
+  Map<String?, Expression?> named = attributes.where((it) {
+    assert(it!.isNamed != null, "${it.runtimeType} return null for isNamed");
 
-    return it.isNamed && !it.shouldBeOmitted;
-  }).where((it) => it.value != null).toList().asMap()
+    return it!.isNamed && !it.shouldBeOmitted;
+  }).where((it) => it!.value != null).toList().asMap()
       .map((key, value) {
-    return MapEntry(value.name, value.toCode());
+    return MapEntry(value!.name, value.toCode());
   });
 
   if(added != null) {
     named.addAll(added);
   }
 
-  Iterable<Expression> positional = attributes.where((it) {
-    return !it.isNamed && !it.shouldBeOmitted;
+  Iterable<Expression?> positional = attributes.where((it) {
+    return !it!.isNamed && !it.shouldBeOmitted;
   })
-      .map((it) => it.toCode());
+      .map((it) => it!.toCode());
 
-  return refer(name).newInstance(positional, named);
+  return refer(name).newInstance(positional as Iterable<Expression>, named as Map<String, Expression>);
 }
 
 String expressionToCode(Expression expression) {

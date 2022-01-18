@@ -3,17 +3,17 @@ import 'package:widget_maker_2_0/material.dart';
 
 mixin ValueChanger<T> {
   T get value;
-  ValueChanged<T> get onUpdate;
+  ValueChanged<T>? get onUpdate;
 }
 
 abstract class StatelessValueChanger<T> extends StatelessWidget with ValueChanger<T> {
   final T value;
-  final ValueChanged<T> onUpdate;
+  final ValueChanged<T>? onUpdate;
   /// Indicates whether this value can be nullable
-  final bool nullable;
+  final bool? nullable;
 
   @mustCallSuper
-  StatelessValueChanger({Key key, @required this.value, @required this.onUpdate, @required this.nullable}) : super(key: key);
+  StatelessValueChanger({Key? key, required this.value, required this.onUpdate, required this.nullable}) : super(key: key);
 }
 
 abstract class StatefulValueChanger<T> extends StatefulWidget with ValueChanger<T> {
@@ -21,5 +21,5 @@ abstract class StatefulValueChanger<T> extends StatefulWidget with ValueChanger<
   final ValueChanged<T> onUpdate;
 
   @mustCallSuper
-  StatefulValueChanger({Key key, @required this.value, @required this.onUpdate}) : super(key: key);
+  StatefulValueChanger({Key? key, required this.value, required this.onUpdate}) : super(key: key);
 }

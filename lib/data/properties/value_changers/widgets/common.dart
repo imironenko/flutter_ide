@@ -4,11 +4,11 @@ import 'package:widget_maker_2_0/data/properties/basic_properties.dart';
 
 class OutlineDropDownButton<T> extends StatelessWidget {
 
-  final List<DropdownMenuItem<T>> items;
-  final T value;
-  final ValueChanged<T> onChanged;
+  final List<DropdownMenuItem<T>>? items;
+  final T? value;
+  final ValueChanged<T?>? onChanged;
 
-  const OutlineDropDownButton({Key key, this.value, this.onChanged, this.items}) : super(key: key);
+  const OutlineDropDownButton({Key? key, this.value, this.onChanged, this.items}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -14,10 +14,10 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class FractionallySizedBoxElement extends WidgetElement with SlotChildElementMixin {
   FractionallySizedBoxElement({
-    @required String id,
-    double heightFactor,
-    double widthFactor,
-    Alignment alignment,
+    required String? id,
+    double? heightFactor,
+    double? widthFactor,
+    Alignment? alignment,
   }) :
     heightFactor = MDoubleProperty(
         value: heightFactor?? null,
@@ -85,7 +85,7 @@ class FractionallySizedBoxElement extends WidgetElement with SlotChildElementMix
  class FractionallySizedBoxElementWidget extends StatefulWidget with ElementWidgetMixin {
   FractionallySizedBoxElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _FractionallySizedBoxElementWidgetState createState() => _FractionallySizedBoxElementWidgetState();
@@ -97,14 +97,14 @@ class _FractionallySizedBoxElementWidgetState extends State<FractionallySizedBox
     return wrapWithDefault(
         child: FractionallySizedBox(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(FractionallySizedBoxElement.CHILD),
+               childId: element!.findIdForSlot(FractionallySizedBoxElement.CHILD),
                data: SlotData(slotName: FractionallySizedBoxElement.CHILD), 
              ),        
-         heightFactor: element.heightFactor.value,
-         widthFactor: element.widthFactor.value,
-         alignment: element.alignment.value,
+         heightFactor: element!.heightFactor.value,
+         widthFactor: element!.widthFactor.value,
+         alignment: element!.alignment.value!,
         )
-    );
+    )!;
   }
 
 } 

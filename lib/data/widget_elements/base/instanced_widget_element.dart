@@ -13,14 +13,14 @@ class InstancedWidgetElement extends WidgetElement with NoChildElementMixin{
     test = otherProperties();
   }
 
-  List<MProperty> test;
+  List<MProperty?>? test;
 
   final String name;
-  final String referenceId;
-  final ValueGetter<List<MProperty>> otherProperties;
+  final String? referenceId;
+  final ValueGetter<List<MProperty?>> otherProperties;
 
   @override
-  List<MProperty> get attributes => test;
+  List<MProperty?>? get attributes => test;
 
   @override
   Widget generateWidget() {
@@ -35,7 +35,7 @@ class InstancedWidgetElement extends WidgetElement with NoChildElementMixin{
 class InstancedWidgetElementWidget extends StatefulWidget with ElementWidgetMixin {
   InstancedWidgetElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _InstancedWidgetElementWidgetState createState() => _InstancedWidgetElementWidgetState();
@@ -44,8 +44,8 @@ class InstancedWidgetElementWidget extends StatefulWidget with ElementWidgetMixi
 class _InstancedWidgetElementWidgetState extends State<InstancedWidgetElementWidget> with ElementWidgetStateMixin<InstancedWidgetElement, InstancedWidgetElementWidget > {
 
   @override
-  Widget getChildOrDragTarget({String childId, SlotData data, WidgetWrapper widgetWrapper}) {
-    return widgetBoard.getWidgetElement(childId)?.generateWidget() ?? Container(color: Colors.red, width: 100, height: 100);
+  Widget getChildOrDragTarget({String? childId, SlotData? data, WidgetWrapper? widgetWrapper}) {
+    return widgetBoard!.getWidgetElement(childId)?.generateWidget() ?? Container(color: Colors.red, width: 100, height: 100);
     //return Container(color: Colors.red, width: 100, height: 100);
   }
 
@@ -53,8 +53,8 @@ class _InstancedWidgetElementWidgetState extends State<InstancedWidgetElementWid
   Widget build(BuildContext context) {
     return wrapWithSelector(
         child: Container(
-          child: getChildOrDragTarget(childId: element.referenceId),
-        ));
+          child: getChildOrDragTarget(childId: element!.referenceId),
+        ))!;
   }
 
 }

@@ -16,10 +16,10 @@ class CanvasSize {
 
   };
 
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
-  get size => Size(width, height);
+  get size => Size(width!, height!);
 
   const CanvasSize({this.width, this.height});
 
@@ -37,7 +37,7 @@ class CanvasSize {
       height.hashCode;
 
 
-  CanvasSize copyWith({double width, double height}) {
+  CanvasSize copyWith({double? width, double? height}) {
     return CanvasSize(
       width: width?? this.width,
       height: height?? this.height,
@@ -46,8 +46,8 @@ class CanvasSize {
 
 }
 
-class MCanvasSizeProperty extends MProperty<CanvasSize> with SingleChangerMixin{
-  MCanvasSizeProperty ({@required CanvasSize value, @required String name})
+class MCanvasSizeProperty extends MProperty<CanvasSize?> with SingleChangerMixin{
+  MCanvasSizeProperty ({required CanvasSize? value, required String? name})
       : super(value: value, name: name, isNamed: true, isRequired: false);
 
 
@@ -60,7 +60,7 @@ class MCanvasSizeProperty extends MProperty<CanvasSize> with SingleChangerMixin{
   }
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return CanvasSizeChanger(
       canvasSize: value,
       onUpdate: (newValue) {

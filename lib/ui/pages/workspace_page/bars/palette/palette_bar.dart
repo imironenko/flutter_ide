@@ -14,18 +14,18 @@ class PaletteItem {
   /// The name of the item
   ///
   /// Will be displayed when selecting it
-  final String name;
+  final String? name;
 
   /// The visual icon representation of the widget
-  final IconData icon;
+  final IconData? icon;
 
   /// A generator for a widget element.
   ///
   /// It takes a string and returns a new WidgetElement in its preconfigured state
-  final WidgetElementGenerator generator;
+  final WidgetElementGenerator? generator;
 
   /// Visual representation when selecting widget
-  final Widget widget;
+  final Widget? widget;
 
   /// A list of categories the widget belongs to. Used for grouping
   final List<String> categories;
@@ -33,16 +33,16 @@ class PaletteItem {
   /// The visual representation of the widget
   Widget get visualRepresentation => widget?? Icon(icon);
 
-  WidgetElement get widgetElement => generator(Uuid().v1());
+  WidgetElement get widgetElement => generator!(Uuid().v1());
 
 
 }
 
 class PaletteItemVisualFeedback extends StatelessWidget {
 
-  final PaletteItem paletteItem;
+  final PaletteItem? paletteItem;
 
-  const PaletteItemVisualFeedback({Key key, this.paletteItem}) : super(key: key);
+  const PaletteItemVisualFeedback({Key? key, this.paletteItem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,16 +52,16 @@ class PaletteItemVisualFeedback extends StatelessWidget {
 
 class PaletteItemVisual extends StatelessWidget {
 
-  final PaletteItem paletteItem;
+  final PaletteItem? paletteItem;
 
-  const PaletteItemVisual({Key key, this.paletteItem}) : super(key: key);
+  const PaletteItemVisual({Key? key, this.paletteItem}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(paletteItem.icon),
+      leading: Icon(paletteItem!.icon),
       title: FittedBox(
-        child: Text(paletteItem.name),
+        child: Text(paletteItem!.name!),
         fit: BoxFit.scaleDown,
         alignment: Alignment.centerLeft,
       ),

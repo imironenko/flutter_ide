@@ -1,6 +1,5 @@
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
-import 'package:flutter/material.dart';
 import 'package:widget_maker_2_0/data/widget_elements/base/meta.dart';
 import 'package:widget_maker_2_0/data/widget_elements/base/widget_element.dart';
 import '../widget_elements/base/literal_widget.dart';
@@ -8,22 +7,22 @@ import '../widget_elements/base/literal_widget.dart';
 
 abstract class ICodeGenerator {
 
-  String generateCode(Map<String, CanvasElement> canvases, Map<String, WidgetElement> allElements);
+  String generateCode(Map<String?, CanvasElement> canvases, Map<String?, WidgetElement> allElements);
 }
 
 class SingleFileCodeGenerator extends ICodeGenerator {
 
   @override
-  String generateCode(Map<String, CanvasElement> canvases, Map<String, WidgetElement> allElements) {
+  String generateCode(Map<String?, CanvasElement> canvases, Map<String?, WidgetElement> allElements) {
 
 
     List<Class> classes = canvases.keys.map((canvasId) {
-      final String classCode = canvases[canvasId].writeCode2(allElements);
-      String literalWidgetElementId = allElements[canvasId].children[0].childrenIds[0];
-      LiteralWidgetElement literalWidgetElement = allElements[literalWidgetElementId];
+      final String classCode = canvases[canvasId]!.writeCode2(allElements);
+      String? literalWidgetElementId = allElements[canvasId]!.children![0].childrenIds![0];
+      LiteralWidgetElement? literalWidgetElement = allElements[literalWidgetElementId] as LiteralWidgetElement?;
       return Class((b) =>
       b
-        ..name = literalWidgetElement.widgetName.value.replaceAll(" ", "")
+        ..name = literalWidgetElement!.widgetName.value!.replaceAll(" ", "")
         ..extend = refer("StatelessWidget", "import 'package:widget_maker_2_0/material.dart'")
         ..methods.add(Method((a) =>
         a

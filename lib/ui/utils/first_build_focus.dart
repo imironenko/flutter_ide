@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 class FirstBuildFocus extends StatefulWidget {
 
   final FocusNode focusNode;
-  final Widget child;
+  final Widget? child;
 
-  const FirstBuildFocus({Key key, @required this.focusNode, this.child}) : super(key: key);
+  const FirstBuildFocus({Key? key, required this.focusNode, this.child}) : super(key: key);
   @override
   _FirstBuildFocusState createState() => _FirstBuildFocusState();
 }
@@ -28,6 +28,6 @@ class _FirstBuildFocusState extends State<FirstBuildFocus> {
   }
   @override
   Widget build(BuildContext context) {
-    return widget.child;
+    return widget.child!;
   }
 }

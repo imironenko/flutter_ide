@@ -19,13 +19,13 @@ class Text extends Widget2{
         this.style,
     });
 
-    final String id;
+    final String? id;
 
 
-    final String data;
-    final TextOverflow overflow;
-    final TextAlign textAlign;
-    final TextStyle style;
+    final String? data;
+    final TextOverflow? overflow;
+    final TextAlign? textAlign;
+    final TextStyle? style;
 
 
     Map<String, dynamic> toMap() {
@@ -57,20 +57,20 @@ class AppBar extends Widget2{
         this.elevation,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 title;
-    final Widget2 leading;
+    final Widget2? title;
+    final Widget2? leading;
 
-    final bool automaticallyImplyLeading;
-    final Color backgroundColor;
-    final Brightness brightness;
-    final double bottomOpacity;
-    final double toolbarOpacity;
-    final bool centerTitle;
-    final double titleSpacing;
-    final bool primary;
-    final double elevation;
+    final bool? automaticallyImplyLeading;
+    final Color? backgroundColor;
+    final Brightness? brightness;
+    final double? bottomOpacity;
+    final double? toolbarOpacity;
+    final bool? centerTitle;
+    final double? titleSpacing;
+    final bool? primary;
+    final double? elevation;
 
 
     Map<String, dynamic> toMap() {
@@ -86,8 +86,8 @@ class AppBar extends Widget2{
             "primary": this.primary?.toMap(),
             "elevation": this.elevation?.toMap(),
 
-            "title": this.title.toMap(),
-            "leading": this.leading.toMap(),
+            "title": this.title!.toMap(),
+            "leading": this.leading!.toMap(),
         };
     }
 }
@@ -102,13 +102,13 @@ class CupertinoNavigationBar extends Widget2{
         this.backgroundColor,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 leading;
-    final Widget2 middle;
-    final Widget2 trailing;
+    final Widget2? leading;
+    final Widget2? middle;
+    final Widget2? trailing;
 
-    final Color backgroundColor;
+    final Color? backgroundColor;
 
 
     Map<String, dynamic> toMap() {
@@ -116,9 +116,9 @@ class CupertinoNavigationBar extends Widget2{
             "&&type": "CupertinoNavigationBar",
             "backgroundColor": this.backgroundColor?.toMap(),
 
-            "leading": this.leading.toMap(),
-            "middle": this.middle.toMap(),
-            "trailing": this.trailing.toMap(),
+            "leading": this.leading!.toMap(),
+            "middle": this.middle!.toMap(),
+            "trailing": this.trailing!.toMap(),
         };
     }
 }
@@ -132,12 +132,12 @@ class Icon extends Widget2{
         this.color,
     });
 
-    final String id;
+    final String? id;
 
 
-    final IconData icon;
-    final double size;
-    final Color color;
+    final IconData? icon;
+    final double? size;
+    final Color? color;
 
 
     Map<String, dynamic> toMap() {
@@ -158,9 +158,9 @@ class Form extends Widget2{
         this.child,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
 
 
@@ -168,7 +168,7 @@ class Form extends Widget2{
         return {
             "&&type": "Form",
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -180,9 +180,9 @@ class Material extends Widget2{
         this.child,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
 
 
@@ -190,7 +190,7 @@ class Material extends Widget2{
         return {
             "&&type": "Material",
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -203,11 +203,11 @@ class Flexible extends Widget2{
         this.flex,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final int flex;
+    final int? flex;
 
 
     Map<String, dynamic> toMap() {
@@ -215,7 +215,7 @@ class Flexible extends Widget2{
             "&&type": "Flexible",
             "flex": this.flex?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -226,7 +226,7 @@ class TextFormField extends Widget2{
         this.id,
     });
 
-    final String id;
+    final String? id;
 
 
 
@@ -246,9 +246,9 @@ class GestureDetector extends Widget2{
         this.child,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
 
 
@@ -256,7 +256,7 @@ class GestureDetector extends Widget2{
         return {
             "&&type": "GestureDetector",
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -271,13 +271,13 @@ class WNetworkImage extends Widget2{
         this.fit,
     });
 
-    final String id;
+    final String? id;
 
 
-    final double width;
-    final double height;
-    final String src;
-    final BoxFit fit;
+    final double? width;
+    final double? height;
+    final String? src;
+    final BoxFit? fit;
 
 
     Map<String, dynamic> toMap() {
@@ -301,12 +301,12 @@ class SizedBox extends Widget2{
         this.height,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final double width;
-    final double height;
+    final double? width;
+    final double? height;
 
 
     Map<String, dynamic> toMap() {
@@ -315,7 +315,7 @@ class SizedBox extends Widget2{
             "width": this.width?.toMap(),
             "height": this.height?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -328,11 +328,11 @@ class CircularProgressIndicator extends Widget2{
         this.backgroundColor,
     });
 
-    final String id;
+    final String? id;
 
 
-    final double strokeWidth;
-    final Color backgroundColor;
+    final double? strokeWidth;
+    final Color? backgroundColor;
 
 
     Map<String, dynamic> toMap() {
@@ -351,7 +351,7 @@ class LinearProgressIndicator extends Widget2{
         this.id,
     });
 
-    final String id;
+    final String? id;
 
 
 
@@ -372,11 +372,11 @@ class CupertinoActivityIndicator extends Widget2{
         this.radius,
     });
 
-    final String id;
+    final String? id;
 
 
-    final bool animating;
-    final double radius;
+    final bool? animating;
+    final double? radius;
 
 
     Map<String, dynamic> toMap() {
@@ -403,17 +403,17 @@ class FloatingActionButton extends Widget2{
         this.onPressed,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final double elevation;
-    final String tooltip;
-    final Color foregroundColor;
-    final Color backgroundColor;
-    final Color focusColor;
-    final Color hoverColor;
-    final VoidCallback onPressed;
+    final double? elevation;
+    final String? tooltip;
+    final Color? foregroundColor;
+    final Color? backgroundColor;
+    final Color? focusColor;
+    final Color? hoverColor;
+    final VoidCallback? onPressed;
 
 
     Map<String, dynamic> toMap() {
@@ -427,7 +427,7 @@ class FloatingActionButton extends Widget2{
             "hoverColor": this.hoverColor?.toMap(),
             "onPressed": this.onPressed?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -442,13 +442,13 @@ class Scaffold extends Widget2{
         this.backgroundColor,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 body;
-    final Widget2 appBar;
-    final Widget2 floatingActionButton;
+    final Widget2? body;
+    final Widget2? appBar;
+    final Widget2? floatingActionButton;
 
-    final Color backgroundColor;
+    final Color? backgroundColor;
 
 
     Map<String, dynamic> toMap() {
@@ -456,9 +456,9 @@ class Scaffold extends Widget2{
             "&&type": "Scaffold",
             "backgroundColor": this.backgroundColor?.toMap(),
 
-            "body": this.body.toMap(),
-            "appBar": this.appBar.toMap(),
-            "floatingActionButton": this.floatingActionButton.toMap(),
+            "body": this.body!.toMap(),
+            "appBar": this.appBar!.toMap(),
+            "floatingActionButton": this.floatingActionButton!.toMap(),
         };
     }
 }
@@ -477,17 +477,17 @@ class ListTile extends Widget2{
         this.enabled,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 leading;
-    final Widget2 title;
-    final Widget2 subtitle;
-    final Widget2 trailing;
+    final Widget2? leading;
+    final Widget2? title;
+    final Widget2? subtitle;
+    final Widget2? trailing;
 
-    final bool isThreeLine;
-    final bool dense;
-    final EdgeInsets contentPadding;
-    final bool enabled;
+    final bool? isThreeLine;
+    final bool? dense;
+    final EdgeInsets? contentPadding;
+    final bool? enabled;
 
 
     Map<String, dynamic> toMap() {
@@ -498,10 +498,10 @@ class ListTile extends Widget2{
             "contentPadding": this.contentPadding?.toMap(),
             "enabled": this.enabled?.toMap(),
 
-            "leading": this.leading.toMap(),
-            "title": this.title.toMap(),
-            "subtitle": this.subtitle.toMap(),
-            "trailing": this.trailing.toMap(),
+            "leading": this.leading!.toMap(),
+            "title": this.title!.toMap(),
+            "subtitle": this.subtitle!.toMap(),
+            "trailing": this.trailing!.toMap(),
         };
     }
 }
@@ -513,9 +513,9 @@ class Center extends Widget2{
         this.child,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
 
 
@@ -523,7 +523,7 @@ class Center extends Widget2{
         return {
             "&&type": "Center",
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -536,11 +536,11 @@ class Padding extends Widget2{
         this.padding,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final EdgeInsets padding;
+    final EdgeInsets? padding;
 
 
     Map<String, dynamic> toMap() {
@@ -548,7 +548,7 @@ class Padding extends Widget2{
             "&&type": "Padding",
             "padding": this.padding?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -561,11 +561,11 @@ class RotatedBox extends Widget2{
         this.quarterTurns,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final int quarterTurns;
+    final int? quarterTurns;
 
 
     Map<String, dynamic> toMap() {
@@ -573,7 +573,7 @@ class RotatedBox extends Widget2{
             "&&type": "RotatedBox",
             "quarterTurns": this.quarterTurns?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -586,11 +586,11 @@ class AspectRatio extends Widget2{
         this.aspectRatio,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final double aspectRatio;
+    final double? aspectRatio;
 
 
     Map<String, dynamic> toMap() {
@@ -598,7 +598,7 @@ class AspectRatio extends Widget2{
             "&&type": "AspectRatio",
             "aspectRatio": this.aspectRatio?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -610,10 +610,10 @@ class TextField extends Widget2{
         this.obscureText,
     });
 
-    final String id;
+    final String? id;
 
 
-    final bool obscureText;
+    final bool? obscureText;
 
 
     Map<String, dynamic> toMap() {
@@ -635,13 +635,13 @@ class FractionallySizedBox extends Widget2{
         this.alignment,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final double heightFactor;
-    final double widthFactor;
-    final Alignment alignment;
+    final double? heightFactor;
+    final double? widthFactor;
+    final Alignment? alignment;
 
 
     Map<String, dynamic> toMap() {
@@ -651,7 +651,7 @@ class FractionallySizedBox extends Widget2{
             "widthFactor": this.widthFactor?.toMap(),
             "alignment": this.alignment?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -666,13 +666,13 @@ class Divider extends Widget2{
         this.color,
     });
 
-    final String id;
+    final String? id;
 
 
-    final double height;
-    final double indent;
-    final double endIndent;
-    final Color color;
+    final double? height;
+    final double? indent;
+    final double? endIndent;
+    final Color? color;
 
 
     Map<String, dynamic> toMap() {
@@ -697,13 +697,13 @@ class Align extends Widget2{
         this.alignment,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final double heightFactor;
-    final double widthFactor;
-    final Alignment alignment;
+    final double? heightFactor;
+    final double? widthFactor;
+    final Alignment? alignment;
 
 
     Map<String, dynamic> toMap() {
@@ -713,7 +713,7 @@ class Align extends Widget2{
             "widthFactor": this.widthFactor?.toMap(),
             "alignment": this.alignment?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -728,13 +728,13 @@ class UnconstrainedBox extends Widget2{
         this.alignment,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final Axis constrainedAxis;
-    final TextDirection textDirection;
-    final Alignment alignment;
+    final Axis? constrainedAxis;
+    final TextDirection? textDirection;
+    final Alignment? alignment;
 
 
     Map<String, dynamic> toMap() {
@@ -744,7 +744,7 @@ class UnconstrainedBox extends Widget2{
             "textDirection": this.textDirection?.toMap(),
             "alignment": this.alignment?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -757,11 +757,11 @@ class ConstrainedBox extends Widget2{
         this.constraints,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final BoxConstraints constraints;
+    final BoxConstraints? constraints;
 
 
     Map<String, dynamic> toMap() {
@@ -769,7 +769,7 @@ class ConstrainedBox extends Widget2{
             "&&type": "ConstrainedBox",
             "constraints": this.constraints?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -791,20 +791,20 @@ class WContainer extends Widget2{
         this.transform,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final double width;
-    final double height;
-    final Color color;
-    final Alignment alignment;
-    final EdgeInsets padding;
-    final Decoration decoration;
-    final Decoration foregroundDecoration;
-    final BoxConstraints constraints;
-    final EdgeInsets margin;
-    final Matrix4 transform;
+    final double? width;
+    final double? height;
+    final Color? color;
+    final Alignment? alignment;
+    final EdgeInsets? padding;
+    final Decoration? decoration;
+    final Decoration? foregroundDecoration;
+    final BoxConstraints? constraints;
+    final EdgeInsets? margin;
+    final Matrix4? transform;
 
 
     Map<String, dynamic> toMap() {
@@ -821,7 +821,7 @@ class WContainer extends Widget2{
             "margin": this.margin?.toMap(),
             "transform": this.transform?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -833,9 +833,9 @@ class AbsorbPointer extends Widget2{
         this.child,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
 
 
@@ -843,7 +843,7 @@ class AbsorbPointer extends Widget2{
         return {
             "&&type": "AbsorbPointer",
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -857,12 +857,12 @@ class WCircleAvatar extends Widget2{
         this.imageUrl,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final double radius;
-    final String imageUrl;
+    final double? radius;
+    final String? imageUrl;
 
 
     Map<String, dynamic> toMap() {
@@ -871,7 +871,7 @@ class WCircleAvatar extends Widget2{
             "radius": this.radius?.toMap(),
             "imageUrl": this.imageUrl?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -888,15 +888,15 @@ class Card extends Widget2{
         this.semanticContainer,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final Clip clipBehavior;
-    final Color color;
-    final double elevation;
-    final EdgeInsets margin;
-    final bool semanticContainer;
+    final Clip? clipBehavior;
+    final Color? color;
+    final double? elevation;
+    final EdgeInsets? margin;
+    final bool? semanticContainer;
 
 
     Map<String, dynamic> toMap() {
@@ -908,7 +908,7 @@ class Card extends Widget2{
             "margin": this.margin?.toMap(),
             "semanticContainer": this.semanticContainer?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -923,13 +923,13 @@ class Checkbox extends Widget2{
         this.value,
     });
 
-    final String id;
+    final String? id;
 
 
-    final Color activeColor;
-    final Color checkColor;
-    final bool tristate;
-    final bool value;
+    final Color? activeColor;
+    final Color? checkColor;
+    final bool? tristate;
+    final bool? value;
 
 
     Map<String, dynamic> toMap() {
@@ -962,21 +962,21 @@ class Chip extends Widget2{
         this.shadowColor,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 avatar;
-    final Widget2 deleteIcon;
-    final Widget2 label;
+    final Widget2? avatar;
+    final Widget2? deleteIcon;
+    final Widget2? label;
 
-    final Color backgroundColor;
-    final Clip clipBehavior;
-    final String deleteButtonTooltipMessage;
-    final Color deleteIconColor;
-    final double elevation;
-    final EdgeInsets labelPadding;
-    final TextStyle labelStyle;
-    final EdgeInsets padding;
-    final Color shadowColor;
+    final Color? backgroundColor;
+    final Clip? clipBehavior;
+    final String? deleteButtonTooltipMessage;
+    final Color? deleteIconColor;
+    final double? elevation;
+    final EdgeInsets? labelPadding;
+    final TextStyle? labelStyle;
+    final EdgeInsets? padding;
+    final Color? shadowColor;
 
 
     Map<String, dynamic> toMap() {
@@ -992,9 +992,9 @@ class Chip extends Widget2{
             "padding": this.padding?.toMap(),
             "shadowColor": this.shadowColor?.toMap(),
 
-            "avatar": this.avatar.toMap(),
-            "deleteIcon": this.deleteIcon.toMap(),
-            "label": this.label.toMap(),
+            "avatar": this.avatar!.toMap(),
+            "deleteIcon": this.deleteIcon!.toMap(),
+            "label": this.label!.toMap(),
         };
     }
 }
@@ -1007,11 +1007,11 @@ class WPageView extends Widget2{
         this.pageSnapping,
     });
 
-    final String id;
+    final String? id;
 
-    final List<Widget> children;
+    final List<Widget>? children;
 
-    final bool pageSnapping;
+    final bool? pageSnapping;
 
 
     Map<String, dynamic> toMap() {
@@ -1019,7 +1019,7 @@ class WPageView extends Widget2{
             "&&type": "WPageView",
             "pageSnapping": this.pageSnapping?.toMap(),
 
-            "children": this.children.map((it) => it.toMap()).toList(),
+            "children": this.children!.map((it) => it.toMap()).toList(),
         };
     }
 }
@@ -1034,13 +1034,13 @@ class Column extends Widget2{
         this.mainAxisAlignment,
     });
 
-    final String id;
+    final String? id;
 
-    final List<Widget> children;
+    final List<Widget>? children;
 
-    final CrossAxisAlignment crossAxisAlignment;
-    final MainAxisSize mainAxisSize;
-    final MainAxisAlignment mainAxisAlignment;
+    final CrossAxisAlignment? crossAxisAlignment;
+    final MainAxisSize? mainAxisSize;
+    final MainAxisAlignment? mainAxisAlignment;
 
 
     Map<String, dynamic> toMap() {
@@ -1050,7 +1050,7 @@ class Column extends Widget2{
             "mainAxisSize": this.mainAxisSize?.toMap(),
             "mainAxisAlignment": this.mainAxisAlignment?.toMap(),
 
-            "children": this.children.map((it) => it.toMap()).toList(),
+            "children": this.children!.map((it) => it.toMap()).toList(),
         };
     }
 }
@@ -1067,15 +1067,15 @@ class Row extends Widget2{
         this.textDirection,
     });
 
-    final String id;
+    final String? id;
 
-    final List<Widget> children;
+    final List<Widget>? children;
 
-    final CrossAxisAlignment crossAxisAlignment;
-    final MainAxisSize mainAxisSize;
-    final MainAxisAlignment mainAxisAlignment;
-    final TextBaseline textBaseline;
-    final TextDirection textDirection;
+    final CrossAxisAlignment? crossAxisAlignment;
+    final MainAxisSize? mainAxisSize;
+    final MainAxisAlignment? mainAxisAlignment;
+    final TextBaseline? textBaseline;
+    final TextDirection? textDirection;
 
 
     Map<String, dynamic> toMap() {
@@ -1087,7 +1087,7 @@ class Row extends Widget2{
             "textBaseline": this.textBaseline?.toMap(),
             "textDirection": this.textDirection?.toMap(),
 
-            "children": this.children.map((it) => it.toMap()).toList(),
+            "children": this.children!.map((it) => it.toMap()).toList(),
         };
     }
 }
@@ -1100,11 +1100,11 @@ class Expanded extends Widget2{
         this.flex,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final int flex;
+    final int? flex;
 
 
     Map<String, dynamic> toMap() {
@@ -1112,7 +1112,7 @@ class Expanded extends Widget2{
             "&&type": "Expanded",
             "flex": this.flex?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -1127,13 +1127,13 @@ class MaterialButton extends Widget2{
         this.padding,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final Color color;
-    final double elevation;
-    final EdgeInsets padding;
+    final Color? color;
+    final double? elevation;
+    final EdgeInsets? padding;
 
 
     Map<String, dynamic> toMap() {
@@ -1143,7 +1143,7 @@ class MaterialButton extends Widget2{
             "elevation": this.elevation?.toMap(),
             "padding": this.padding?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -1157,12 +1157,12 @@ class OutlineButton extends Widget2{
         this.padding,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final Color color;
-    final EdgeInsets padding;
+    final Color? color;
+    final EdgeInsets? padding;
 
 
     Map<String, dynamic> toMap() {
@@ -1171,7 +1171,7 @@ class OutlineButton extends Widget2{
             "color": this.color?.toMap(),
             "padding": this.padding?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -1186,13 +1186,13 @@ class RaisedButton extends Widget2{
         this.color,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final double elevation;
-    final EdgeInsets padding;
-    final Color color;
+    final double? elevation;
+    final EdgeInsets? padding;
+    final Color? color;
 
 
     Map<String, dynamic> toMap() {
@@ -1202,7 +1202,7 @@ class RaisedButton extends Widget2{
             "padding": this.padding?.toMap(),
             "color": this.color?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -1219,15 +1219,15 @@ class CupertinoButton extends Widget2{
         this.pressedOpacity,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final Color color;
-    final Color disabledColor;
-    final double minSize;
-    final EdgeInsets padding;
-    final double pressedOpacity;
+    final Color? color;
+    final Color? disabledColor;
+    final double? minSize;
+    final EdgeInsets? padding;
+    final double? pressedOpacity;
 
 
     Map<String, dynamic> toMap() {
@@ -1239,7 +1239,7 @@ class CupertinoButton extends Widget2{
             "padding": this.padding?.toMap(),
             "pressedOpacity": this.pressedOpacity?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }
@@ -1262,21 +1262,21 @@ class WAnimatedContainer extends Widget2{
         this.transform,
     });
 
-    final String id;
+    final String? id;
 
-    final Widget2 child;
+    final Widget2? child;
 
-    final WDuration duration;
-    final double width;
-    final double height;
-    final Color color;
-    final Alignment alignment;
-    final EdgeInsets padding;
-    final Decoration decoration;
-    final Decoration foregroundDecoration;
-    final BoxConstraints constraints;
-    final EdgeInsets margin;
-    final Matrix4 transform;
+    final WDuration? duration;
+    final double? width;
+    final double? height;
+    final Color? color;
+    final Alignment? alignment;
+    final EdgeInsets? padding;
+    final Decoration? decoration;
+    final Decoration? foregroundDecoration;
+    final BoxConstraints? constraints;
+    final EdgeInsets? margin;
+    final Matrix4? transform;
 
 
     Map<String, dynamic> toMap() {
@@ -1294,7 +1294,7 @@ class WAnimatedContainer extends Widget2{
             "margin": this.margin?.toMap(),
             "transform": this.transform?.toMap(),
 
-            "child": this.child.toMap(),
+            "child": this.child!.toMap(),
         };
     }
 }

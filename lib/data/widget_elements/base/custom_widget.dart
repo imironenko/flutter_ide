@@ -7,11 +7,11 @@ import 'package:widget_maker_2_0/data/widget_elements/widgets/base.dart';
 // The idea is that every widget which has "child" parameter can be shoved in here and it works for now
 class CustomWidgetElement extends WidgetElement with SingleChildElement{
   CustomWidgetElement({
-    @required String id,
+    required String id,
     this.widget,
   }) : super(id);
 
-  final Widget widget;
+  final Widget? widget;
 
 
   @override
@@ -31,7 +31,7 @@ class CustomWidgetElement extends WidgetElement with SingleChildElement{
 class CustomElementWidget extends StatefulWidget with ElementWidgetMixin {
   CustomElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _CustomElementWidgetState createState() => _CustomElementWidgetState();
@@ -43,8 +43,8 @@ class _CustomElementWidgetState extends State<CustomElementWidget> with ElementW
   Widget build(BuildContext context) {
     return wrapWithSelector(
         child: Container(
-          child: getChildOrDragTarget(childId: element.childId),
-        ));
+          child: getChildOrDragTarget(childId: element!.childId),
+        ))!;
   }
 
 }

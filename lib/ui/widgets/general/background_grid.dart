@@ -1,37 +1,37 @@
 import 'package:flutter/material.dart';
 class _GridPaperPainter extends CustomPainter {
   const _GridPaperPainter({
-    @required this.offset,
-    @required this.zoom,
+    required this.offset,
+    required this.zoom,
     this.color,
     this.interval,
     this.divisions,
     this.subdivisions,
   });
 
-  final Color color;
-  final double interval;
-  final int divisions;
-  final int subdivisions;
+  final Color? color;
+  final double? interval;
+  final int? divisions;
+  final int? subdivisions;
   final Offset offset;
   final double zoom;
 
   @override
   void paint(Canvas canvas, Size size) {
     final Paint linePaint = Paint()
-      ..color = color;
+      ..color = color!;
 
     final double zoomMultiplier = 1 / zoom;
 
-    final double allDivisions = (divisions * subdivisions).toDouble();
+    final double allDivisions = (divisions! * subdivisions!).toDouble();
 
 
-    for (double x = 0.0; x <= size.width * zoomMultiplier; x += interval / allDivisions) {
-      linePaint.strokeWidth = (x % interval == 0.0) ? 1.0 : (x % (interval / subdivisions) == 0.0) ? 0.5 : 0.25;
+    for (double x = 0.0; x <= size.width * zoomMultiplier; x += interval! / allDivisions) {
+      linePaint.strokeWidth = (x % interval! == 0.0) ? 1.0 : (x % (interval! / subdivisions!) == 0.0) ? 0.5 : 0.25;
       canvas.drawLine(Offset(x, 0.0) + offset, Offset(x, size.height * zoomMultiplier) + offset, linePaint);
     }
-    for (double y = 0.0; y <= size.height * zoomMultiplier; y += interval / allDivisions) {
-      linePaint.strokeWidth = (y % interval == 0.0) ? 1.0 : (y % (interval / subdivisions) == 0.0) ? 0.5 : 0.25;
+    for (double y = 0.0; y <= size.height * zoomMultiplier; y += interval! / allDivisions) {
+      linePaint.strokeWidth = (y % interval! == 0.0) ? 1.0 : (y % (interval! / subdivisions!) == 0.0) ? 0.5 : 0.25;
       canvas.drawLine(Offset(0.0, y) + offset, Offset(size.width * zoomMultiplier, y) + offset, linePaint);
     }
   }
@@ -53,9 +53,9 @@ class BackgroundGrid extends StatelessWidget {
 
   /// Creates a widget that draws a rectilinear grid of 1-pixel-wide lines.
   const BackgroundGrid({
-    Key key,
-    @required this.offset,
-    @required this.zoom,
+    Key? key,
+    required this.offset,
+    required this.zoom,
     this.color = const Color(0x7FC3E8F3),
     this.interval = 100.0,
     this.divisions = 2,
@@ -103,7 +103,7 @@ class BackgroundGrid extends StatelessWidget {
   /// The widget below this widget in the tree.
   ///
   /// {@macro flutter.widgets.child}
-  final Widget child;
+  final Widget? child;
   @override
   Widget build(BuildContext context) {
     return CustomPaint(

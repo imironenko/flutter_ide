@@ -14,10 +14,10 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class IconElement extends WidgetElement with NoChildElementMixin {
   IconElement({
-    @required String id,
-    IconData icon,
-    double size,
-    Color color,
+    required String? id,
+    IconData? icon,
+    double? size,
+    Color? color,
   }) :
     icon = MIconDataProperty(
         value: icon?? Icons.add,
@@ -79,7 +79,7 @@ class IconElement extends WidgetElement with NoChildElementMixin {
  class IconElementWidget extends StatefulWidget with ElementWidgetMixin {
   IconElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _IconElementWidgetState createState() => _IconElementWidgetState();
@@ -91,11 +91,11 @@ class _IconElementWidgetState extends State<IconElementWidget> with ElementWidge
     return wrapWithDefault(
         child: Icon(
         
-         element.icon.value,
-         size: element.size.value,
-         color: element.color.value,
+         element!.icon.value,
+         size: element!.size.value,
+         color: element!.color.value,
         )
-    );
+    )!;
   }
 
 } 

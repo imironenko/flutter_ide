@@ -4,8 +4,8 @@ import 'package:widget_maker_2_0/data/properties/value_changers/widgets/number_c
 import 'package:widget_maker_2_0/ui/theme.dart';
 
 class NewCanvasDialogResult {
-  final String name;
-  final CanvasSize canvasSize;
+  final String? name;
+  final CanvasSize? canvasSize;
 
   NewCanvasDialogResult({this.name, this.canvasSize});
 }
@@ -26,7 +26,7 @@ class _NewCanvasDialogState extends State<NewCanvasDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: MyTheme.of(context).background16dp,
+      backgroundColor: MyTheme.of(context)!.background16dp,
       child: Container(
         width: 400,
         padding: const EdgeInsets.all(16),

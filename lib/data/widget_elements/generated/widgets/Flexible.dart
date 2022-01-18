@@ -14,8 +14,8 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class FlexibleElement extends WidgetElement with SlotChildElementMixin {
   FlexibleElement({
-    @required String id,
-    int flex,
+    required String? id,
+    int? flex,
   }) :
     flex = MIntProperty(
         value: flex?? null,
@@ -63,7 +63,7 @@ class FlexibleElement extends WidgetElement with SlotChildElementMixin {
  class FlexibleElementWidget extends StatefulWidget with ElementWidgetMixin {
   FlexibleElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _FlexibleElementWidgetState createState() => _FlexibleElementWidgetState();
@@ -75,12 +75,12 @@ class _FlexibleElementWidgetState extends State<FlexibleElementWidget> with Elem
     return wrapWithDefault(
         child: Flexible(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(FlexibleElement.CHILD),
+               childId: element!.findIdForSlot(FlexibleElement.CHILD),
                data: SlotData(slotName: FlexibleElement.CHILD), 
-             ),        
-         flex: element.flex.value,
+             )!,        
+         flex: element!.flex.value!,
         )
-    );
+    )!;
   }
 
 } 

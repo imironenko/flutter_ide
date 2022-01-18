@@ -23,10 +23,10 @@ class Project with ChangeNotifier{
         id: Uuid().v1(),
         name: "A widget"
     );
-    _widgetBoard.acceptNewChild(_widgetBoard .rootKey, literalWidgetElement);
+    _widgetBoard!.acceptNewChild(_widgetBoard! .rootKey, literalWidgetElement);
   }
-  WidgetBoard _widgetBoard;
-  WidgetBoard get widgetBoard => _widgetBoard;
+  WidgetBoard? _widgetBoard;
+  WidgetBoard? get widgetBoard => _widgetBoard;
 
   StreamController<String> _saveLocation = StreamController();
   Stream<String> get saveLocation => _saveLocation.stream;
@@ -50,7 +50,7 @@ class Project with ChangeNotifier{
     //save();
   }
 
-  String _pathToSave;
+  String? _pathToSave;
 
   void overrideWidgetBoard(WidgetBoard board) {
     //_widgetBoard.removeListener(_onUpdate);
@@ -60,10 +60,10 @@ class Project with ChangeNotifier{
   }
 
   /// Sets the path of where to save the file
-  void setFilePath(String path) {
+  void setFilePath(String? path) {
     if(path == null) {
       _pathToSave = null;
-      _saveLocation.add(null);
+      // _saveLocation.add(null);
       return;
     }
     if(path.endsWith(".dart")) {
@@ -79,14 +79,14 @@ class Project with ChangeNotifier{
     await save();
   }
 
-  Future saveToFolder(String folderPath) async {
+  Future saveToFolder(String? folderPath) async {
     if(folderPath != null) {
       // try 10 different extensions
       for(int i = 0; i < 10; i++) {
         File file = File("$folderPath/widget-maker-${Uuid().v1()}.dart");
         if(!(await file.exists())) {
           var f = await file.create();
-          await f.writeAsString(widgetBoard.getLayoutCode());
+          await f.writeAsString(widgetBoard!.getLayoutCode());
           return;
         }
 
@@ -95,14 +95,14 @@ class Project with ChangeNotifier{
   }
 
   String getCode() {
-    return widgetBoard.getLayoutCode();
+    return widgetBoard!.getLayoutCode();
   }
 
 
   Future save() async {
     if(_pathToSave != null) {
       //_isLoadingStream.add(SaveState.saving);
-      await File(_pathToSave).writeAsString(widgetBoard.getLayoutCode());
+      await File(_pathToSave!).writeAsString(widgetBoard!.getLayoutCode());
       //_isLoadingStream.add(SaveState.success);
     }
   }

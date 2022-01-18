@@ -9,15 +9,15 @@ import 'dart:math' as math;
 
 class DeselectWidget extends StatelessWidget {
 
-  final Widget child;
+  final Widget? child;
 
-  const DeselectWidget({Key key, this.child}) : super(key: key);
+  const DeselectWidget({Key? key, this.child}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        AppScope.of(context).widgetBoard.setSelected(null);
+        AppScope.of(context).widgetBoard!.setSelected(null);
       },
       child: child,
     );
@@ -26,9 +26,9 @@ class DeselectWidget extends StatelessWidget {
 
 class DefocusWidget extends StatelessWidget {
 
-  final Widget child;
+  final Widget? child;
 
-  const DefocusWidget({Key key, this.child}) : super(key: key);
+  const DefocusWidget({Key? key, this.child}) : super(key: key);
 
 
 
@@ -54,13 +54,13 @@ class CanvasSpace extends StatelessWidget {
     return Stack(
       children: <Widget>[
         StreamBuilder<void>(
-          stream: AppScope.of(context).widgetBoard.onTopLevelChangeStream,
+          stream: AppScope.of(context).widgetBoard!.onTopLevelChangeStream,
           builder: (context, _) {
            return Simple2DCanvas(
-             widgets: AppScope.of(context).widgetBoard.canvases.map<String, CanvasWidget>((key, entry) {
-               return MapEntry<String, CanvasWidget>(key, CanvasWidget(
+             widgets: AppScope.of(context).widgetBoard!.canvases.map<String?, CanvasWidget>((key, entry) {
+               return MapEntry<String?, CanvasWidget>(key, CanvasWidget(
                  child: entry.generateWidget(),
-                 size: entry.canvasSize.value.size,
+                 size: entry.canvasSize.value!.size,
                  position: entry.position.value,
                ));
              }),
@@ -89,7 +89,7 @@ class PlayModeToggle extends StatelessWidget {
               initialData: AppScope.of(context).playModeStream.value,
               builder: (context, snapshot) {
                 return Switch(
-                  value: snapshot.data,
+                  value: snapshot.data!,
                   onChanged: (it) {
                     AppScope.of(context).updatePlayMode(it);
                   },

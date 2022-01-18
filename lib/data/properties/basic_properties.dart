@@ -23,8 +23,8 @@ import 'value_changers/widgets/number_changer.dart';
 import 'value_changers/widgets/value_row.dart';
 
 class NamedWidget {
-  final Widget widget;
-  final String name;
+  final Widget? widget;
+  final String? name;
 
   NamedWidget({this.widget, this.name});
 }
@@ -33,8 +33,8 @@ class PropertyReference {
 
   PropertyReference({this.propertyName, this.elementId});
 
-  final String propertyName;
-  final String elementId;
+  final String? propertyName;
+  final String? elementId;
 
 
 }
@@ -63,33 +63,33 @@ typedef ValueGetter<T> = T Function();
 abstract class MProperty<T> {
   MProperty({
     this.name = "No Name",
-    T value,
-    String displayName,
+    T? value,
+    String? displayName,
     this.isNamed = true,
     this.isRequired = false,
     this.nullable = true,
-    @required this.defaultValue,
+    required this.defaultValue,
   }) : this.displayName = displayName ?? capitalize(name), _value = value;
 
   /// The name to be displayed in the changer widget
-  final String displayName;
+  final String? displayName;
 
   /// The actual property name as it is in the source code
-  final String name;
+  final String? name;
 
   /// The value of this property
   ///
   /// Is mutable
-  T _value;
-  T get value {
+  T? _value;
+  T? get value {
     if(isReference) {
-      var element = AppScope.debugProject.widgetBoard.getWidgetElementFromAnySource(propertyReference.elementId);
-      var property = element.attributes.where((it) => it.name == propertyReference.propertyName).first;
+      var element = AppScope.debugProject!.widgetBoard!.getWidgetElementFromAnySource(propertyReference!.elementId)!;
+      var property = element.attributes!.where((it) => it!.name == propertyReference!.propertyName).first!;
       return property.value;
     }
     return _value;
   }
-  set value(T it) {
+  set value(T? it) {
     _value = it;
   }
 
@@ -114,7 +114,7 @@ abstract class MProperty<T> {
   ///
   /// If this is not null then this property doesn't hold a value on its own but
   /// instead references to another reference
-  PropertyReference propertyReference;
+  PropertyReference? propertyReference;
 
 
   /// Indicates whether this property was updated at least once
@@ -126,24 +126,24 @@ abstract class MProperty<T> {
   //bool get shouldBeOmitted => !wasMutated && !isRequired;
   bool get shouldBeOmitted => defaultValue == value;
 
-  void updateValue(T newValue, BuildContext context, String id) {
+  void updateValue(T newValue, BuildContext context, String? id) {
     wasMutated = true;
     value = newValue;
-    AppScope.of(context).widgetBoard.notifyUpdate(id, affectsLayout: false);
+    AppScope.of(context).widgetBoard!.notifyUpdate(id, affectsLayout: false);
   }
 
-  Widget getChanger(BuildContext context, String id) {
+  Widget getChanger(BuildContext context, String? id) {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: buildFinalChanger(context, id),
     );
   }
 
-  Widget buildFinalChanger(BuildContext context, String id);
+  Widget buildFinalChanger(BuildContext context, String? id);
 
-  Expression toCode();
+  Expression? toCode();
 
-  static String capitalize(String it) {
+  static String? capitalize(String? it) {
     if (it == null) return null;
     if (it.isEmpty) return it;
     var first = it.substring(0, 1).toUpperCase();
@@ -164,7 +164,7 @@ abstract class MProperty<T> {
   /// Copies this propert and returns a new property containing state etc.
   ///
   /// This is useful when wanting the have another property which contains a different state
-  MProperty<T> copy();
+  MProperty<T>? copy();
 }
 
 /// A property which is the composition of other properties.
@@ -174,14 +174,14 @@ abstract class MObjectProperty<T> extends MProperty<T> with SingleChangerMixin{
 
   MObjectProperty({
     String name = "No Name",
-    T value,
-    @required T defaultValue,
+    T? value,
+    required T defaultValue,
   }) : internalValue = value, super(name: name, value: value, defaultValue: defaultValue);
 
   List<MProperty> getProperties();
   T constructEmpty();
 
-  T internalValue;
+  T? internalValue;
 
 
 
@@ -191,10 +191,10 @@ abstract class MObjectProperty<T> extends MProperty<T> with SingleChangerMixin{
     internalValue = it;
   }
   @override
-  T get value => internalValue;
+  T? get value => internalValue;
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return GestureDetector(
       onTap: () {
         if(internalValue == null) {
@@ -211,25 +211,25 @@ abstract class MObjectProperty<T> extends MProperty<T> with SingleChangerMixin{
     );
   }
 
-  Widget buildAddButton(BuildContext context, String id) {
+  Widget buildAddButton(BuildContext context, String? id) {
     return Icon(Icons.add);
   }
 
-  Widget buildTappableButton(BuildContext context, String id) {
+  Widget buildTappableButton(BuildContext context, String? id) {
     return Center(child: Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Text(name),
+      child: Text(name!),
     ));
   }
 
-  Widget buildPage(BuildContext context, String id) {
+  Widget buildPage(BuildContext context, String? id) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(name),
+        title: Text(name!),
       ),
-      backgroundColor: MyTheme.of(context).background4dp,
+      backgroundColor: MyTheme.of(context)!.background4dp,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -246,18 +246,18 @@ abstract class MObjectProperty<T> extends MProperty<T> with SingleChangerMixin{
 mixin SingleChangerMixin<T> on MProperty<T> {
 
   @override
-  Widget buildFinalChanger(BuildContext context, String id) {
+  Widget buildFinalChanger(BuildContext context, String? id) {
     return ValueRow(
       text: name,
       child: buildChanger(context, id),
       onVariableTap: () async {
-        var widgetBoard = AppScope.of(context).widgetBoard;
+        var widgetBoard = AppScope.of(context).widgetBoard!;
         LiteralWidgetElement element = widgetBoard.getFirstLiteralWidgetElementAncestor(id);
-        MProperty property = await showDialogAtContext(context: context, builder: (context) {
+        MProperty property = await (showDialogAtContext(context: context, builder: (context) {
           return SelectVariableDialog(
             properties: element.addedProperties,
           );
-        }, size: Size(100, 100));
+        }, size: Size(100, 100)) as FutureOr<MProperty<dynamic>>);
 
         propertyReference = PropertyReference(
           elementId: element.id,
@@ -267,7 +267,7 @@ mixin SingleChangerMixin<T> on MProperty<T> {
     );
   }
 
-  Widget buildChanger(BuildContext context, String id);
+  Widget? buildChanger(BuildContext context, String? id);
 }
 /*
 mixin DifferentConstructorChangerMixin<T, R> on MProperty<T> {
@@ -322,11 +322,11 @@ mixin DifferentConstructorChangerMixin<T, R> on MProperty<T> {
 
 class MWIPProperty<T> extends MProperty<T> with SingleChangerMixin {
   MWIPProperty({
-      T value,
-      String name,
+      T? value,
+      String? name,
       bool isNamed = true,
       bool isRequired = false,
-      @required T defaultValue,
+      required T defaultValue,
       })
       : super(
             name: name,
@@ -337,7 +337,7 @@ class MWIPProperty<T> extends MProperty<T> with SingleChangerMixin {
   );
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return Text("This attribute is WIP");
   }
 
@@ -358,15 +358,15 @@ class MWIPProperty<T> extends MProperty<T> with SingleChangerMixin {
   }
 }
 
-class MDoubleProperty extends MProperty<double> with SingleChangerMixin {
+class MDoubleProperty extends MProperty<double?> with SingleChangerMixin {
   MDoubleProperty({
-    @required double value,
-    @required String name,
+    required double? value,
+    required String? name,
     this.showDescription = false,
     this.allowNegative = false,
     bool isNamed = true,
     bool isRequired = false,
-    @required double defaultValue,
+    required double? defaultValue,
   }) : super(value: value, name: name, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
 
   final bool showDescription;
@@ -386,7 +386,7 @@ class MDoubleProperty extends MProperty<double> with SingleChangerMixin {
   }
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return NumberChanger(
       showDescription: showDescription,
       allowNegative: allowNegative,
@@ -398,21 +398,21 @@ class MDoubleProperty extends MProperty<double> with SingleChangerMixin {
     );
   }
 
-  static Expression convertToCode(double value) => a.literal(value);
+  static Expression convertToCode(double? value) => a.literal(value);
 
   @override
   Expression toCode() => convertToCode(value);
 
 }
 
-class MIntProperty extends MProperty<int> with SingleChangerMixin {
+class MIntProperty extends MProperty<int?> with SingleChangerMixin {
   MIntProperty({
-    @required int value,
-    @required String name,
+    required int? value,
+    required String? name,
     isNamed = true,
     isRequired = false,
     this.allowNegative = true,
-    @required int defaultValue,
+    required int? defaultValue,
   })
       : super(value: value, name: name, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
 
@@ -429,10 +429,10 @@ class MIntProperty extends MProperty<int> with SingleChangerMixin {
     );
   }
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return NumberChanger(
       name: name,
-      value: value.toDouble(),
+      value: value!.toDouble(),
       allowNegative: allowNegative,
       onUpdate: (update) {
         updateValue(update.round(), context, id);
@@ -440,19 +440,19 @@ class MIntProperty extends MProperty<int> with SingleChangerMixin {
     );
   }
 
-  static Expression convertToCode(int value) => a.literal(value);
+  static Expression convertToCode(int? value) => a.literal(value);
 
   @override
   Expression toCode() => convertToCode(value);
 }
 
-class MAlignmentProperty extends MProperty<Alignment> with SingleChangerMixin {
+class MAlignmentProperty extends MProperty<Alignment?> with SingleChangerMixin {
   MAlignmentProperty({
-       @required Alignment value,
-       @required String name,
+       required Alignment? value,
+       required String? name,
         bool isNamed = true,
         bool isRequired = false,
-        @required Alignment defaultValue,
+        required Alignment? defaultValue,
       })
       : super(value: value, name: name, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
 
@@ -469,7 +469,7 @@ class MAlignmentProperty extends MProperty<Alignment> with SingleChangerMixin {
   }
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return AlignmentChanger(
       value: value,
       size: Size(50, 50),
@@ -479,7 +479,7 @@ class MAlignmentProperty extends MProperty<Alignment> with SingleChangerMixin {
     );
   }
 
-  static Expression convertToCode(Alignment value) {
+  static Expression? convertToCode(Alignment? value) {
     if(value == null) return null;
     if (value == Alignment.centerRight) {
       return a.refer("Alignment").property("centerRight");
@@ -509,17 +509,17 @@ class MAlignmentProperty extends MProperty<Alignment> with SingleChangerMixin {
   }
 
   @override
-  Expression toCode() => convertToCode(value);
+  Expression? toCode() => convertToCode(value);
 
 }
 
-class MStringProperty extends MProperty<String> with SingleChangerMixin {
+class MStringProperty extends MProperty<String?> with SingleChangerMixin {
   MStringProperty({
-    @required String value,
-    @required String name,
+    required String? value,
+    required String? name,
     bool isNamed = true,
     bool isRequired = false,
-    @required String defaultValue,
+    required String? defaultValue,
   }) : super(
             value: value,
             name: name,
@@ -540,7 +540,7 @@ class MStringProperty extends MProperty<String> with SingleChangerMixin {
     );
   }
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return StringChanger(
       value: value,
       onUpdate: (it) {
@@ -549,19 +549,19 @@ class MStringProperty extends MProperty<String> with SingleChangerMixin {
     );
   }
 
-  static Expression convertToCode(String value) => a.literal(value);
+  static Expression convertToCode(String? value) => a.literal(value);
 
   @override
   Expression toCode() => convertToCode(value);
 }
 
-class MBoolProperty extends MProperty<bool> with SingleChangerMixin {
+class MBoolProperty extends MProperty<bool?> with SingleChangerMixin {
   MBoolProperty({
-    @required bool value,
-    @required String name,
+    required bool? value,
+    required String? name,
     bool isRequired = false,
     bool isNamed = true,
-    @required bool defaultValue,
+    required bool? defaultValue,
   }) : super(
           value: value,
           name: name,
@@ -583,7 +583,7 @@ class MBoolProperty extends MProperty<bool> with SingleChangerMixin {
   }
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return BoolChanger(
       value: value,
       nullable: !isRequired,
@@ -593,20 +593,20 @@ class MBoolProperty extends MProperty<bool> with SingleChangerMixin {
     );
   }
 
-  static Expression convertToCode(bool value) => a.literal(value);
+  static Expression convertToCode(bool? value) => a.literal(value);
 
   @override
   Expression toCode() => convertToCode(value);
 }
 
-class MBoxConstraintsProperty extends MProperty<BoxConstraints>
+class MBoxConstraintsProperty extends MProperty<BoxConstraints?>
     with SingleChangerMixin {
   MBoxConstraintsProperty({
-    @required BoxConstraints value,
-    @required String name,
+    required BoxConstraints? value,
+    required String? name,
     bool isRequired = false,
     bool isNamed = true,
-    @required BoxConstraints defaultValue,
+    required BoxConstraints? defaultValue,
   }) : super(value: value, name: name, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
 
 
@@ -621,7 +621,7 @@ class MBoxConstraintsProperty extends MProperty<BoxConstraints>
     );
   }
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return SizedBox();
     return ConstraintsChanger(
       constraints: value,
@@ -679,9 +679,9 @@ class MEdgeInsetsProperty extends MProperty<EdgeInsets>
   List<String> get names => ["all", "only", "symmetrical", "none"];
 }
 */
-class MColorProperty extends MProperty<Color> with SingleChangerMixin {
+class MColorProperty extends MProperty<Color?> with SingleChangerMixin {
   MColorProperty(
-      {@required Color value, @required String name, bool isNamed = true, bool isRequired = false, @required Color defaultValue})
+      {required Color? value, required String name, bool isNamed = true, bool isRequired = false, required Color? defaultValue})
       : super(value: value, name: name, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
 
 
@@ -691,7 +691,7 @@ class MColorProperty extends MProperty<Color> with SingleChangerMixin {
   }
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return ColorChanger(
       onUpdate: (it) {
         updateValue(it, context, id);
@@ -700,7 +700,7 @@ class MColorProperty extends MProperty<Color> with SingleChangerMixin {
     );
   }
 
-  static Expression convertToCode(Color value) {
+  static Expression convertToCode(Color? value) {
     if(value == null) return a.literalNull;
     return a.refer("Color").newInstance([a.CodeExpression(a.Code("0x${value.value.toRadixString(16)}"))]);
   }
@@ -712,13 +712,13 @@ class MColorProperty extends MProperty<Color> with SingleChangerMixin {
 
 
 
-class MEdgeInsetsProperty extends MProperty<EdgeInsets> {
+class MEdgeInsetsProperty extends MProperty<EdgeInsets?> {
   MEdgeInsetsProperty({
-    @required EdgeInsets value,
-    @required String name,
+    required EdgeInsets? value,
+    required String? name,
     bool isRequired = false,
     bool isNamed = true,
-    @required EdgeInsets defaultValue,
+    required EdgeInsets? defaultValue,
   }) : super(value: value, name: name, isRequired : isRequired, isNamed: isNamed, defaultValue: defaultValue);
 
   EdgeInsetsMode selectedOption = EdgeInsetsMode.none;
@@ -736,22 +736,22 @@ class MEdgeInsetsProperty extends MProperty<EdgeInsets> {
   }
   @override
   Expression toCode() {
-    if(value.left == value.right && value.bottom == value.top && value.left == value.top) {
-      return a.refer("EdgeInsets").newInstanceNamed("all", [a.literal(value.left)]);
-    } else if(value.left == value.right && value.top == value.bottom) {
+    if(value!.left == value!.right && value!.bottom == value!.top && value!.left == value!.top) {
+      return a.refer("EdgeInsets").newInstanceNamed("all", [a.literal(value!.left)]);
+    } else if(value!.left == value!.right && value!.top == value!.bottom) {
       return a.refer("EdgeInsets").newInstanceNamed("symmetric", [],
         {
-          "horizontal": a.literal(value.left),
-          "vertical": a.literal(value.top),
+          "horizontal": a.literal(value!.left),
+          "vertical": a.literal(value!.top),
         }
       );
     } else {
       return a.refer("EdgeInsets").newInstanceNamed("only", [],
         {
-          "left": a.literal(value.left),
-          "right": a.literal(value.right),
-          "bottom": a.literal(value.bottom),
-          "top": a.literal(value.top),
+          "left": a.literal(value!.left),
+          "right": a.literal(value!.right),
+          "bottom": a.literal(value!.bottom),
+          "top": a.literal(value!.top),
         }
       );
     }
@@ -759,8 +759,8 @@ class MEdgeInsetsProperty extends MProperty<EdgeInsets> {
 
   VoidCallback get onChange => () {
     var minimum = min<double>(
-        min<double>(min<double>(value.left, value.right), value.top),
-        value.bottom);
+        min<double>(min<double>(value!.left, value!.right), value!.top),
+        value!.bottom);
     value = EdgeInsets.all(minimum);
   };
 
@@ -778,7 +778,7 @@ class MEdgeInsetsProperty extends MProperty<EdgeInsets> {
   }
 
   @override
-  Widget buildFinalChanger(BuildContext context, String id) {
+  Widget buildFinalChanger(BuildContext context, String? id) {
     return StatefulBuilder(
       builder: (context, stateSetter) {
         return MultiChanger<EdgeInsetsMode>(
@@ -787,7 +787,7 @@ class MEdgeInsetsProperty extends MProperty<EdgeInsets> {
           changer: EdgeInsetsChanger(
             mode: selectedOption,
             edgeInsets: value,
-            onUpdate: (EdgeInsets it) {
+            onUpdate: (EdgeInsets? it) {
               updateValue(it, context, id);
             },
           ),

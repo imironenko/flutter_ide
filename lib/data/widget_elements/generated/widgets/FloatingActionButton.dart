@@ -14,14 +14,14 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class FloatingActionButtonElement extends WidgetElement with SlotChildElementMixin {
   FloatingActionButtonElement({
-    @required String id,
-    double elevation,
-    String tooltip,
-    Color foregroundColor,
-    Color backgroundColor,
-    Color focusColor,
-    Color hoverColor,
-    VoidCallback onPressed,
+    required String? id,
+    double? elevation,
+    String? tooltip,
+    Color? foregroundColor,
+    Color? backgroundColor,
+    Color? focusColor,
+    Color? hoverColor,
+    VoidCallback? onPressed,
   }) :
     elevation = MDoubleProperty(
         value: elevation?? null,
@@ -59,7 +59,7 @@ class FloatingActionButtonElement extends WidgetElement with SlotChildElementMix
         defaultValue: null
     ),
 
-    onPressed = MWIPProperty<VoidCallback>(
+    onPressed = MWIPProperty<VoidCallback?>(
         value: onPressed?? null,
         name: "onPressed",
         defaultValue: null
@@ -74,7 +74,7 @@ class FloatingActionButtonElement extends WidgetElement with SlotChildElementMix
     final MColorProperty backgroundColor;
     final MColorProperty focusColor;
     final MColorProperty hoverColor;
-    final MWIPProperty<VoidCallback> onPressed;
+    final MWIPProperty<VoidCallback?> onPressed;
 
     static const String CHILD = "child";
 
@@ -123,7 +123,7 @@ class FloatingActionButtonElement extends WidgetElement with SlotChildElementMix
  class FloatingActionButtonElementWidget extends StatefulWidget with ElementWidgetMixin {
   FloatingActionButtonElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _FloatingActionButtonElementWidgetState createState() => _FloatingActionButtonElementWidgetState();
@@ -135,18 +135,18 @@ class _FloatingActionButtonElementWidgetState extends State<FloatingActionButton
     return wrapWithDefault(
         child: FloatingActionButton(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(FloatingActionButtonElement.CHILD),
+               childId: element!.findIdForSlot(FloatingActionButtonElement.CHILD),
                data: SlotData(slotName: FloatingActionButtonElement.CHILD), 
              ),        
-         elevation: element.elevation.value,
-         tooltip: element.tooltip.value,
-         foregroundColor: element.foregroundColor.value,
-         backgroundColor: element.backgroundColor.value,
-         focusColor: element.focusColor.value,
-         hoverColor: element.hoverColor.value,
-         onPressed: element.onPressed.value,
+         elevation: element!.elevation.value,
+         tooltip: element!.tooltip.value,
+         foregroundColor: element!.foregroundColor.value,
+         backgroundColor: element!.backgroundColor.value,
+         focusColor: element!.focusColor.value,
+         hoverColor: element!.hoverColor.value,
+         onPressed: element!.onPressed.value,
         )
-    );
+    )!;
   }
 
 } 

@@ -14,10 +14,10 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class UnconstrainedBoxElement extends WidgetElement with SlotChildElementMixin {
   UnconstrainedBoxElement({
-    @required String id,
-    Axis constrainedAxis,
-    TextDirection textDirection,
-    Alignment alignment,
+    required String? id,
+    Axis? constrainedAxis,
+    TextDirection? textDirection,
+    Alignment? alignment,
   }) :
     constrainedAxis = MAxisProperty(
         value: constrainedAxis?? null,
@@ -83,7 +83,7 @@ class UnconstrainedBoxElement extends WidgetElement with SlotChildElementMixin {
  class UnconstrainedBoxElementWidget extends StatefulWidget with ElementWidgetMixin {
   UnconstrainedBoxElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _UnconstrainedBoxElementWidgetState createState() => _UnconstrainedBoxElementWidgetState();
@@ -95,14 +95,14 @@ class _UnconstrainedBoxElementWidgetState extends State<UnconstrainedBoxElementW
     return wrapWithDefault(
         child: UnconstrainedBox(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(UnconstrainedBoxElement.CHILD),
+               childId: element!.findIdForSlot(UnconstrainedBoxElement.CHILD),
                data: SlotData(slotName: UnconstrainedBoxElement.CHILD), 
              ),        
-         constrainedAxis: element.constrainedAxis.value,
-         textDirection: element.textDirection.value,
-         alignment: element.alignment.value,
+         constrainedAxis: element!.constrainedAxis.value,
+         textDirection: element!.textDirection.value,
+         alignment: element!.alignment.value!,
         )
-    );
+    )!;
   }
 
 } 

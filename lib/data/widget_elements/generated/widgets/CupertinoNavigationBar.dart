@@ -14,8 +14,8 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class CupertinoNavigationBarElement extends WidgetElement with SlotChildElementMixin {
   CupertinoNavigationBarElement({
-    @required String id,
-    Color backgroundColor,
+    required String? id,
+    Color? backgroundColor,
   }) :
     backgroundColor = MColorProperty(
         value: backgroundColor?? null,
@@ -67,7 +67,7 @@ class CupertinoNavigationBarElement extends WidgetElement with SlotChildElementM
  class CupertinoNavigationBarElementWidget extends StatefulWidget with ElementWidgetMixin {
   CupertinoNavigationBarElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _CupertinoNavigationBarElementWidgetState createState() => _CupertinoNavigationBarElementWidgetState();
@@ -79,18 +79,18 @@ class _CupertinoNavigationBarElementWidgetState extends State<CupertinoNavigatio
     return wrapWithDefault(
         child: CupertinoNavigationBar(
           leading: getChildOrDragTarget(
-               childId: element.findIdForSlot(CupertinoNavigationBarElement.LEADING),
+               childId: element!.findIdForSlot(CupertinoNavigationBarElement.LEADING),
                data: SlotData(slotName: CupertinoNavigationBarElement.LEADING), 
              ),          middle: getChildOrDragTarget(
-               childId: element.findIdForSlot(CupertinoNavigationBarElement.MIDDLE),
+               childId: element!.findIdForSlot(CupertinoNavigationBarElement.MIDDLE),
                data: SlotData(slotName: CupertinoNavigationBarElement.MIDDLE), 
              ),          trailing: getChildOrDragTarget(
-               childId: element.findIdForSlot(CupertinoNavigationBarElement.TRAILING),
+               childId: element!.findIdForSlot(CupertinoNavigationBarElement.TRAILING),
                data: SlotData(slotName: CupertinoNavigationBarElement.TRAILING), 
              ),        
-         backgroundColor: element.backgroundColor.value,
+         backgroundColor: element!.backgroundColor.value,
         )
-    );
+    )!;
   }
 
 } 

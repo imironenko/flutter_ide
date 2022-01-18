@@ -11,11 +11,11 @@ enum _DecorationType {
 }
 class DecorationChanger extends StatefulWidget {
 
-  final ValueChanged<Decoration> onChange;
-  final Decoration value;
-  final String name;
+  final ValueChanged<Decoration>? onChange;
+  final Decoration? value;
+  final String? name;
 
-  const DecorationChanger({Key key, this.onChange, this.value, this.name}) : super(key: key);
+  const DecorationChanger({Key? key, this.onChange, this.value, this.name}) : super(key: key);
 
   @override
   _DecorationChangerState createState() => _DecorationChangerState();
@@ -24,7 +24,7 @@ class DecorationChanger extends StatefulWidget {
 class _DecorationChangerState extends State<DecorationChanger> {
 
 
-  _DecorationType get decorationType {
+  _DecorationType? get decorationType {
     if(widget.value == null) return null;
     if(widget.value is BoxDecoration) {
       return _DecorationType.BoxDecoration;
@@ -36,17 +36,20 @@ class _DecorationChangerState extends State<DecorationChanger> {
     return _DecorationType.Unknown;
   }
 
-  void _onDecorationUpdate(_DecorationType type) {
+  void _onDecorationUpdate(_DecorationType? type) {
     if(type == decorationType) return;
     switch(type) {
       case _DecorationType.BoxDecoration:
-        widget.onChange(BoxDecoration());
+        widget.onChange!(BoxDecoration());
         break;
       case _DecorationType.FlutterLogoDecoration:
-        widget.onChange(FlutterLogoDecoration());
+        widget.onChange!(FlutterLogoDecoration());
         break;
       case _DecorationType.ShapeDecoration:
-        widget.onChange(ShapeDecoration(shape: null));
+        widget.onChange!(ShapeDecoration(shape: Border.all(
+          color: Colors.red,
+          width: 8.0,
+        )));
         break;
       default:
         break;

@@ -1,7 +1,7 @@
 import 'package:yaml/yaml.dart';
 import 'models.dart';
 
-ParsedWidget parseWidget(String name, YamlMap map) {
+ParsedWidget parseWidget(String? name, YamlMap map) {
 
   List<ParsedProperty> properties = [];
   WidgetMeta meta = WidgetMeta();
@@ -25,13 +25,13 @@ ParsedWidget parseWidget(String name, YamlMap map) {
 }
 
 
-GeneralInfo parseGenerationInfo(String name, YamlMap info) {
+GeneralInfo parseGenerationInfo(String? name, YamlMap? info) {
   if(info == null)
     return GeneralInfo(
       layoutModel: NoChildLayoutModel()
     );
 
-  LayoutModel layoutModel;
+  LayoutModel? layoutModel;
 
   if(info["layout"] == "single") {
     layoutModel = SlotChildLayoutModel(
@@ -44,7 +44,7 @@ GeneralInfo parseGenerationInfo(String name, YamlMap info) {
   } else if(info["layout"] == "none" || info["layout"] == null) {
     layoutModel = NoChildLayoutModel();
   } else if(info["layout"] is YamlMap) {
-    YamlList slots = info["layout"]["slots"];
+    YamlList? slots = info["layout"]["slots"];
     if(slots != null) {
       List<Slot> pSlots = [];
       for (var it in slots) {
@@ -89,7 +89,7 @@ List<ParsedProperty> parseProperties(YamlMap properties) {
 
   List<ParsedProperty> parsedProperties = [];
 
-  for(String property in properties.keys) {
+  for(String? property in properties.keys as Iterable<String?>) {
 
     if(property == "meta" || property == "widget")
       continue;
@@ -105,9 +105,9 @@ List<ParsedProperty> parseProperties(YamlMap properties) {
 
       YamlMap map = properties[property];
 
-      Map<String, String> other = {};
+      Map<String?, String> other = {};
 
-      for(String key in map.keys) {
+      for(String? key in map.keys as Iterable<String?>) {
         if(key != "type" && key != "positional" && key != "default" && key != "wip") {
           other[key] = map[key].toString();
         }
@@ -126,7 +126,7 @@ List<ParsedProperty> parseProperties(YamlMap properties) {
   return parsedProperties;
 }
 
-WidgetMeta parseWidgetMeta(YamlMap meta) {
+WidgetMeta parseWidgetMeta(YamlMap? meta) {
   if(meta == null)
     return WidgetMeta(
       categories: ["None"]

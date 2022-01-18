@@ -27,8 +27,8 @@ class StayScrollbar extends StatefulWidget {
   /// The [child] should be a source of [ScrollNotification] notifications,
   /// typically a [Scrollable] widget.
   const StayScrollbar({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
   /// The widget below this widget in the tree.
@@ -45,12 +45,12 @@ class StayScrollbar extends StatefulWidget {
 
 
 class _ScrollbarState extends State<StayScrollbar> with TickerProviderStateMixin {
-  ScrollbarPainter _materialPainter;
-  TargetPlatform _currentPlatform;
-  TextDirection _textDirection;
-  Color _themeColor;
+  ScrollbarPainter? _materialPainter;
+  TargetPlatform? _currentPlatform;
+  TextDirection? _textDirection;
+  late Color _themeColor;
 
-  Animation<double> _fadeoutOpacityAnimation;
+  late Animation<double> _fadeoutOpacityAnimation;
 
   @override
   void initState() {
@@ -95,7 +95,7 @@ class _ScrollbarState extends State<StayScrollbar> with TickerProviderStateMixin
         && (notification is ScrollUpdateNotification
             || notification is OverscrollNotification)) {
 
-      _materialPainter.update(notification.metrics, notification.metrics.axisDirection);
+      _materialPainter!.update(notification.metrics, notification.metrics.axisDirection);
     }
     return false;
   }

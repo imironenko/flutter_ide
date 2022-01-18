@@ -25,8 +25,8 @@ abstract class MMProp {
         });
 
 
-        final double dx;
-        final double dy;
+        final double? dx;
+        final double? dy;
 
 
         Map<String, dynamic> toMap() {
@@ -50,12 +50,12 @@ abstract class MMProp {
         });
 
 
-        final int days;
-        final int hours;
-        final int minutes;
-        final int seconds;
-        final int milliseconds;
-        final int microseconds;
+        final int? days;
+        final int? hours;
+        final int? minutes;
+        final int? seconds;
+        final int? milliseconds;
+        final int? microseconds;
 
 
         Map<String, dynamic> toMap() {
@@ -87,16 +87,16 @@ abstract class MMProp {
         });
 
 
-        final double fontSize;
-        final bool inherit;
-        final Color color;
-        final Color backgroundColor;
-        final FontWeight fontWeight;
-        final FontStyle fontStyle;
-        final double letterSpacing;
-        final double wordSpacing;
-        final TextBaseline textBaseline;
-        final double height;
+        final double? fontSize;
+        final bool? inherit;
+        final Color? color;
+        final Color? backgroundColor;
+        final FontWeight? fontWeight;
+        final FontStyle? fontStyle;
+        final double? letterSpacing;
+        final double? wordSpacing;
+        final TextBaseline? textBaseline;
+        final double? height;
 
 
         Map<String, dynamic> toMap() {

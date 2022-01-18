@@ -9,7 +9,7 @@ import 'base.dart';
 class CanvasElementWidget extends StatefulWidget with ElementWidgetMixin {
   CanvasElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _CanvasElementWidgetState createState() => _CanvasElementWidgetState();
@@ -21,8 +21,8 @@ class _CanvasElementWidgetState extends State<CanvasElementWidget> with ElementW
 
 
   @override
-  Widget getChildOrDragTarget({String childId, SlotData data, WidgetWrapper widgetWrapper}) {
-    return widgetBoard.getWidgetElement(childId)?.generateWidget() ?? ElementDragTarget(id: widget.id, child: SizedBox.expand(), acceptingWidget: SizedBox.expand(),);
+  Widget getChildOrDragTarget({String? childId, SlotData? data, WidgetWrapper? widgetWrapper}) {
+    return widgetBoard!.getWidgetElement(childId)?.generateWidget() ?? ElementDragTarget(id: widget.id, child: SizedBox.expand(), acceptingWidget: SizedBox.expand(),);
   }
 
 
@@ -35,7 +35,7 @@ class _CanvasElementWidgetState extends State<CanvasElementWidget> with ElementW
             child: GestureDetector(
               onPanStart: (_) {},
               onPanUpdate: (update) {
-                element.position.updateValue(element.position.value + update.delta, context, element.id);
+                element!.position.updateValue(element!.position.value! + update.delta, context, element!.id);
               },
               child: Container(
                 padding: const EdgeInsets.all(2),
@@ -62,11 +62,11 @@ class _CanvasElementWidgetState extends State<CanvasElementWidget> with ElementW
             child: wrapWithSelector(
               child: AnimatedContainer(
                 alignment: Alignment.center,
-                color: MyTheme.of(context).background2dp,
+                color: MyTheme.of(context)!.background2dp,
                 duration: Duration(milliseconds: 300),
-                width: element.canvasSize.value.width,
-                height: element.canvasSize.value.height,
-                child: getChildOrDragTarget(childId: element.childId),
+                width: element!.canvasSize.value!.width,
+                height: element!.canvasSize.value!.height,
+                child: getChildOrDragTarget(childId: element!.childId),
             )),
           ),
         ),

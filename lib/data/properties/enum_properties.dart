@@ -4,22 +4,22 @@ import 'package:widget_maker_2_0/data/string_builder.dart';
 import 'package:widget_maker_2_0/material.dart';
 import 'basic_properties.dart';
 
-abstract class MEnumProperty<T> extends MProperty<T> with SingleChangerMixin{
+abstract class MEnumProperty<T> extends MProperty<T?> with SingleChangerMixin{
 
   MEnumProperty({
-    @required T value,
-    @required this.possibleValues,
-    @required String name,
-    @required isNamed,
-    @required isRequired,
-    @required T defaultValue,
+    required T value,
+    required this.possibleValues,
+    required String? name,
+    required isNamed,
+    required isRequired,
+    required T defaultValue,
 }): super(value: value, name: name, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
 
 
   final List<T> possibleValues;
 
   @override
-  Expression toCode() => convertToCode<T>(value);
+  Expression toCode() => convertToCode<T?>(value);
 
   static Expression convertToCode<T>(T value) {
     if(value == null) return literalNull;
@@ -31,11 +31,11 @@ abstract class MEnumProperty<T> extends MProperty<T> with SingleChangerMixin{
   }
 
   @override
-  Widget buildChanger(BuildContext context, String id) {
+  Widget buildChanger(BuildContext context, String? id) {
     return EnumChanger<T>(
       value: value,
       possibleValues: possibleValues,
-      onUpdate: (T newValue) {
+      onUpdate: (T? newValue) {
         updateValue(newValue, context, id);
       },
     );

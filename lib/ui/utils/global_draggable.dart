@@ -6,32 +6,32 @@ import 'package:flutter_desktop_widgets2/flutter_desktop_widgets2.dart';
 import 'package:widget_maker_2_0/material.dart';
 
 typedef MyDragTargetMove<T> = void Function(T data, Offset localPosition);
-typedef _OnDragEnd = void Function(Velocity velocity, Offset offset, bool wasAccepted);
+typedef _OnDragEnd = void Function(Velocity velocity, Offset? offset, bool wasAccepted);
 
 /// A class which accepts draggable coming from the Flutter
 /// [Draggable] class and also my own global draggable system for
 /// programmatically starting drags (used for the quick actions)
 class GlobalDragTarget<T> extends StatefulWidget {
 
-  const GlobalDragTarget({Key key, this.builder, this.onAccept, this.onWillAccept, this.onMove}) : super(key: key);
+  const GlobalDragTarget({Key? key, this.builder, this.onAccept, this.onWillAccept, this.onMove}) : super(key: key);
 
-  final DragTargetBuilder<T> builder;
-  final DragTargetAccept<T> onAccept;
-  final MyDragTargetMove<T> onMove;
-  final DragTargetWillAccept<T> onWillAccept;
+  final DragTargetBuilder<T>? builder;
+  final DragTargetAccept<T>? onAccept;
+  final MyDragTargetMove<T>? onMove;
+  final DragTargetWillAccept<T>? onWillAccept;
 
   @override
   _GlobalDragTargetState<T> createState() => _GlobalDragTargetState<T>();
 }
 
 
-class _GlobalDragTargetState<T> extends State<GlobalDragTarget<T>> {
+class _GlobalDragTargetState<T> extends State<GlobalDragTarget<T?>> {
 
-  T data;
+  T? data;
 
   bool didEnter(dynamic data) {
     // no eed for onWillAccept
-    if (data is T && (widget.onWillAccept == null || widget.onWillAccept(data))) {
+    if (data is T && (widget.onWillAccept == null || widget.onWillAccept!(data))) {
       setState(() {
         this.data = data;
       });
@@ -61,8 +61,8 @@ class _GlobalDragTargetState<T> extends State<GlobalDragTarget<T>> {
     setState(() {
       this.data = null;
     });
-    if (widget.onAccept != null && (widget.onWillAccept == null || widget.onWillAccept(data)))
-      widget.onAccept(data);
+    if (widget.onAccept != null && (widget.onWillAccept == null || widget.onWillAccept!(data)))
+      widget.onAccept!(data);
   }
 
   @override
@@ -74,7 +74,7 @@ class _GlobalDragTargetState<T> extends State<GlobalDragTarget<T>> {
         return MetaData(
           metaData: this,
           behavior: HitTestBehavior.translucent,
-          child: widget.builder(
+          child: widget.builder!(
             context,
             [...canidate, if(data != null) data],
             rejected,
@@ -86,11 +86,11 @@ class _GlobalDragTargetState<T> extends State<GlobalDragTarget<T>> {
 }
 
 
-Future<bool> startGlobalDrag<T>(BuildContext context, {T data, Widget feedback}) async {
+Future<bool> startGlobalDrag<T>(BuildContext context, {T? data, Widget? feedback}) async {
   var completer = Completer<bool>();
   _GlobalDragAvatar<T>(
     feedback: feedback,
-    overlayState: Overlay.of(context),
+    overlayState: Overlay.of(context)!,
     data: data,
     completer: completer,
     context: context,
@@ -102,8 +102,8 @@ Future<bool> startGlobalDrag<T>(BuildContext context, {T data, Widget feedback})
 class _GlobalDragAvatar<T> extends Drag{
 
   _GlobalDragAvatar({
-    @required this.overlayState,
-    Offset initialPosition,
+    required this.overlayState,
+    Offset? initialPosition,
     this.feedback,
     this.data,
     this.completer,
@@ -113,22 +113,22 @@ class _GlobalDragAvatar<T> extends Drag{
   }) {
     _lastOffset = initialPosition;
     _entry = OverlayEntry(builder: _buildEntry);
-    overlayState.insert(_entry);
+    overlayState.insert(_entry!);
   }
 
-  OverlayEntry _entry;
+  OverlayEntry? _entry;
   final OverlayState overlayState;
-  final Widget feedback;
-  final T data;
-  final BuildContext context;
-  final _OnDragEnd onDragEnd;
+  final Widget? feedback;
+  final T? data;
+  final BuildContext? context;
+  final _OnDragEnd? onDragEnd;
 
-  final Completer completer;
+  final Completer? completer;
 
 
-  _GlobalDragTargetState entered;
+  _GlobalDragTargetState? entered;
 
-  Offset _lastOffset;
+  Offset? _lastOffset;
 
   @override
   void cancel() {
@@ -146,48 +146,48 @@ class _GlobalDragAvatar<T> extends Drag{
   void onHover(PointerHoverEvent event) {
     _updatePointer(event.position);
   }
-  void _updatePointer(Offset position) {
+  void _updatePointer(Offset? position) {
     _lastOffset = position;
-    _entry.markNeedsBuild();
+    _entry!.markNeedsBuild();
 
 
     final BoxHitTestResult result = BoxHitTestResult();
     // ToDo no idea why this is not working, something is blocking it with an RenderAbsorbPoint
     //WidgetsBinding.instance.hitTest(result, _lastOffset);
-    var box = context.findRenderObject() as RenderBox;
-    box.hitTest(result, position: _lastOffset);
+    var box = context!.findRenderObject() as RenderBox;
+    box.hitTest(result, position: _lastOffset!);
 
     final List<MapEntry<RenderMetaData,_GlobalDragTargetState<T>>> targets = _getDragTargets(result.path).toList();
 
     if(targets.isEmpty) {
       if(entered != null) {
-        entered.didLeave(data);
+        entered!.didLeave(data);
         entered = null;
       }
       return;
     }
     if(targets.first.value != entered) {
       if(entered != null)
-        entered.didLeave(data);
+        entered!.didLeave(data);
       targets.first.value.didEnter(data);
       entered = targets.first.value;
     } else {
       // We're inside the same drag target
       assert(targets.first.value == entered);
-      entered.didMove(data, targets.first.key.globalToLocal(position));
+      entered!.didMove(data, targets.first.key.globalToLocal(position!));
     }
 
   }
 
   void onDown() {
     if (onDragEnd != null)
-      onDragEnd(Velocity.zero, _lastOffset, entered != null);
+      onDragEnd!(Velocity.zero, _lastOffset, entered != null);
 
     _updatePointer(_lastOffset);
-    _entry.remove();
+    _entry!.remove();
     entered?.didDrop(data);
     _entry = null;
-    completer.complete(entered != null);
+    completer!.complete(entered != null);
   }
 
 
@@ -196,7 +196,7 @@ class _GlobalDragAvatar<T> extends Drag{
     // widgets build RenderMetaData boxes for us for this purpose).
     for (HitTestEntry entry in path) {
       if (entry.target is RenderMetaData) {
-        final RenderMetaData renderMetaData = entry.target;
+        final RenderMetaData renderMetaData = entry.target as RenderMetaData;
         if (renderMetaData.metaData is _GlobalDragTargetState<T>)
           yield MapEntry(renderMetaData, renderMetaData.metaData);
       }
@@ -204,7 +204,7 @@ class _GlobalDragAvatar<T> extends Drag{
   }
 
   Widget _buildEntry(BuildContext context) {
-   final RenderBox box = overlayState.context.findRenderObject();
+   final RenderBox box = overlayState.context.findRenderObject() as RenderBox;
    final Offset overlayTopLeft = box.localToGlobal(Offset.zero);
    return Positioned.fill(
      child: Listener(
@@ -214,8 +214,8 @@ class _GlobalDragAvatar<T> extends Drag{
        child: Stack(
          children: <Widget>[
            Positioned(
-             left: _lastOffset.dx - overlayTopLeft.dx,
-             top: _lastOffset.dy - overlayTopLeft.dy,
+             left: _lastOffset!.dx - overlayTopLeft.dx,
+             top: _lastOffset!.dy - overlayTopLeft.dy,
              child: IgnorePointer(
                child: feedback,
              ),
@@ -258,9 +258,9 @@ class GlobalDraggable<T> extends StatefulWidget {
   /// The [child] and [feedback] arguments must not be null. If
   /// [maxSimultaneousDrags] is non-null, it must be non-negative.
   const GlobalDraggable({
-    Key key,
-    @required this.child,
-    @required this.feedback,
+    Key? key,
+    required this.child,
+    required this.feedback,
     this.data,
     this.axis,
     this.childWhenDragging,
@@ -280,20 +280,20 @@ class GlobalDraggable<T> extends StatefulWidget {
         super(key: key);
 
 
-  final T data;
-  final Axis axis;
+  final T? data;
+  final Axis? axis;
   final Widget child;
-  final Widget childWhenDragging;
+  final Widget? childWhenDragging;
   final Widget feedback;
   final Offset feedbackOffset;
   final DragAnchor dragAnchor;
   final bool ignoringFeedbackSemantics;
-  final Axis affinity;
-  final int maxSimultaneousDrags;
-  final VoidCallback onDragStarted;
-  final DraggableCanceledCallback onDraggableCanceled;
-  final VoidCallback onDragCompleted;
-  final DragEndCallback onDragEnd;
+  final Axis? affinity;
+  final int? maxSimultaneousDrags;
+  final VoidCallback? onDragStarted;
+  final DraggableCanceledCallback? onDraggableCanceled;
+  final VoidCallback? onDragCompleted;
+  final DragEndCallback? onDragEnd;
 
   @protected
   MultiDragGestureRecognizer createRecognizer(GestureMultiDragStartCallback onStart) {
@@ -332,29 +332,29 @@ class _DraggableState<T> extends State<GlobalDraggable<T>> {
   // We achieve that by keeping count of the number of active drags and only
   // disposing the gesture recognizer after (a) this state object has been
   // disposed and (b) there are no more active drags.
-  GestureRecognizer _recognizer;
+  GestureRecognizer? _recognizer;
   int _activeCount = 0;
 
   void _disposeRecognizerIfInactive() {
     if (_activeCount > 0)
       return;
-    _recognizer.dispose();
+    _recognizer!.dispose();
     _recognizer = null;
   }
 
   void _routePointer(PointerEvent event) {
-    if (widget.maxSimultaneousDrags != null && _activeCount >= widget.maxSimultaneousDrags)
+    if (widget.maxSimultaneousDrags != null && _activeCount >= widget.maxSimultaneousDrags!)
       return;
-    _recognizer.addPointer(event);
+    _recognizer!.addPointer(event as PointerDownEvent);
   }
 
-  _GlobalDragAvatar<T> _startDrag(Offset position) {
-    if (widget.maxSimultaneousDrags != null && _activeCount >= widget.maxSimultaneousDrags)
+  _GlobalDragAvatar<T>? _startDrag(Offset position) {
+    if (widget.maxSimultaneousDrags != null && _activeCount >= widget.maxSimultaneousDrags!)
       return null;
-    Offset dragStartPoint;
+    Offset? dragStartPoint;
     switch (widget.dragAnchor) {
       case DragAnchor.child:
-        final RenderBox renderObject = context.findRenderObject();
+        final RenderBox renderObject = context.findRenderObject() as RenderBox;
         dragStartPoint = renderObject.globalToLocal(position);
         break;
       case DragAnchor.pointer:
@@ -365,7 +365,7 @@ class _DraggableState<T> extends State<GlobalDraggable<T>> {
       _activeCount += 1;
     });
     final _GlobalDragAvatar<T> avatar = _GlobalDragAvatar<T>(
-      overlayState: Overlay.of(context, debugRequiredFor: widget),
+      overlayState: Overlay.of(context, debugRequiredFor: widget)!,
       data: widget.data,
       //axis: widget.axis,
       initialPosition: dragStartPoint,
@@ -373,7 +373,7 @@ class _DraggableState<T> extends State<GlobalDraggable<T>> {
       context: context,
       //feedbackOffset: widget.feedbackOffset,
       //ignoringFeedbackSemantics: widget.ignoringFeedbackSemantics,
-      onDragEnd: (Velocity velocity, Offset offset, bool wasAccepted) {
+      onDragEnd: (Velocity velocity, Offset? offset, bool? wasAccepted) {
         if (mounted) {
           setState(() {
             _activeCount -= 1;
@@ -383,20 +383,20 @@ class _DraggableState<T> extends State<GlobalDraggable<T>> {
           _disposeRecognizerIfInactive();
         }
         if (mounted && widget.onDragEnd != null) {
-          widget.onDragEnd(DraggableDetails(
-              wasAccepted: wasAccepted,
+          widget.onDragEnd!(DraggableDetails(
+              wasAccepted: wasAccepted!,
               velocity: velocity,
-              offset: offset,
+              offset: offset!,
           ));
         }
-        if (wasAccepted && widget.onDragCompleted != null)
-          widget.onDragCompleted();
-        if (!wasAccepted && widget.onDraggableCanceled != null)
-          widget.onDraggableCanceled(velocity, offset);
+        if (wasAccepted!=null && widget.onDragCompleted != null)
+          widget.onDragCompleted!();
+        if (!wasAccepted! && widget.onDraggableCanceled != null)
+          widget.onDraggableCanceled!(velocity, offset!);
       },
     );
     if (widget.onDragStarted != null)
-      widget.onDragStarted();
+      widget.onDragStarted!();
     return avatar;
   }
 
@@ -404,7 +404,7 @@ class _DraggableState<T> extends State<GlobalDraggable<T>> {
   Widget build(BuildContext context) {
     assert(Overlay.of(context, debugRequiredFor: widget) != null);
     final bool canDrag = widget.maxSimultaneousDrags == null ||
-                         _activeCount < widget.maxSimultaneousDrags;
+                         _activeCount < widget.maxSimultaneousDrags!;
     final bool showChild = _activeCount == 0 || widget.childWhenDragging == null;
     return Listener(
       onPointerDown: canDrag ? _routePointer : null,

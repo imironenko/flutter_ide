@@ -7,13 +7,13 @@ import 'package:widget_maker_2_0/ui/board_widget.dart';
 
 class IntellijPusher extends StatefulWidget {
 
-  final Widget child;
+  final Widget? child;
 
   static IntellijPusherState of(BuildContext context) {
     return Provider.of<IntellijPusherState>(context);
   }
 
-  const IntellijPusher({Key key, this.child}) : super(key: key);
+  const IntellijPusher({Key? key, this.child}) : super(key: key);
   @override
   IntellijPusherState createState() => IntellijPusherState();
 }
@@ -21,8 +21,8 @@ class IntellijPusher extends StatefulWidget {
 class IntellijPusherState extends State<IntellijPusher> {
 
 
-  WidgetBoard widgetBoard;
-  String path;
+  WidgetBoard? widgetBoard;
+  String? path;
 
   @override
   void didChangeDependencies() {

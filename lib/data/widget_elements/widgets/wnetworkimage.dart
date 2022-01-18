@@ -6,7 +6,7 @@ import 'base.dart';
 class ImageElementWidget extends StatefulWidget with ElementWidgetMixin {
   ImageElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _ImageElementWidgetState createState() => _ImageElementWidgetState ();
@@ -16,11 +16,11 @@ class _ImageElementWidgetState extends State<ImageElementWidget> with ElementWid
   @override
   Widget build(BuildContext context) {
     return wrapWithDefault(
-        child: Image.network(element.src.value,
-          height: element.height.value,
-          width: element.width.value,
-          fit: element.fit.value,
-        ));
+        child: Image.network(element!.src.value!,
+          height: element!.height.value,
+          width: element!.width.value,
+          fit: element!.fit.value,
+        ))!;
   }
 
 }

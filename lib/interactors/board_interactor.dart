@@ -18,20 +18,20 @@ class BoardInteractor {
 
 
   // TODO make this an inherited widget or something?
-  static BoardInteractor _instance;
+  static BoardInteractor? _instance;
 
   BoardInteractor._();
 
   factory BoardInteractor() {
     if(_instance == null)
       _instance = BoardInteractor._();
-    return _instance;
+    return _instance!;
   }
 
-  void insertPaletteItem(BuildContext context, PaletteItem element) async {
+  void insertPaletteItem(BuildContext context, PaletteItem? element) async {
     if(element != null) {
       var widgetElement = element.widgetElement;
-      AppScope.of(context).widgetBoard.addChild(widgetElement);
+      AppScope.of(context).widgetBoard!.addChild(widgetElement);
       Provider.of<CurrentlyDraggingState>(context).setDragging(true);
       bool accepted = await startGlobalDrag<String>(context,
           data: widgetElement.id,
@@ -41,7 +41,7 @@ class BoardInteractor {
 
       );
       if(!accepted) {
-        AppScope.of(context).widgetBoard.removeChild(widgetElement.id);
+        AppScope.of(context).widgetBoard!.removeChild(widgetElement.id);
         showDidNotAccept(context);
       }
     }
@@ -51,8 +51,8 @@ class BoardInteractor {
 
 
   void delete(BuildContext context) async {
-    var widgetBoard = AppScope.of(context).widgetBoard;
-    String id = widgetBoard.currentlySelectedValue;
+    var widgetBoard = AppScope.of(context).widgetBoard!;
+    String? id = widgetBoard.currentlySelectedValue;
     if(id == null) return;
 
     if(!widgetBoard.hasChildren(id)) {

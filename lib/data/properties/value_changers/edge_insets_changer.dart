@@ -8,16 +8,16 @@ enum EdgeInsetsMode {
 }
 
 
-class EdgeInsetsChanger extends StatelessValueChanger<EdgeInsets>{
+class EdgeInsetsChanger extends StatelessValueChanger<EdgeInsets?>{
 
-  EdgeInsetsChanger({Key key, this.mode, EdgeInsets edgeInsets, ValueChanged<EdgeInsets> onUpdate}) :
-        super(key: key, value: edgeInsets, onUpdate: onUpdate);
+  EdgeInsetsChanger({Key? key, this.mode, EdgeInsets? edgeInsets, ValueChanged<EdgeInsets?>? onUpdate}) :
+        super(key: key, value: edgeInsets, onUpdate: onUpdate,nullable: true);
 
-  final EdgeInsetsMode mode;
+  final EdgeInsetsMode? mode;
 
   EdgeInsets get nValue => value ?? EdgeInsets.all(0);
 
-  void _update({double left, double top, double right, double bottom}) {
+  void _update({double? left, double? top, double? right, double? bottom}) {
 
     var oldInserts;
     if(value == null) {
@@ -33,7 +33,7 @@ class EdgeInsetsChanger extends StatelessValueChanger<EdgeInsets>{
       bottom: bottom,
     );
 
-    onUpdate(newEdgeInsets);
+    onUpdate!(newEdgeInsets);
   }
 
   Widget buildAll(context) {
@@ -141,6 +141,6 @@ class EdgeInsetsChanger extends StatelessValueChanger<EdgeInsets>{
         return SizedBox();
     }
     assert(false);
-    return null;
+    return SizedBox();
   }
 }

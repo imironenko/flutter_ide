@@ -14,9 +14,9 @@ import 'package:widget_maker_2_0/data/widget_elements/widgets/wcircleavatar.dart
 
 class WCircleAvatarElement extends WidgetElement with SlotChildElementMixin {
   WCircleAvatarElement({
-    @required String id,
-    double radius,
-    String imageUrl,
+    required String? id,
+    double? radius,
+    String? imageUrl,
   }) :
     radius = MDoubleProperty(
         value: radius?? 32,

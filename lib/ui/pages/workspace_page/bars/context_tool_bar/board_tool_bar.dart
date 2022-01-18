@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_desktop_widgets2/flutter_desktop_widgets2.dart';
 import 'package:widget_maker_2_0/data/app_scope/app_scope.dart';
@@ -19,8 +21,8 @@ class BoardToolBar extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () async {
-              NewCanvasDialogResult canvas = await showDialogAndRestoreFocus<NewCanvasDialogResult>(context: context, builder: (context) => NewCanvasDialog());
-              AppScope.of(context).widgetBoard.addCanvas(canvas?.name, canvas.canvasSize);
+              NewCanvasDialogResult canvas = await (showDialogAndRestoreFocus<NewCanvasDialogResult>(context: context, builder: (context) => NewCanvasDialog()) as FutureOr<NewCanvasDialogResult>);
+              AppScope.of(context).widgetBoard!.addCanvas(canvas?.name, canvas.canvasSize!);
             },
             child: Text("New Canvas"),
           ),

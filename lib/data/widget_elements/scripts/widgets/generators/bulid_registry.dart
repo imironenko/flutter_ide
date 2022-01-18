@@ -28,7 +28,7 @@ ${res.join("\n")}
 
 
   List<PaletteItem> get allItems => [
-${widgets.map((it) => "    " + makeFirstSmall(it.name)).join(",\n")}
+${widgets.map((it) => "    " + makeFirstSmall(it.name!)).join(",\n")}
   ];
   
   
@@ -47,7 +47,7 @@ String mapToCategoriesToCode(Map<String, List<ParsedWidget>> it) {
   for(String key in it.keys) {
     String map = """
     \"$key\": [
-${it[key].map((it) => "       ${makeFirstSmall(it.name)}").join(",\n")}
+${it[key]!.map((it) => "       ${makeFirstSmall(it.name!)}").join(",\n")}
     ],
     """;
     res += map;
@@ -61,11 +61,11 @@ Map<String, List<ParsedWidget>> mapToCategories(List<ParsedWidget> parsedWidget)
   Map<String, List<ParsedWidget>> res = {};
 
   for(ParsedWidget it in parsedWidget) {
-    for(String category in it.meta.categories) {
+    for(String category in it.meta!.categories!) {
       if(!res.containsKey(category)) {
         res[category] = [];
       }
-      res[category].add(it);
+      res[category]!.add(it);
     }
   }
 
@@ -79,11 +79,11 @@ Iterable<String> getImports(List<ParsedWidget> widgets) {
 }
 
 String convert(ParsedWidget it) {
-  String name = it.name;
-  WidgetMeta meta = it.meta;
+  String name = it.name!;
+  WidgetMeta meta = it.meta!;
 
   String category = "categories: [\n"
-      "${it.meta.categories.map((it) => "     \"$it\"").join(",\n")}"
+      "${it.meta!.categories!.map((it) => "     \"$it\"").join(",\n")}"
       "\n    ],";
 
   return """

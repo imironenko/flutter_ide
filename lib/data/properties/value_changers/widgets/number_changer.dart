@@ -3,14 +3,14 @@ import 'package:widget_maker_2_0/material.dart';
 import 'decoration.dart';
 
 class NumberChanger extends StatefulWidget {
-  NumberChanger({Key key, this.name, this.onUpdate,
+  NumberChanger({Key? key, this.name, this.onUpdate,
     this.value, this.allowNegative = true, this.showDescription = true, this.updateEveryChange = false,
     this.isInt = false})
       : super(key: key);
 
-  final String name;
-  final ValueChanged<double> onUpdate;
-  final double value;
+  final String? name;
+  final ValueChanged<double?>? onUpdate;
+  final double? value;
   final bool allowNegative;
   final bool showDescription;
   final bool updateEveryChange;
@@ -31,7 +31,7 @@ class NumberChangerState
   bool hovering = false;
   bool hovered = false;
 
-  String lastInput;
+  String? lastInput;
 
   final FocusNode focusNode = FocusNode();
   
@@ -84,7 +84,7 @@ class NumberChangerState
     super.dispose();
   }
 
-  double stringToNumber(String value) {
+  double? stringToNumber(String value) {
     if(value == "infinity") {
       value = "Infinity";
     } else if(value == "-infinity") {
@@ -95,17 +95,17 @@ class NumberChangerState
 
   void update(String value) {
     if(value == "") {
-      widget.onUpdate(null);
+      widget.onUpdate!(null);
       lastInput = null;
       return;
     }
     if(isValidString(value)) {
       if(value.isEmpty) return;
       var val = stringToNumber(value);
-      widget.onUpdate(val);
+      widget.onUpdate!(val);
       lastInput = value;
     } else {
-      textEditingController.text = lastInput;
+      textEditingController.text = lastInput!;
     }
   }
 
@@ -127,9 +127,9 @@ class NumberChangerState
     var newNumber = 0.0;
     if (number != null) newNumber = number;
 
-    newNumber += update.primaryDelta * -1;
+    newNumber += update.primaryDelta! * -1;
     if(isValidNumber(newNumber))
-      widget.onUpdate(newNumber);
+      widget.onUpdate!(newNumber);
     //textEditingController.text = newNumber.toString();
   }
 

@@ -14,11 +14,11 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class TextElement extends WidgetElement with NoChildElementMixin {
   TextElement({
-    @required String id,
-    String data,
-    TextOverflow overflow,
-    TextAlign textAlign,
-    TextStyle style,
+    required String? id,
+    String? data,
+    TextOverflow? overflow,
+    TextAlign? textAlign,
+    TextStyle? style,
   }) :
     data = MStringProperty(
         value: data?? "Hello",
@@ -89,7 +89,7 @@ class TextElement extends WidgetElement with NoChildElementMixin {
  class TextElementWidget extends StatefulWidget with ElementWidgetMixin {
   TextElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _TextElementWidgetState createState() => _TextElementWidgetState();
@@ -101,12 +101,12 @@ class _TextElementWidgetState extends State<TextElementWidget> with ElementWidge
     return wrapWithDefault(
         child: Text(
         
-         element.data.value,
-         overflow: element.overflow.value,
-         textAlign: element.textAlign.value,
-         style: element.style.value,
+         element!.data.value!,
+         overflow: element!.overflow.value,
+         textAlign: element!.textAlign.value,
+         style: element!.style.value,
         )
-    );
+    )!;
   }
 
 } 

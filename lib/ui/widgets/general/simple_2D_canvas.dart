@@ -8,17 +8,17 @@ import 'background_grid.dart';
 
 class CanvasWidget {
 
-  final Offset position;
-  final Widget child;
-  final Size size;
+  final Offset? position;
+  final Widget? child;
+  final Size? size;
 
   CanvasWidget({this.position, this.size, this.child});
 }
 class Simple2DCanvas extends StatefulWidget {
 
-  final Map<String, CanvasWidget> widgets;
+  final Map<String?, CanvasWidget>? widgets;
 
-  const Simple2DCanvas({Key key, this.widgets}) : super(key: key);
+  const Simple2DCanvas({Key? key, this.widgets}) : super(key: key);
 
   @override
   _Simple2DCanvasState createState() => _Simple2DCanvasState();
@@ -36,14 +36,14 @@ class _Simple2DCanvasState extends State<Simple2DCanvas> {
 
 
   List<Widget> get _children {
-    return widget.widgets.keys.map((key) {
-      CanvasWidget it = widget.widgets[key];
+    return widget.widgets!.keys.map((key) {
+      CanvasWidget it = widget.widgets![key]!;
       return Positioned2(
-        top: it.position.dy - position.dy,
-        left: it.position.dx - position.dx,
-        width: it.size.width,
-        height: it.size.height,
-        child: RepaintBoundary.wrap(it.child, widget.widgets.keys.toList().indexOf(key)),
+        top: it.position!.dy - position.dy,
+        left: it.position!.dx - position.dx,
+        width: it.size!.width,
+        height: it.size!.height,
+        child: RepaintBoundary.wrap(it.child!, widget.widgets!.keys.toList().indexOf(key)),
       );
     }).toList()/*..insert(0, Positioned2.fill( TODO implement at some point
         child: BackgroundGrid(
@@ -66,7 +66,7 @@ class _Simple2DCanvasState extends State<Simple2DCanvas> {
   void _receivedPointerSignal(PointerSignalEvent event) {
     if (event is PointerScrollEvent) {
       //final double targetScrollOffset = _targetScrollOffsetForPointerScroll(event);
-      GestureBinding.instance.pointerSignalResolver.register(event, _handlePointerScroll);
+      GestureBinding.instance!.pointerSignalResolver.register(event, _handlePointerScroll);
     }
   }
 
@@ -82,7 +82,7 @@ class _Simple2DCanvasState extends State<Simple2DCanvas> {
 
   }
 
-  var context;
+  late BuildContext context;
 
   @override
   Widget build(BuildContext context) {
@@ -139,14 +139,14 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
   ///  * [PositionedDirectional], which is similar to [Positioned.directional]
   ///    but adapts to the ambient [Directionality].
   const Positioned2({
-    Key key,
+    Key? key,
     this.left,
     this.top,
     this.right,
     this.bottom,
     this.width,
     this.height,
-    @required Widget child,
+    required Widget child,
   }) : assert(left == null || right == null || width == null),
        assert(top == null || bottom == null || height == null),
        super(key: key, child: child);
@@ -157,9 +157,9 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
   /// from the given [Rect]. The [right] and [bottom] properties are
   /// set to null.
   Positioned2.fromRect({
-    Key key,
-    Rect rect,
-    @required Widget child,
+    Key? key,
+    required Rect rect,
+    required Widget child,
   }) : left = rect.left,
        top = rect.top,
        width = rect.width,
@@ -173,9 +173,9 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
   /// This sets the [left], [top], [right], and [bottom] properties from the
   /// given [RelativeRect]. The [height] and [width] properties are set to null.
   Positioned2.fromRelativeRect({
-    Key key,
-    RelativeRect rect,
-    @required Widget child,
+    Key? key,
+    required RelativeRect rect,
+    required Widget child,
   }) : left = rect.left,
        top = rect.top,
        right = rect.right,
@@ -187,12 +187,12 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
   /// Creates a Positioned object with [left], [top], [right], and [bottom] set
   /// to 0.0 unless a value for them is passed.
   const Positioned2.fill({
-    Key key,
+    Key? key,
     this.left = 0.0,
     this.top = 0.0,
     this.right = 0.0,
     this.bottom = 0.0,
-    @required Widget child,
+    required Widget child,
   }) : width = null,
        height = null,
        super(key: key, child: child);
@@ -216,19 +216,19 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
   ///
   ///  * [PositionedDirectional], which adapts to the ambient [Directionality].
   factory Positioned2.directional({
-    Key key,
-    @required TextDirection textDirection,
-    double start,
-    double top,
-    double end,
-    double bottom,
-    double width,
-    double height,
-    @required Widget child,
+    Key? key,
+    required TextDirection textDirection,
+    double? start,
+    double? top,
+    double? end,
+    double? bottom,
+    double? width,
+    double? height,
+    required Widget child,
   }) {
     assert(textDirection != null);
-    double left;
-    double right;
+    double? left;
+    double? right;
     switch (textDirection) {
       case TextDirection.rtl:
         left = end;
@@ -258,7 +258,7 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
   ///
   /// If all three are null, the [Stack.alignment] is used to position the child
   /// horizontally.
-  final double left;
+  final double? left;
 
   /// The distance that the child's top edge is inset from the top of the stack.
   ///
@@ -267,7 +267,7 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
   ///
   /// If all three are null, the [Stack.alignment] is used to position the child
   /// vertically.
-  final double top;
+  final double? top;
 
   /// The distance that the child's right edge is inset from the right of the stack.
   ///
@@ -276,7 +276,7 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
   ///
   /// If all three are null, the [Stack.alignment] is used to position the child
   /// horizontally.
-  final double right;
+  final double? right;
 
   /// The distance that the child's bottom edge is inset from the bottom of the stack.
   ///
@@ -285,7 +285,7 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
   ///
   /// If all three are null, the [Stack.alignment] is used to position the child
   /// vertically.
-  final double bottom;
+  final double? bottom;
 
   /// The child's width.
   ///
@@ -294,7 +294,7 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
   ///
   /// If all three are null, the [Stack.alignment] is used to position the child
   /// horizontally.
-  final double width;
+  final double? width;
 
   /// The child's height.
   ///
@@ -303,12 +303,12 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
   ///
   /// If all three are null, the [Stack.alignment] is used to position the child
   /// vertically.
-  final double height;
+  final double? height;
 
   @override
   void applyParentData(RenderObject renderObject) {
     assert(renderObject.parentData is StackParentData);
-    final StackParentData parentData = renderObject.parentData;
+    final StackParentData parentData = renderObject.parentData as StackParentData;
     bool needsLayout = false;
 
     if (parentData.left != left) {
@@ -342,7 +342,7 @@ class Positioned2 extends ParentDataWidget<StackParentData> {
     }
 
     if (needsLayout) {
-      final AbstractNode targetParent = renderObject.parent;
+      final AbstractNode? targetParent = renderObject.parent;
       if (targetParent is RenderObject)
         targetParent.markNeedsLayout();
     }
@@ -369,7 +369,7 @@ class Stack2 extends MultiChildRenderObjectWidget {
   /// By default, the non-positioned children of the stack are aligned by their
   /// top left corners.
   Stack2({
-    Key key,
+    Key? key,
     this.alignment = AlignmentDirectional.topStart,
     this.textDirection,
     this.fit = StackFit.loose,
@@ -403,7 +403,7 @@ class Stack2 extends MultiChildRenderObjectWidget {
   /// The text direction with which to resolve [alignment].
   ///
   /// Defaults to the ambient [Directionality].
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
 
   /// How to size the non-positioned children in the stack.
   ///
@@ -457,9 +457,9 @@ class RenderStack2 extends RenderBox
   /// By default, the non-positioned children of the stack are aligned by their
   /// top left corners.
   RenderStack2({
-    List<RenderBox> children,
+    List<RenderBox>? children,
     AlignmentGeometry alignment = AlignmentDirectional.topStart,
-    TextDirection textDirection,
+    TextDirection? textDirection,
     StackFit fit = StackFit.loose,
     Overflow overflow = Overflow.clip,
   }) : assert(alignment != null),
@@ -476,7 +476,7 @@ class RenderStack2 extends RenderBox
 
 
   @override
-  bool hitTest(BoxHitTestResult result, {Offset position}) {
+  bool hitTest(BoxHitTestResult result, {required Offset position}) {
     if (hitTestChildren(result, position: position) || hitTestSelf(position)) {
       result.add(BoxHitTestEntry(this, position));
       return true;
@@ -489,7 +489,7 @@ class RenderStack2 extends RenderBox
       child.parentData = StackParentData();
   }
 
-  Alignment _resolvedAlignment;
+  Alignment? _resolvedAlignment;
 
   void _resolve() {
     if (_resolvedAlignment != null)
@@ -531,9 +531,9 @@ class RenderStack2 extends RenderBox
   ///
   /// This may be changed to null, but only after the [alignment] has been changed
   /// to a value that does not depend on the direction.
-  TextDirection get textDirection => _textDirection;
-  TextDirection _textDirection;
-  set textDirection(TextDirection value) {
+  TextDirection? get textDirection => _textDirection;
+  TextDirection? _textDirection;
+  set textDirection(TextDirection? value) {
     if (_textDirection == value)
       return;
     _textDirection = value;
@@ -571,9 +571,9 @@ class RenderStack2 extends RenderBox
 
   double _getIntrinsicDimension(double mainChildSizeGetter(RenderBox child)) {
     double extent = 0.0;
-    RenderBox child = firstChild;
+    RenderBox? child = firstChild;
     while (child != null) {
-      final StackParentData childParentData = child.parentData;
+      final StackParentData childParentData = child.parentData as StackParentData;
       if (!childParentData.isPositioned)
         extent = math.max(extent, mainChildSizeGetter(child));
       assert(child.parentData == childParentData);
@@ -603,7 +603,7 @@ class RenderStack2 extends RenderBox
   }
 
   @override
-  double computeDistanceToActualBaseline(TextBaseline baseline) {
+  double? computeDistanceToActualBaseline(TextBaseline baseline) {
     return defaultComputeDistanceToHighestActualBaseline(baseline);
   }
 
@@ -622,7 +622,7 @@ class RenderStack2 extends RenderBox
     double width = constraints.minWidth;
     double height = constraints.minHeight;
 
-    BoxConstraints nonPositionedConstraints;
+    BoxConstraints? nonPositionedConstraints;
     assert(fit != null);
     switch (fit) {
       case StackFit.loose:
@@ -637,9 +637,9 @@ class RenderStack2 extends RenderBox
     }
     assert(nonPositionedConstraints != null);
 
-    RenderBox child = firstChild;
+    RenderBox? child = firstChild;
     while (child != null) {
-      final StackParentData childParentData = child.parentData;
+      final StackParentData childParentData = child.parentData as StackParentData;
 
       if (!childParentData.isPositioned) {
         hasNonPositionedChildren = true;
@@ -666,47 +666,47 @@ class RenderStack2 extends RenderBox
 
     child = firstChild;
     while (child != null) {
-      final StackParentData childParentData = child.parentData;
+      final StackParentData childParentData = child.parentData as StackParentData;
 
       if (!childParentData.isPositioned) {
-        childParentData.offset = _resolvedAlignment.alongOffset(size - child.size);
+        childParentData.offset = _resolvedAlignment!.alongOffset(size - child.size as Offset);
       } else {
         BoxConstraints childConstraints = const BoxConstraints();
 
         if (childParentData.left != null && childParentData.right != null)
-          childConstraints = childConstraints.tighten(width: size.width - childParentData.right - childParentData.left);
+          childConstraints = childConstraints.tighten(width: size.width - childParentData.right! - childParentData.left!);
         else if (childParentData.width != null)
           childConstraints = childConstraints.tighten(width: childParentData.width);
 
         if (childParentData.top != null && childParentData.bottom != null)
-          childConstraints = childConstraints.tighten(height: size.height - childParentData.bottom - childParentData.top);
+          childConstraints = childConstraints.tighten(height: size.height - childParentData.bottom! - childParentData.top!);
         else if (childParentData.height != null)
           childConstraints = childConstraints.tighten(height: childParentData.height);
 
         child.layout(childConstraints, parentUsesSize: true);
 
-        double x;
+        double? x;
         if (childParentData.left != null) {
           x = childParentData.left;
         } else if (childParentData.right != null) {
-          x = size.width - childParentData.right - child.size.width;
+          x = size.width - childParentData.right! - child.size.width;
         } else {
-          x = _resolvedAlignment.alongOffset(size - child.size).dx;
+          x = _resolvedAlignment!.alongOffset(size - child.size as Offset).dx;
         }
 
-        if (x < 0.0 || x + child.size.width > size.width)
+        if (x! < 0.0 || x + child.size.width > size.width)
           _hasVisualOverflow = true;
 
-        double y;
+        double? y;
         if (childParentData.top != null) {
           y = childParentData.top;
         } else if (childParentData.bottom != null) {
-          y = size.height - childParentData.bottom - child.size.height;
+          y = size.height - childParentData.bottom! - child.size.height;
         } else {
-          y = _resolvedAlignment.alongOffset(size - child.size).dy;
+          y = _resolvedAlignment!.alongOffset(size - child.size as Offset).dy;
         }
 
-        if (y < 0.0 || y + child.size.height > size.height)
+        if (y! < 0.0 || y + child.size.height > size.height)
           _hasVisualOverflow = true;
 
         childParentData.offset = Offset(x, y);
@@ -718,7 +718,7 @@ class RenderStack2 extends RenderBox
   }
 
   @override
-  bool hitTestChildren(BoxHitTestResult result, { Offset position }) {
+  bool hitTestChildren(BoxHitTestResult result, { required Offset position }) {
     return defaultHitTestChildren(result, position: position);
   }
 
@@ -741,7 +741,7 @@ class RenderStack2 extends RenderBox
   }
 
   @override
-  Rect describeApproximatePaintClip(RenderObject child) => _hasVisualOverflow ? Offset.zero & size : null;
+  Rect? describeApproximatePaintClip(RenderObject child) => _hasVisualOverflow ? Offset.zero & size : null;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -762,12 +762,12 @@ class Transform2 extends SingleChildRenderObjectWidget {
   ///
   /// The [transform] argument must not be null.
   const Transform2({
-    Key key,
-    @required this.transform,
+    Key? key,
+    required this.transform,
     this.origin,
     this.alignment,
     this.transformHitTests = true,
-    Widget child,
+    Widget? child,
   }) : assert(transform != null),
         super(key: key, child: child);
 
@@ -799,12 +799,12 @@ class Transform2 extends SingleChildRenderObjectWidget {
   ///  * [RotationTransition], which animates changes in rotation smoothly
   ///    over a given duration.
   Transform2.rotate({
-    Key key,
-    @required double angle,
+    Key? key,
+    required double angle,
     this.origin,
     this.alignment = Alignment.center,
     this.transformHitTests = true,
-    Widget child,
+    Widget? child,
   }) : transform = Matrix4.rotationZ(angle),
         super(key: key, child: child);
 
@@ -828,10 +828,10 @@ class Transform2 extends SingleChildRenderObjectWidget {
   /// ```
   /// {@end-tool}
   Transform2.translate({
-    Key key,
-    @required Offset offset,
+    Key? key,
+    required Offset offset,
     this.transformHitTests = true,
-    Widget child,
+    Widget? child,
   }) : transform = Matrix4.translationValues(offset.dx, offset.dy, 0.0),
         origin = null,
         alignment = null,
@@ -867,12 +867,12 @@ class Transform2 extends SingleChildRenderObjectWidget {
   ///  * [ScaleTransition], which animates changes in scale smoothly
   ///    over a given duration.
   Transform2.scale({
-    Key key,
-    @required double scale,
+    Key? key,
+    required double scale,
     this.origin,
     this.alignment = Alignment.center,
     this.transformHitTests = true,
-    Widget child,
+    Widget? child,
   }) : transform = Matrix4.diagonal3Values(scale, scale, 1.0),
         super(key: key, child: child);
 
@@ -884,7 +884,7 @@ class Transform2 extends SingleChildRenderObjectWidget {
   ///
   /// Setting an origin is equivalent to conjugating the transform matrix by a
   /// translation. This property is provided just for convenience.
-  final Offset origin;
+  final Offset? origin;
 
   /// The alignment of the origin, relative to the size of the box.
   ///
@@ -897,7 +897,7 @@ class Transform2 extends SingleChildRenderObjectWidget {
   /// Similarly [AlignmentDirectional.end] is the same as an [Alignment]
   /// whose [Alignment.x] value is `1.0` if [textDirection] is
   /// [TextDirection.ltr], and `-1.0` if [textDirection] is [TextDirection.rtl].
-  final AlignmentGeometry alignment;
+  final AlignmentGeometry? alignment;
 
   /// Whether to apply the transformation when performing hit tests.
   final bool transformHitTests;
@@ -928,12 +928,12 @@ class RenderTransform2 extends RenderProxyBox {
   ///
   /// The [transform] argument must not be null.
   RenderTransform2({
-    @required Matrix4 transform,
-    Offset origin,
-    AlignmentGeometry alignment,
-    TextDirection textDirection,
+    required Matrix4 transform,
+    Offset? origin,
+    AlignmentGeometry? alignment,
+    TextDirection? textDirection,
     this.transformHitTests = true,
-    RenderBox child,
+    RenderBox? child,
   }) : assert(transform != null),
        super(child) {
     this.transform = transform;
@@ -947,9 +947,9 @@ class RenderTransform2 extends RenderProxyBox {
   ///
   /// Setting an origin is equivalent to conjugating the transform matrix by a
   /// translation. This property is provided just for convenience.
-  Offset get origin => _origin;
-  Offset _origin;
-  set origin(Offset value) {
+  Offset? get origin => _origin;
+  Offset? _origin;
+  set origin(Offset? value) {
     if (_origin == value)
       return;
     _origin = value;
@@ -968,9 +968,9 @@ class RenderTransform2 extends RenderProxyBox {
   /// Similarly [AlignmentDirectional.end] is the same as an [Alignment]
   /// whose [Alignment.x] value is `1.0` if [textDirection] is
   /// [TextDirection.ltr], and `-1.0` if [textDirection] is [TextDirection.rtl].
-  AlignmentGeometry get alignment => _alignment;
-  AlignmentGeometry _alignment;
-  set alignment(AlignmentGeometry value) {
+  AlignmentGeometry? get alignment => _alignment;
+  AlignmentGeometry? _alignment;
+  set alignment(AlignmentGeometry? value) {
     if (_alignment == value)
       return;
     _alignment = value;
@@ -982,9 +982,9 @@ class RenderTransform2 extends RenderProxyBox {
   ///
   /// This may be changed to null, but only after [alignment] has been changed
   /// to a value that does not depend on the direction.
-  TextDirection get textDirection => _textDirection;
-  TextDirection _textDirection;
-  set textDirection(TextDirection value) {
+  TextDirection? get textDirection => _textDirection;
+  TextDirection? _textDirection;
+  set textDirection(TextDirection? value) {
     if (_textDirection == value)
       return;
     _textDirection = value;
@@ -1001,7 +1001,7 @@ class RenderTransform2 extends RenderProxyBox {
   bool transformHitTests;
 
   // Note the lack of a getter for transform because Matrix4 is not immutable
-  Matrix4 _transform;
+  Matrix4? _transform;
 
   /// The matrix to transform the child by during painting.
   set transform(Matrix4 value) {
@@ -1015,68 +1015,68 @@ class RenderTransform2 extends RenderProxyBox {
 
   /// Sets the transform to the identity matrix.
   void setIdentity() {
-    _transform.setIdentity();
+    _transform!.setIdentity();
     markNeedsPaint();
     markNeedsSemanticsUpdate();
   }
 
   /// Concatenates a rotation about the x axis into the transform.
   void rotateX(double radians) {
-    _transform.rotateX(radians);
+    _transform!.rotateX(radians);
     markNeedsPaint();
     markNeedsSemanticsUpdate();
   }
 
   /// Concatenates a rotation about the y axis into the transform.
   void rotateY(double radians) {
-    _transform.rotateY(radians);
+    _transform!.rotateY(radians);
     markNeedsPaint();
     markNeedsSemanticsUpdate();
   }
 
   /// Concatenates a rotation about the z axis into the transform.
   void rotateZ(double radians) {
-    _transform.rotateZ(radians);
+    _transform!.rotateZ(radians);
     markNeedsPaint();
     markNeedsSemanticsUpdate();
   }
 
   /// Concatenates a translation by (x, y, z) into the transform.
   void translate(double x, [ double y = 0.0, double z = 0.0 ]) {
-    _transform.translate(x, y, z);
+    _transform!.translate(x, y, z);
     markNeedsPaint();
     markNeedsSemanticsUpdate();
   }
 
   /// Concatenates a scale into the transform.
-  void scale(double x, [ double y, double z ]) {
-    _transform.scale(x, y, z);
+  void scale(double x, [ double? y, double? z ]) {
+    _transform!.scale(x, y, z);
     markNeedsPaint();
     markNeedsSemanticsUpdate();
   }
 
-  Matrix4 get _effectiveTransform {
-    final Alignment resolvedAlignment = alignment?.resolve(textDirection);
+  Matrix4? get _effectiveTransform {
+    final Alignment? resolvedAlignment = alignment?.resolve(textDirection);
     if (_origin == null && resolvedAlignment == null)
       return _transform;
     final Matrix4 result = Matrix4.identity();
     if (_origin != null)
-      result.translate(_origin.dx, _origin.dy);
-    Offset translation;
+      result.translate(_origin!.dx, _origin!.dy);
+    late Offset translation;
     if (resolvedAlignment != null) {
       translation = resolvedAlignment.alongSize(size);
       result.translate(translation.dx, translation.dy);
     }
-    result.multiply(_transform);
+    result.multiply(_transform!);
     if (resolvedAlignment != null)
       result.translate(-translation.dx, -translation.dy);
     if (_origin != null)
-      result.translate(-_origin.dx, -_origin.dy);
+      result.translate(-_origin!.dx, -_origin!.dy);
     return result;
   }
 
   @override
-  bool hitTest(BoxHitTestResult result, { Offset position }) {
+  bool hitTest(BoxHitTestResult result, { required Offset position }) {
     // RenderTransform objects don't check if they are
     // themselves hit, because it's confusing to think about
     // how the untransformed size and the child's transformed
@@ -1085,7 +1085,7 @@ class RenderTransform2 extends RenderProxyBox {
   }
 
   @override
-  bool hitTestChildren(BoxHitTestResult result, { Offset position }) {
+  bool hitTestChildren(BoxHitTestResult result, { required Offset position }) {
     assert(!transformHitTests || _effectiveTransform != null);
     return result.addWithPaintTransform(
       transform: transformHitTests ? _effectiveTransform : null,
@@ -1102,10 +1102,10 @@ class RenderTransform2 extends RenderProxyBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     if (child != null) {
-      final Matrix4 transform = _effectiveTransform;
-      final Offset childOffset = MatrixUtils.getAsTranslation(transform);
+      final Matrix4 transform = _effectiveTransform!;
+      final Offset? childOffset = MatrixUtils.getAsTranslation(transform);
       if (childOffset == null) {
-        layer = context.pushTransform(needsCompositing, offset, transform, super.paint, oldLayer: layer);
+        layer = context.pushTransform(needsCompositing, offset, transform, super.paint, oldLayer: layer as TransformLayer?);
       } else {
         super.paint(context, offset + childOffset);
         layer = null;
@@ -1115,7 +1115,7 @@ class RenderTransform2 extends RenderProxyBox {
 
   @override
   void applyPaintTransform(RenderBox child, Matrix4 transform) {
-    transform.multiply(_effectiveTransform);
+    transform.multiply(_effectiveTransform!);
   }
 
   @override
@@ -1123,7 +1123,7 @@ class RenderTransform2 extends RenderProxyBox {
     super.debugFillProperties(properties);
     properties.add(TransformProperty('transform matrix', _transform));
     properties.add(DiagnosticsProperty<Offset>('origin', origin));
-    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment));
+    properties.add(DiagnosticsProperty<Alignment>('alignment', alignment as Alignment?));
     properties.add(EnumProperty<TextDirection>('textDirection', textDirection, defaultValue: null));
     properties.add(DiagnosticsProperty<bool>('transformHitTests', transformHitTests));
   }

@@ -14,10 +14,10 @@ import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
 class MaterialButtonElement extends WidgetElement with SlotChildElementMixin {
   MaterialButtonElement({
-    @required String id,
-    Color color,
-    double elevation,
-    EdgeInsets padding,
+    required String? id,
+    Color? color,
+    double? elevation,
+    EdgeInsets? padding,
   }) :
     color = MColorProperty(
         value: color?? null,
@@ -83,7 +83,7 @@ class MaterialButtonElement extends WidgetElement with SlotChildElementMixin {
  class MaterialButtonElementWidget extends StatefulWidget with ElementWidgetMixin {
   MaterialButtonElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _MaterialButtonElementWidgetState createState() => _MaterialButtonElementWidgetState();
@@ -95,15 +95,15 @@ class _MaterialButtonElementWidgetState extends State<MaterialButtonElementWidge
     return wrapWithDefault(
         child: MaterialButton(
           child: getChildOrDragTarget(
-               childId: element.findIdForSlot(MaterialButtonElement.CHILD),
+               childId: element!.findIdForSlot(MaterialButtonElement.CHILD),
                data: SlotData(slotName: MaterialButtonElement.CHILD), 
                widgetWrapper: (context, child) => sizeWidgetWrapper(context, Size(100.0,60.0), child)
              ),        
-         color: element.color.value,
-         elevation: element.elevation.value,
-         padding: element.padding.value,
+         color: element!.color.value,
+         elevation: element!.elevation.value,
+         padding: element!.padding.value,
         )
-    );
+    )!;
   }
 
 } 

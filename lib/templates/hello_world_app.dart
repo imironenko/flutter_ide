@@ -25,7 +25,7 @@ WidgetBoard syntaxText () {
   WidgetBoard b = WidgetBoard();
 
   var s = ScaffoldElement(id: _i);
-  b.rootWidgetElement.tAccept(b,s);
+  b.rootWidgetElement!.tAccept(b,s);
 
   var a = AppBarElement(id: _i);
   s.tAccept(b, a, ScaffoldElement.APPBAR);

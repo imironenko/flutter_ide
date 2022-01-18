@@ -5,7 +5,7 @@ void showDidNotAccept(BuildContext context) => showAlertAtCursor(context, "Not a
 
 void showAlertAtCursor(BuildContext context, String alert) {
   var position = CursorPositionWidget.of(context);
-  OverlayEntry entry;
+  OverlayEntry? entry;
   entry = OverlayEntry(
     builder: (context) {
       return _FadingOverlay(
@@ -17,17 +17,17 @@ void showAlertAtCursor(BuildContext context, String alert) {
   );
 
 
-  Navigator.of(context).overlay.insert(entry);
+  Navigator.of(context).overlay!.insert(entry);
 }
 
 
 class _FadingOverlay extends StatefulWidget {
 
-  final OverlayEntry entry;
-  final String text;
-  final Offset position;
+  final OverlayEntry? entry;
+  final String? text;
+  final Offset? position;
 
-  const _FadingOverlay({Key key, this.entry, this.text, this.position}) : super(key: key);
+  const _FadingOverlay({Key? key, this.entry, this.text, this.position}) : super(key: key);
 
   @override
   __FadingOverlayState createState() => __FadingOverlayState();
@@ -49,18 +49,18 @@ class __FadingOverlayState extends State<_FadingOverlay> {
       visible = false;
     });
     await Future.delayed(const Duration(milliseconds: 300));
-    widget.entry.remove();
+    widget.entry!.remove();
   }
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: widget.position.dy,
-      left: widget.position.dx,
+      top: widget.position!.dy,
+      left: widget.position!.dx,
       child: AnimatedOpacity(
         opacity: visible? 1: 0,
         duration: const Duration(milliseconds: 200),
-        child: Material(color: Colors.transparent, child: Text(widget.text)),
+        child: Material(color: Colors.transparent, child: Text(widget.text!)),
       ),
     );
   }

@@ -10,7 +10,7 @@ import 'base.dart';
 class ColumnElementWidget extends StatefulWidget with ElementWidgetMixin {
   ColumnElementWidget({this.id}) : super(key: ObjectKey(id));
 
-  final String id;
+  final String? id;
 
   @override
   _ColumnElementWidgetState createState() => _ColumnElementWidgetState();
@@ -22,21 +22,21 @@ class _ColumnElementWidgetState extends State<ColumnElementWidget>
         ListElementWidgetStateMixin {
 
 
-  Widget toAdd;
-  int position;
+  Widget? toAdd;
+  int? position;
   GlobalKey columnKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
-    if (childrenIds.isEmpty) {
+    if (childrenIds!.isEmpty) {
       return getArrow(Axis.vertical);
     }
 
 
     Widget row = Column(
-        crossAxisAlignment: element.crossAxisAlignment.value,
-        mainAxisSize: element.mainAxisSize.value,
-        mainAxisAlignment: element.mainAxisAlignment.value,
+        crossAxisAlignment: element!.crossAxisAlignment.value!,
+        mainAxisSize: element!.mainAxisSize.value!,
+        mainAxisAlignment: element!.mainAxisAlignment.value!,
         children: [
         ...getRowChildren(Axis.vertical),
     /*if(!hasExpanded())
@@ -46,13 +46,13 @@ class _ColumnElementWidgetState extends State<ColumnElementWidget>
     ],
     );
 
-    if (childrenIds.isEmpty) {
+    if (childrenIds!.isEmpty) {
       row = SizedBox.expand(
         child: row,
       );
     }
 
-    return wrapWithDefault(child: row);
+    return wrapWithDefault(child: row)!;
     /*
     Widget row = GlobalDragTarget<String>(
       builder: (context, it, it2) {
@@ -95,8 +95,8 @@ class _ColumnElementWidgetState extends State<ColumnElementWidget>
   }
 
   int _calculateIndex(Offset offset) {
-    RenderFlex it = columnKey.currentContext.findRenderObject();
-    RenderBox child = it.firstChild;
+    RenderFlex it = columnKey.currentContext!.findRenderObject() as RenderFlex;
+    RenderBox? child = it.firstChild;
 
     double currentAxisPosition = 0;
     int i = 0;
@@ -108,7 +108,7 @@ class _ColumnElementWidgetState extends State<ColumnElementWidget>
       }
 
       currentAxisPosition += child.size.height;
-      final FlexParentData childParentData = child.parentData;
+      final FlexParentData childParentData = child.parentData as FlexParentData;
       child = childParentData.nextSibling;
       i++;
     }
@@ -118,12 +118,12 @@ class _ColumnElementWidgetState extends State<ColumnElementWidget>
 
   }
 
-  List<Widget> getChildren2() {
-    List<Widget> result = childrenIds
-        .map((it) => widgetBoard.getWidgetElement(it).generateWidget())
+  List<Widget?> getChildren2() {
+    List<Widget?> result = childrenIds!
+        .map((it) => widgetBoard!.getWidgetElement(it)!.generateWidget())
         .toList();
     if(toAdd != null && position != null) {
-      return result..insert(position, toAdd);
+      return result..insert(position!, toAdd);
     }
     return result;
   }

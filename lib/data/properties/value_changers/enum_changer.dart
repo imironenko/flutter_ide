@@ -3,22 +3,22 @@ import 'package:widget_maker_2_0/data/properties/value_changers/widgets/common.d
 import 'package:widget_maker_2_0/material.dart';
 
 
-class EnumChanger<T> extends StatelessValueChanger<T>{
+class EnumChanger<T> extends StatelessValueChanger<T?>{
 
   final List<T> possibleValues;
   final String enumName;
 
-  EnumChanger({Key key, T value, this.possibleValues, ValueChanged<T> onUpdate, bool nullable = true}):
+  EnumChanger({Key? key, T? value, required this.possibleValues, ValueChanged<T?>? onUpdate, bool nullable = true}):
       enumName = possibleValues[0].toString().split(".")[0],
         super(key: key, value: value, onUpdate: onUpdate, nullable: nullable);
 
-  String _removePrefix(String name) {
+  String? _removePrefix(String name) {
     if(name == "null") return null;
     return name.split(".")[1];
   }
 
   // To make this nullable
-  List<T> get _internalPossibleValues => nullable? (List.from(possibleValues)..add(null)): possibleValues;
+  List<T?> get _internalPossibleValues => nullable!? (List.from(possibleValues)..add(null)): possibleValues;
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +32,9 @@ class EnumChanger<T> extends StatelessValueChanger<T>{
       }).toList(),
       onChanged: (string) {
         if(string == null) {
-          onUpdate(null);
+          onUpdate!(null);
         }
-        onUpdate(possibleValues.firstWhere((it) => _removePrefix(it.toString() )== string));
+        onUpdate!(possibleValues.firstWhere((it) => _removePrefix(it.toString() )== string));
       },
     );
   }

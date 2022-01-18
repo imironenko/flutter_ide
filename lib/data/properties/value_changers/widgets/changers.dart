@@ -5,7 +5,7 @@ import 'number_changer.dart';
 class RoundNumberChanger extends StatelessWidget {
 
   const RoundNumberChanger({
-    Key key,
+    Key? key,
     this.name,
     this.onUpdate,
     this.value,
@@ -14,9 +14,9 @@ class RoundNumberChanger extends StatelessWidget {
     this.isInt = false,
   }) : super(key: key);
 
-  final String name;
-  final ValueChanged<double> onUpdate;
-  final double value;
+  final String? name;
+  final ValueChanged<double>? onUpdate;
+  final double? value;
   final bool allowNegative;
   final bool showDescription;
   final bool isInt;
@@ -43,12 +43,12 @@ class RoundNumberChanger extends StatelessWidget {
 
 
 class RoundContainer extends StatelessWidget {
-  final Widget child;
-  final double width;
-  final double height;
-  final Color color;
+  final Widget? child;
+  final double? width;
+  final double? height;
+  final Color? color;
 
-  const RoundContainer({Key key, this.child, this.width, this.height, this.color}) : super(key: key);
+  const RoundContainer({Key? key, this.child, this.width, this.height, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

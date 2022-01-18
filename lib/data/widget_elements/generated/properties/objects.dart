@@ -9,9 +9,9 @@ import 'package:widget_maker_2_0/data/properties/wrappers/wrappers.dart';
 /// All the enum properties
 /// GENERATED DO NOT TOUCH
 
-class MWDurationProperty extends MObjectProperty<WDuration> {
+class MWDurationProperty extends MObjectProperty<WDuration?> {
 
-  MWDurationProperty({ WDuration value, String name, WDuration defaultValue}):
+  MWDurationProperty({ WDuration? value, String? name, WDuration? defaultValue}):
       props = {
         "days": MIntProperty(
             name: "days",
@@ -66,23 +66,23 @@ class MWDurationProperty extends MObjectProperty<WDuration> {
     return props.values.toList();
   }
   @override
-  WDuration get value => internalValue == null? null: WDuration(
-    days: props["days"].value,
-    hours: props["hours"].value,
-    minutes: props["minutes"].value,
-    seconds: props["seconds"].value,
-    milliseconds: props["milliseconds"].value,
-    microseconds: props["microseconds"].value,
+  WDuration? get value => internalValue == null? null: WDuration(
+    days: props["days"]!.value,
+    hours: props["hours"]!.value,
+    minutes: props["minutes"]!.value,
+    seconds: props["seconds"]!.value,
+    milliseconds: props["milliseconds"]!.value,
+    microseconds: props["microseconds"]!.value,
   );
 
   Map<String, dynamic> toMap() {
     return {
-       "days": props["days"].value.serialize(),
-       "hours": props["hours"].value.serialize(),
-       "minutes": props["minutes"].value.serialize(),
-       "seconds": props["seconds"].value.serialize(),
-       "milliseconds": props["milliseconds"].value.serialize(),
-       "microseconds": props["microseconds"].value.serialize(),
+       "days": props["days"]!.value.serialize(),
+       "hours": props["hours"]!.value.serialize(),
+       "minutes": props["minutes"]!.value.serialize(),
+       "seconds": props["seconds"]!.value.serialize(),
+       "milliseconds": props["milliseconds"]!.value.serialize(),
+       "microseconds": props["microseconds"]!.value.serialize(),
     };
   }
 
@@ -94,9 +94,9 @@ class MWDurationProperty extends MObjectProperty<WDuration> {
   WDuration constructEmpty() => WDuration();
 
 }
-class MTextStyleProperty extends MObjectProperty<TextStyle> {
+class MTextStyleProperty extends MObjectProperty<TextStyle?> {
 
-  MTextStyleProperty({ TextStyle value, String name, TextStyle defaultValue}):
+  MTextStyleProperty({ TextStyle? value, String? name, TextStyle? defaultValue}):
       props = {
         "fontSize": MDoubleProperty(
             name: "fontSize",
@@ -172,31 +172,31 @@ class MTextStyleProperty extends MObjectProperty<TextStyle> {
     return props.values.toList();
   }
   @override
-  TextStyle get value => internalValue == null? null: TextStyle(
-    fontSize: props["fontSize"].value,
-    inherit: props["inherit"].value,
-    color: props["color"].value,
-    backgroundColor: props["backgroundColor"].value,
-    fontWeight: props["fontWeight"].value,
-    fontStyle: props["fontStyle"].value,
-    letterSpacing: props["letterSpacing"].value,
-    wordSpacing: props["wordSpacing"].value,
-    textBaseline: props["textBaseline"].value,
-    height: props["height"].value,
+  TextStyle? get value => internalValue == null? null: TextStyle(
+    fontSize: props["fontSize"]!.value,
+    inherit: props["inherit"]!.value,
+    color: props["color"]!.value,
+    backgroundColor: props["backgroundColor"]!.value,
+    fontWeight: props["fontWeight"]!.value,
+    fontStyle: props["fontStyle"]!.value,
+    letterSpacing: props["letterSpacing"]!.value,
+    wordSpacing: props["wordSpacing"]!.value,
+    textBaseline: props["textBaseline"]!.value,
+    height: props["height"]!.value,
   );
 
   Map<String, dynamic> toMap() {
     return {
-       "fontSize": props["fontSize"].value.serialize(),
-       "inherit": props["inherit"].value.serialize(),
-       "color": props["color"].value.serialize(),
-       "backgroundColor": props["backgroundColor"].value.serialize(),
-       "fontWeight": props["fontWeight"].value.serialize(),
-       "fontStyle": props["fontStyle"].value.serialize(),
-       "letterSpacing": props["letterSpacing"].value.serialize(),
-       "wordSpacing": props["wordSpacing"].value.serialize(),
-       "textBaseline": props["textBaseline"].value.serialize(),
-       "height": props["height"].value.serialize(),
+       "fontSize": props["fontSize"]!.value.serialize(),
+       "inherit": props["inherit"]!.value.serialize(),
+       "color": props["color"]!.value.serialize(),
+       "backgroundColor": props["backgroundColor"]!.value.serialize(),
+       "fontWeight": props["fontWeight"]!.value.serialize(),
+       "fontStyle": props["fontStyle"]!.value.serialize(),
+       "letterSpacing": props["letterSpacing"]!.value.serialize(),
+       "wordSpacing": props["wordSpacing"]!.value.serialize(),
+       "textBaseline": props["textBaseline"]!.value.serialize(),
+       "height": props["height"]!.value.serialize(),
     };
   }
 

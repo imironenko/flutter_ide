@@ -1,8 +1,7 @@
 import 'mock_framework.dart';
 
 class TestWidget extends StatelessWidget {
-
-  TestWidget({this.width});
+  TestWidget({required this.width});
 
   final DoubleObject width;
 

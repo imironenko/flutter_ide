@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_maker_2_0/data/widget_elements/widgets/list_helpers.dart';
 
-
-
 class DAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,10 +20,12 @@ class DAppBar extends StatelessWidget {
 class DText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.", textAlign: TextAlign.center,);
+    return Text(
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      textAlign: TextAlign.center,
+    );
   }
 }
-
 
 class DCenter extends StatelessWidget {
   @override
@@ -62,9 +62,9 @@ class DMaterialButton extends StatelessWidget {
 class DOutlineButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return OutlineButton(
+    return OutlinedButton(
       onPressed: () {},
-      child: Text("Outline Button"),
+      child: const Text("Outline Button"),
     );
   }
 }
@@ -72,7 +72,7 @@ class DOutlineButton extends StatelessWidget {
 class DRaisedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return ElevatedButton(
       onPressed: () {},
       child: Text("Raised Button"),
     );
@@ -89,26 +89,26 @@ class DCupertinoButton extends StatelessWidget {
   }
 }
 
-
 class DScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FittedBox(
         child: SizedBox(
-          width: 411,
-          height: 731,
-          child: Scaffold(
-      appBar: AppBar(
+      width: 411,
+      height: 731,
+      child: Scaffold(
+        appBar: AppBar(
           title: Text("My App"),
-      ),
-      body: Center(
+        ),
+        body: Center(
           child: Text("Hello"),
-      ),
-      floatingActionButton: FloatingActionButton(
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
           child: Icon(Icons.add),
+        ),
       ),
-    ),
-        ));
+    ));
   }
 }
 
@@ -149,7 +149,6 @@ class DCheckbox extends StatelessWidget {
     );
   }
 }
-
 
 class DRotatedBox extends StatelessWidget {
   @override

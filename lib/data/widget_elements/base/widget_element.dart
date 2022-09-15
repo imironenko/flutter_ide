@@ -5,7 +5,6 @@ import 'package:widget_maker_2_0/data/bs/widget_board/widget_board.dart';
 import 'package:widget_maker_2_0/material.dart';
 import 'package:widget_maker_2_0/data/properties/basic_properties.dart';
 
-
 class SlotData {
   final String? slotName;
   final data;
@@ -18,7 +17,6 @@ class SlotData {
 /// A child slot is only a property which happens to be a widget.
 /// TODO make abstract
 abstract class ChildSlot {
-
   ChildSlot({required this.slotName, this.childrenIds});
 
   /// This is the name of the property.
@@ -39,22 +37,23 @@ abstract class ChildSlot {
   Expression generateCode(Map<String?, WidgetElement> allElements);
 }
 
-
 class SingleChildSlot extends ChildSlot {
-
-
   SingleChildSlot({required String slotName, String? childId})
-    :super(slotName: slotName, childrenIds: childId == null? []: [childId]);
+      : super(
+            slotName: slotName, childrenIds: childId == null ? [] : [childId]);
 
   @override
   void insert(String? id, [data]) {
     assert(childrenIds!.length <= 1);
-    childrenIds..clear()..add(id);
+    childrenIds!
+      ..clear()
+      ..add(id);
   }
+
   @override
   void remove(String? id, [data]) {
     assert(childrenIds!.first == id,
-    "Tried to remove child $id, but this only contained ${childrenIds!.first}");
+        "Tried to remove child $id, but this only contained ${childrenIds!.first}");
     childrenIds!.clear();
   }
 
@@ -62,22 +61,21 @@ class SingleChildSlot extends ChildSlot {
 
   Expression generateCode(Map<String?, WidgetElement> allElements) {
     assert(childrenIds!.length == 0 || childrenIds!.length == 1);
-    return CodeExpression(Code("${allElements[childrenIds![0]]?.writeCode2(allElements)}"));
+    return CodeExpression(
+        Code("${allElements[childrenIds![0]]?.writeCode2(allElements)}"));
   }
-
 }
 
 class ListChildSlot extends ChildSlot {
-
   ListChildSlot({required String slotName, List<String>? childrenIds})
-      :super(slotName: slotName, childrenIds: childrenIds?? []);
+      : super(slotName: slotName, childrenIds: childrenIds ?? []);
 
   @override
   void insert(String? id, [SlotData? data]) {
-    if(data == null) {
+    if (data == null) {
       childrenIds!.add(id);
     } else {
-      if(data.data == null) {
+      if (data.data == null) {
         childrenIds!.add(id);
       } else {
         assert(data.data is int);
@@ -85,6 +83,7 @@ class ListChildSlot extends ChildSlot {
       }
     }
   }
+
   @override
   void remove(String? id, [data]) {
     childrenIds!.remove(id);
@@ -93,8 +92,11 @@ class ListChildSlot extends ChildSlot {
   dynamic getDataForChild(String? id) {
     return childrenIds!.indexOf(id);
   }
+
   Expression generateCode(Map<String?, WidgetElement> allElements) {
-    return literalList(childrenIds!.map((it) => allElements[it]).map((it) => it!.toExpression(allElements)));
+    return literalList(childrenIds!
+        .map((it) => allElements[it])
+        .map((it) => it!.toExpression(allElements)));
     //return CodeExpression(Code("${allElements[childrenIds[0]]?.writeCode2(allElements)}"));
   }
 }
@@ -154,29 +156,26 @@ abstract class WidgetElement {
   }
 
   Expression toExpression(Map<String?, WidgetElement> allElements) {
-    return propertyConstructor(name.replaceAll(" ", ""), attributes!,
+    return propertyConstructor(
+        name.replaceAll(" ", ""),
+        attributes!,
         children!.where((it) => it.hasChild).toList().asMap().map((key, value) {
           return MapEntry(value.slotName, value.generateCode(allElements));
-        })
-    );
-
+        }));
   }
+
   String writeCode2(Map<String?, WidgetElement> allElements) {
     final emitter = DartEmitter();
     return toExpression(allElements).accept(emitter).toString();
   }
-
 }
 
-
-
 mixin SingleChildElement on WidgetElement {
-
   @override
   List<ChildSlot> constructChildSlots() => [SingleChildSlot(slotName: "child")];
 
-
-  String? get childId => childSlot.childrenIds!.length == 1? childSlot.childrenIds!.first: null;
+  String? get childId =>
+      childSlot.childrenIds!.length == 1 ? childSlot.childrenIds!.first : null;
   ChildSlot get childSlot => children![0];
 
   String get slotName => "child";
@@ -198,12 +197,9 @@ mixin SingleChildElement on WidgetElement {
   }
 
   dynamic getDataForChild(String? childId) => null;
-
-
 }
 
 mixin NoChildElementMixin on WidgetElement {
-
   @override
   List<ChildSlot> constructChildSlots() => [];
 
@@ -229,27 +225,22 @@ mixin NoChildElementMixin on WidgetElement {
   dynamic getDataForChild(String? childId) => null;
 }
 
-
-
 mixin SlotChildElementMixin on WidgetElement {
-
-
   @override
   List<ChildSlot> constructChildSlots();
 
   /// Helper method for slots with a single child
   String? findIdForSlot(String slot) {
-    for(ChildSlot it in children!) {
-      if(it.slotName == slot) {
+    for (ChildSlot it in children!) {
+      if (it.slotName == slot) {
         assert(it.isSingleChild, "Was not single child slot");
-        return it.childrenIds!.length > 0? it.childrenIds![0] : null;
+        return it.childrenIds!.length > 0 ? it.childrenIds![0] : null;
       }
     }
     return null;
 
     //assert(false, "not found $slot");
   }
-
 
   @override
   bool containsChild(String childId) {
@@ -259,15 +250,15 @@ mixin SlotChildElementMixin on WidgetElement {
   // TODO Don't accept until a clear widget tree slot system is ready
   // Can accept if there is only one slot tho
   @override
-  bool canAcceptChild(String childId, [SlotData? data]) => children!.length == 1;
+  bool canAcceptChild(String childId, [SlotData? data]) =>
+      children!.length == 1;
 
   @override
   void acceptChild(String? childId, [SlotData? data]) {
-
     // TODO nesting data, first which slot, then which pos
 
     // If no data, just put it in the first slot
-    if(data == null) {
+    if (data == null) {
       children!.first.insert(childId, data);
     } else {
       children!
@@ -279,8 +270,8 @@ mixin SlotChildElementMixin on WidgetElement {
 
   @override
   dynamic getDataForChild(String? childId) {
-    for(ChildSlot it in children!) {
-      if(it.childrenIds!.contains(childId)) {
+    for (ChildSlot it in children!) {
+      if (it.childrenIds!.contains(childId)) {
         return SlotData(
           slotName: it.slotName,
           data: it.getDataForChild(childId),
@@ -292,14 +283,13 @@ mixin SlotChildElementMixin on WidgetElement {
 
   @override
   void removeChild(String? childId) {
-    for(ChildSlot it in children!) {
-      if(it.childrenIds!.contains(childId)) {
+    for (ChildSlot it in children!) {
+      if (it.childrenIds!.contains(childId)) {
         it.childrenIds!.remove(childId);
         return;
       }
     }
-    assert(false, "Tried to remove $childId from scaffold which didn't have that child");
+    assert(false,
+        "Tried to remove $childId from scaffold which didn't have that child");
   }
-
 }
-

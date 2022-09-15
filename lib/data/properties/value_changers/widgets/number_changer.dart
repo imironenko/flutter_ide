@@ -3,9 +3,15 @@ import 'package:widget_maker_2_0/material.dart';
 import 'decoration.dart';
 
 class NumberChanger extends StatefulWidget {
-  NumberChanger({Key? key, this.name, this.onUpdate,
-    this.value, this.allowNegative = true, this.showDescription = true, this.updateEveryChange = false,
-    this.isInt = false})
+  NumberChanger(
+      {Key? key,
+      this.name,
+      this.onUpdate,
+      this.value,
+      this.allowNegative = true,
+      this.showDescription = true,
+      this.updateEveryChange = false,
+      this.isInt = false})
       : super(key: key);
 
   final String? name;
@@ -23,9 +29,9 @@ class NumberChanger extends StatefulWidget {
   }
 }
 
-class NumberChangerState
-    extends State<NumberChanger> {
-  final TextEditingController textEditingController = TextEditingController(text: "-");
+class NumberChangerState extends State<NumberChanger> {
+  final TextEditingController textEditingController =
+      TextEditingController(text: "-");
 
   bool dragging = false;
   bool hovering = false;
@@ -34,33 +40,33 @@ class NumberChangerState
   String? lastInput;
 
   final FocusNode focusNode = FocusNode();
-  
+
   @override
   void initState() {
     super.initState();
     _updateTextController();
 
-    if(widget.updateEveryChange) {
+    if (widget.updateEveryChange) {
       textEditingController.addListener(() {
         update(textEditingController.text);
       });
     }
 
     focusNode.addListener(() {
-      if(!focusNode.hasFocus) {
+      if (!focusNode.hasFocus) {
         update(textEditingController.text);
       }
     });
   }
 
-
   void _updateTextController() {
-    if(widget.value == double.infinity) {
+    if (widget.value == double.infinity) {
       textEditingController.text = "infinity";
-    } else if(widget.value == double.negativeInfinity) {
+    } else if (widget.value == double.negativeInfinity) {
       textEditingController.text = "-infinity";
     } else {
-      textEditingController.text = widget.value?.toStringAsFixed(widget.isInt? 0: 2)?.toString();
+      textEditingController.text =
+          widget.value?.toStringAsFixed(widget.isInt ? 0 : 2).toString() ?? "";
     }
     lastInput = textEditingController.text;
   }
@@ -73,7 +79,7 @@ class NumberChangerState
 
   @override
   void dispose() {
-    if(!focusNode.hasFocus) {
+    if (!focusNode.hasFocus) {
       // TODO figure out why this was in here in the first place
       /*SchedulerBinding.instance.addPostFrameCallback((_) {
         update(textEditingController.text);
@@ -85,22 +91,22 @@ class NumberChangerState
   }
 
   double? stringToNumber(String value) {
-    if(value == "infinity") {
+    if (value == "infinity") {
       value = "Infinity";
-    } else if(value == "-infinity") {
+    } else if (value == "-infinity") {
       value = "-Infinity";
     }
     return double.tryParse(value);
   }
 
   void update(String value) {
-    if(value == "") {
+    if (value == "") {
       widget.onUpdate!(null);
       lastInput = null;
       return;
     }
-    if(isValidString(value)) {
-      if(value.isEmpty) return;
+    if (isValidString(value)) {
+      if (value.isEmpty) return;
       var val = stringToNumber(value);
       widget.onUpdate!(val);
       lastInput = value;
@@ -110,15 +116,15 @@ class NumberChangerState
   }
 
   bool isValidString(String value) {
-    if(value.isEmpty) return true;
+    if (value.isEmpty) return true;
     var val = stringToNumber(value);
 
-    if(val == null) return false;
+    if (val == null) return false;
     return isValidNumber(val);
   }
 
   bool isValidNumber(double number) {
-    if(number < 0 && !widget.allowNegative) return false;
+    if (number < 0 && !widget.allowNegative) return false;
     return true;
   }
 
@@ -128,8 +134,7 @@ class NumberChangerState
     if (number != null) newNumber = number;
 
     newNumber += update.primaryDelta! * -1;
-    if(isValidNumber(newNumber))
-      widget.onUpdate!(newNumber);
+    if (isValidNumber(newNumber)) widget.onUpdate!(newNumber);
     //textEditingController.text = newNumber.toString();
   }
 
@@ -138,78 +143,67 @@ class NumberChangerState
   }
 
   void resetCursor() {
-   // if (!dragging && !hovering) CursorManager.instance.resetCursor();
+    // if (!dragging && !hovering) CursorManager.instance.resetCursor();
   }
 
-  InputDecoration get decoration => hovering?
-  MyDecorations.inputDecoration : InputDecoration(
-    border: InputBorder.none
-  );
+  InputDecoration get decoration => hovering
+      ? MyDecorations.inputDecoration
+      : InputDecoration(border: InputBorder.none);
 
   void handleHoverChange(bool hover) {
-    if(hover != this.hovering) {
+    if (hover != this.hovering) {
       setState(() {
         hovering = hover;
       });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onVerticalDragUpdate: onDragUpdate,
-      onVerticalDragStart: (_) {
-        dragging = true;
-        setCursor();
-      },
-      onVerticalDragCancel: () {
-        dragging = false;
-        resetCursor();
-      },
-      onVerticalDragEnd: (_) {
-        dragging = false;
-        resetCursor();
-      },
-      child: Theme(
-        data: ThemeData(
-          unselectedWidgetColor: Colors.red
-        ),
-        child: IntrinsicHeight(
-          child: TextField(
-            maxLines: 1,
-            focusNode: focusNode,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyText1,
-            controller: textEditingController,
-            decoration: InputDecoration(
-              disabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white.withOpacity(0.5)
-                )
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white.withOpacity(0.5)
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white.withOpacity(0.5)
-                )
-              ),
-              contentPadding: const EdgeInsets.all(8),
-              helperText: widget.showDescription? widget.name: null,
-              helperStyle: TextStyle(color: Colors.white),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.white.withOpacity(0.5)
-                )
-              )
+        onVerticalDragUpdate: onDragUpdate,
+        onVerticalDragStart: (_) {
+          dragging = true;
+          setCursor();
+        },
+        onVerticalDragCancel: () {
+          dragging = false;
+          resetCursor();
+        },
+        onVerticalDragEnd: (_) {
+          dragging = false;
+          resetCursor();
+        },
+        child: Theme(
+          data: ThemeData(unselectedWidgetColor: Colors.red),
+          child: IntrinsicHeight(
+            child: TextField(
+              maxLines: 1,
+              focusNode: focusNode,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyText1,
+              controller: textEditingController,
+              decoration: InputDecoration(
+                  disabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.white.withOpacity(0.5))),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.white.withOpacity(0.5)),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.white.withOpacity(0.5))),
+                  contentPadding: const EdgeInsets.all(8),
+                  helperText: widget.showDescription ? widget.name : null,
+                  helperStyle: TextStyle(color: Colors.white),
+                  border: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Colors.white.withOpacity(0.5)))),
+              onSubmitted: update,
+              // onEditingComplete: ,
             ),
-            onSubmitted: update,
-           // onEditingComplete: ,
           ),
-        ),
-      )
-    );
+        ));
   }
 }

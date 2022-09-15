@@ -12,7 +12,6 @@ import 'dialogs/new_canvas_dialog.dart';
 /// This toolbar shows options related to canvases.
 /// This is visible when nothing else is selected.
 class BoardToolBar extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -21,8 +20,14 @@ class BoardToolBar extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () async {
-              NewCanvasDialogResult canvas = await (showDialogAndRestoreFocus<NewCanvasDialogResult>(context: context, builder: (context) => NewCanvasDialog()) as FutureOr<NewCanvasDialogResult>);
-              AppScope.of(context).widgetBoard!.addCanvas(canvas?.name, canvas.canvasSize!);
+              NewCanvasDialogResult canvas =
+                  await (showDialogAndRestoreFocus<NewCanvasDialogResult>(
+                          context: context,
+                          builder: (context) => NewCanvasDialog())
+                      as FutureOr<NewCanvasDialogResult>);
+              AppScope.of(context)
+                  .widgetBoard!
+                  .addCanvas(canvas.name, canvas.canvasSize!);
             },
             child: Text("New Canvas"),
           ),
@@ -31,7 +36,3 @@ class BoardToolBar extends StatelessWidget {
     );
   }
 }
-
-
-
-

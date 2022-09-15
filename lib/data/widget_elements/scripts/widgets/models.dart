@@ -1,4 +1,3 @@
-
 import 'package:widget_maker_2_0/data/widget_elements/scripts/widgets/generators/build_widget.dart';
 
 import '../build.dart';
@@ -15,7 +14,6 @@ class Size {
       'height': this.height,
     };
   }
-
 }
 
 class IdAndData {
@@ -35,11 +33,11 @@ class IdAndData {
 }
 
 enum SlotType {
-  list, widget,
+  list,
+  widget,
 }
 
 class Slot {
-
   Slot({this.name, this.type, this.maxEmptySize});
 
   final String? name;
@@ -47,25 +45,33 @@ class Slot {
   final Size? maxEmptySize;
 
   String toCode() {
-    switch(type) {
+    switch (type) {
       case SlotType.list:
         return "ListChildSlot";
       case SlotType.widget:
         return "SingleChildSlot";
+      default:
+        return "";
     }
+
+    return "";
   }
 
   String toSerializationType() {
-    switch(type) {
+    switch (type) {
       case SlotType.list:
         return "List<Widget>";
       case SlotType.widget:
         return "Widget2";
+      default:
+        return "";
     }
+
+    return "";
   }
 
   String finalSerializeCode() {
-    switch(type) {
+    switch (type) {
       case SlotType.list:
         return """
         int i = 0;
@@ -77,15 +83,23 @@ class Slot {
       case SlotType.widget:
         return '_deserializeWidgetElement(widget.$name, widgetBoard, element.id, SlotData(slotName: \'$name\', data: null));';
         return "this.$name.toMap()";
+      default:
+        return "";
     }
+
+    return "";
   }
+
   String serialize() {
-    switch(type) {
+    switch (type) {
       case SlotType.list:
         return "this.$name.map((it) => it.toMap()).toList()";
       case SlotType.widget:
         return "this.$name.toMap()";
+      default:
+        return "";
     }
+    return "";
   }
 
   Map<String, dynamic> toMap() {
@@ -94,11 +108,9 @@ class Slot {
       'type': this.type,
     };
   }
-
 }
 
 abstract class LayoutModel {
-
   const LayoutModel();
 
   String get getMixin;
@@ -108,8 +120,7 @@ abstract class LayoutModel {
   List<Map<String, String?>> get properties;
 }
 
-class NoChildLayoutModel extends LayoutModel{
-
+class NoChildLayoutModel extends LayoutModel {
   const NoChildLayoutModel();
 
   @override
@@ -122,12 +133,9 @@ class NoChildLayoutModel extends LayoutModel{
 
   @override
   List<Map<String, String>> get properties => [];
-
-
 }
 
-class SlotChildLayoutModel extends LayoutModel{
-
+class SlotChildLayoutModel extends LayoutModel {
   final List<Slot>? slotNames;
   final String? widgetName;
 
@@ -139,68 +147,80 @@ class SlotChildLayoutModel extends LayoutModel{
   @override
   Map<Slot, IdAndData> getPropertyAccess() {
     return slotNames!.asMap().map<Slot, IdAndData>((int key, Slot value) {
-      return MapEntry<Slot, IdAndData>(value, IdAndData(
-        id: getAccessor(value.name!),
-        data: "SlotData(slotName: ${widgetName}Element.${value.name!.toUpperCase()})",
-        maxEmptySize: value.maxEmptySize,
-      ));
+      return MapEntry<Slot, IdAndData>(
+          value,
+          IdAndData(
+            id: getAccessor(value.name!),
+            data:
+                "SlotData(slotName: ${widgetName}Element.${value.name!.toUpperCase()})",
+            maxEmptySize: value.maxEmptySize,
+          ));
     });
   }
 
   //String getAccessor(String value) => "${widgetName}Element.${value.toUpperCase()}";
-  String getAccessor(String value) => "findIdForSlot(${widgetName}Element.${value.toUpperCase()})";
+  String getAccessor(String value) =>
+      "findIdForSlot(${widgetName}Element.${value.toUpperCase()})";
 
   @override
   List<Map<String, String?>> get properties => slotNames!.map((it) {
-    return {
-      'name': it.name,
-      'type': it.toSerializationType(),
-      'serializer': it.serialize(),
-      'fCode': it.finalSerializeCode(),
-
-    };
-  }).toList();
+        return {
+          'name': it.name,
+          'type': it.toSerializationType(),
+          'serializer': it.serialize(),
+          'fCode': it.finalSerializeCode(),
+        };
+      }).toList();
 }
 
-
 class ParsedWidget {
-
   final List<ParsedProperty>? properties;
   final WidgetMeta? meta;
   final String? name;
   final String? actualName;
   final GeneralInfo? generalInfo;
 
-
   String get elementName => "${name}Element";
 
-  ParsedWidget({this.generalInfo, this.name, this.properties, this.meta, String? actualName}): this.actualName = actualName?? name;
+  ParsedWidget(
+      {this.generalInfo,
+      this.name,
+      this.properties,
+      this.meta,
+      String? actualName})
+      : this.actualName = actualName ?? name;
 
   Map<String, dynamic> toMap() {
     return {
-      'positionalProperties': this.properties!.where((it) => it.positional).map((it) => it.toMap()).toList(),
-      'namedProperties': this.properties!.where((it) => !it.positional).map((it) => it.toMap()).toList(),
+      'positionalProperties': this
+          .properties!
+          .where((it) => it.positional)
+          .map((it) => it.toMap())
+          .toList(),
+      'namedProperties': this
+          .properties!
+          .where((it) => !it.positional)
+          .map((it) => it.toMap())
+          .toList(),
       // All properties
       'properties': this.properties!.map((it) => it.toMap()).toList(),
       'meta': this.meta!.toMap(),
       'name': this.name,
-      'refName': generalInfo?.useWidget?? "${elementName}Widget",
+      'refName': generalInfo?.useWidget ?? "${elementName}Widget",
       'elementName': this.elementName,
       'generalInfo': this.generalInfo!.toMap(),
       'mixin': generalInfo!.layoutModel!.getMixin,
-      'import': generalInfo?.useWidget == null? "": "import 'package:widget_maker_2_0/data/widget_elements/widgets/${name!.toLowerCase()}.dart';" ,
+      'import': generalInfo?.useWidget == null
+          ? ""
+          : "import 'package:widget_maker_2_0/data/widget_elements/widgets/${name!.toLowerCase()}.dart';",
       'generatedWidget': generateWidget(this),
       'slots': getMaybeSlots(this),
       'actualName': actualName,
-
     };
   }
-
 }
 
-
 class GeneralInfo {
-
   final String? useWidget;
   final LayoutModel? layoutModel;
 
@@ -222,12 +242,16 @@ class ParsedProperty {
   final dynamic defaultValue;
   final bool wip;
 
-  ParsedProperty({this.wip = false, this.type, this.name, this.positional = false, this.customAttributes = const {}, this.defaultValue});
-
+  ParsedProperty(
+      {this.wip = false,
+      this.type,
+      this.name,
+      this.positional = false,
+      this.customAttributes = const {},
+      this.defaultValue});
 
   String get propertyConstructorName {
-    return wip? "MWIPProperty<$type>"
-        : "M${makeFirstBig(type!)}Property";
+    return wip ? "MWIPProperty<$type>" : "M${makeFirstBig(type!)}Property";
   }
 
   Map<String, dynamic> toMap() {
@@ -235,15 +259,19 @@ class ParsedProperty {
       'name': this.name,
       'type': this.type,
       'positional': this.positional,
-      'customAttributes': this.customAttributes.keys.map((key) => {'key': key, 'value': customAttributes[key]}).toList(),
-      'defaultValue': _escapeDefaultValue(this.defaultValue)?? "null",
+      'customAttributes': this
+          .customAttributes
+          .keys
+          .map((key) => {'key': key, 'value': customAttributes[key]})
+          .toList(),
+      'defaultValue': _escapeDefaultValue(this.defaultValue) ?? "null",
       'wip': wip,
       'propertyConstructorName': propertyConstructorName,
     };
   }
 
   dynamic _escapeDefaultValue(dynamic it) {
-    if(it != null && it is String && it.startsWith("\\")) {
+    if (it != null && it is String && it.startsWith("\\")) {
       return "\"${it.substring(1)}\"";
     }
     return it;
@@ -251,7 +279,6 @@ class ParsedProperty {
 }
 
 class WidgetMeta {
-
   final String? icon;
   final String? widget;
   final List<String>? categories;
@@ -265,5 +292,4 @@ class WidgetMeta {
       'categories': this.categories,
     };
   }
-
 }

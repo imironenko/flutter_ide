@@ -8,11 +8,8 @@ import 'package:widget_maker_2_0/data/properties/basic_properties.dart';
 import 'package:widget_maker_2_0/data/properties/value_changers/widgets/changers.dart';
 import 'package:widget_maker_2_0/data/widget_elements/base/literal_widget.dart';
 
-
 class AddPropertyProperty extends MProperty with SingleChangerMixin {
-
-  AddPropertyProperty({String? name}): super(name: name);
-
+  AddPropertyProperty({String? name}) : super(defaultValue: name);
 
   @override
   AddPropertyProperty copy() {
@@ -20,6 +17,7 @@ class AddPropertyProperty extends MProperty with SingleChangerMixin {
       name: name,
     );
   }
+
   @override
   Widget buildChanger(BuildContext context, String? id) {
     return Material(
@@ -34,18 +32,20 @@ class AddPropertyProperty extends MProperty with SingleChangerMixin {
                   return Material(
                     child: Container(
                       child: ListView(
-                        children: PropertyType.values.map((it) => GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).pop(it);
-                          },
-                          child: Text(it.toString().split(".")[1]),
-                        )).toList()
-                      ),
+                          children: PropertyType.values
+                              .map((it) => GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).pop(it);
+                                    },
+                                    child: Text(it.toString().split(".")[1]),
+                                  ))
+                              .toList()),
                     ),
                   );
-                }
-            );
-            LiteralWidgetElement it = AppScope.of(context).widgetBoard!.getWidgetElementFromAnySource(id) as LiteralWidgetElement;
+                });
+            LiteralWidgetElement it = AppScope.of(context)
+                .widgetBoard!
+                .getWidgetElementFromAnySource(id) as LiteralWidgetElement;
             it.addProperty(type, "test");
             updateValue(null, context, id);
           },
@@ -59,5 +59,4 @@ class AddPropertyProperty extends MProperty with SingleChangerMixin {
   Expression toCode() {
     return CodeExpression(Code(""));
   }
-
 }

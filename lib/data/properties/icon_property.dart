@@ -7,8 +7,17 @@ import 'icon_property/m_icons.dart';
 
 class MIconDataProperty extends MProperty<IconData?> with SingleChangerMixin {
   MIconDataProperty(
-      {required IconData? value, required String? name, bool isNamed = true, bool isRequired = false, required IconData defaultValue})
-      : super(value: value, name: name, isNamed: isNamed, isRequired: isRequired, defaultValue: defaultValue);
+      {required IconData? value,
+      required String? name,
+      bool isNamed = true,
+      bool isRequired = false,
+      IconData? defaultValue})
+      : super(
+            value: value,
+            name: name,
+            isNamed: isNamed,
+            isRequired: isRequired,
+            defaultValue: defaultValue);
 
   @override
   MIconDataProperty copy() {
@@ -32,14 +41,12 @@ class MIconDataProperty extends MProperty<IconData?> with SingleChangerMixin {
 
   @override
   Expression toCode() {
-    if(value == null) return literalNull;
+    if (value == null) return literalNull;
     return refer("Icons").property(MIconContainer.iconDataToName[value!]!);
   }
 }
 
-
 class MIconData {
-
   final IconData? icon;
   final String? name;
 

@@ -1,5 +1,3 @@
-
-
 import 'package:code_builder/code_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_maker_2_0/data/properties/basic_properties.dart';
@@ -19,22 +17,21 @@ enum _DecorationType {
 }
 
 class MDecorationProperty extends MProperty<Decoration?> {
-
   MDecorationProperty({
     String? name,
     Decoration? value,
-    bool isNamed= true,
+    bool isNamed = true,
     bool isRequired = false,
     bool nullable = true,
     Decoration? defaultValue,
-  }): super(
-      name: name,
-      value: value,
-      isNamed: isNamed,
-      isRequired: isRequired,
-      nullable: nullable,
-      defaultValue: defaultValue,
-  );
+  }) : super(
+          name: name,
+          value: value,
+          isNamed: isNamed,
+          isRequired: isRequired,
+          nullable: nullable,
+          defaultValue: defaultValue,
+        );
 
   @override
   MDecorationProperty copy() {
@@ -47,12 +44,12 @@ class MDecorationProperty extends MProperty<Decoration?> {
     );
   }
 
-  final MBoxDecorationProperty _mBoxDecorationProperty = MBoxDecorationProperty();
+  final MBoxDecorationProperty _mBoxDecorationProperty =
+      MBoxDecorationProperty();
 
   _DecorationType _selected = _DecorationType.none;
 
   List<String> names = ["Box", "FlutterLogo", "Shape", "Unkown", "None"];
-
 
   void onChange(it, stateSetter) {
     stateSetter(() {
@@ -62,26 +59,24 @@ class MDecorationProperty extends MProperty<Decoration?> {
 
   @override
   Widget buildFinalChanger(BuildContext context, String? id) {
-    return StatefulBuilder(
-      builder: (context, stateSetter) {
-        return MultiChanger(
-          name: name,
-          selectedOption: _selected,
-          options: _DecorationType.values,
-          names: names,
-          changer: getDecorationChanger(context, id),
-          onChange: (dynamic it) => onChange(it, stateSetter),
-         /* value: value,
+    return StatefulBuilder(builder: (context, stateSetter) {
+      return MultiChanger(
+        name: name,
+        selectedOption: _selected,
+        options: _DecorationType.values,
+        names: names,
+        changer: getDecorationChanger(context, id),
+        onChange: (dynamic it) => onChange(it, stateSetter),
+        /* value: value,
           onChange: (it) {
             updateValue(it, context, id);
           },*/
-        );
-      }
-    );
+      );
+    });
   }
 
   Widget getDecorationChanger(BuildContext context, String? id) {
-    if(_selected == _DecorationType.BoxDecoration) {
+    if (_selected == _DecorationType.BoxDecoration) {
       return _mBoxDecorationProperty.buildChanger(context, id);
     }
 
@@ -93,35 +88,37 @@ class MDecorationProperty extends MProperty<Decoration?> {
     // TODO: implement toCode
     throw UnimplementedError();
   }
-
 }
 
-
-class MBoxDecorationProperty extends MProperty<BoxDecoration> with SingleChangerMixin<BoxDecoration>{
-  
-  
+class MBoxDecorationProperty extends MProperty<BoxDecoration>
+    with SingleChangerMixin<BoxDecoration> {
   final MColorProperty color;
   final MDecorationImageProperty image;
   final MBorderProperty border;
   final MBorderRadiusGeometryProperty borderRadius;
   final MGradientProperty gradient;
 
-  MBoxDecorationProperty():
-    color = MColorProperty(
-      name: "color",
-      value: null, defaultValue: null
-    ),
-    image = MDecorationImageProperty(),
-    border = MBorderProperty(),
-    borderRadius = MBorderRadiusGeometryProperty(),
-    gradient = MGradientProperty();
-
+  // MBoxDecorationProperty({
+  //     MColorProperty color = MColorProperty(name: "color", value: null, defaultValue: null),
+  //     MDecorationImageProperty image = MDecorationImageProperty(),
+  //     MBorderProperty border = MBorderProperty(),
+  //     MBorderRadiusGeometryProperty borderRadius = MBorderRadiusGeometryProperty(),
+  //     MGradientProperty gradient = MGradientProperty();
+  // }) : super(defaultValue: BoxDecoration)
+  MBoxDecorationProperty()
+      : color = MColorProperty(name: "color", value: null, defaultValue: null),
+        image = MDecorationImageProperty(),
+        border = MBorderProperty(),
+        borderRadius = MBorderRadiusGeometryProperty(),
+        gradient = MGradientProperty();
 
   MBoxDecorationProperty copy() {
     return MBoxDecorationProperty();
   }
 
-  List<MProperty> get properties => [/*image, */border,/* borderRadius, gradient*/];
+  List<MProperty> get properties => [
+        /*image, */ border, /* borderRadius, gradient*/
+      ];
 
   @override
   Widget buildChanger(BuildContext context, String? id) {
@@ -132,7 +129,6 @@ class MBoxDecorationProperty extends MProperty<BoxDecoration> with SingleChanger
       value: value,
       onChange: (dynamic it) => updateValue(it, context, id),
       id: id,
-
     );
   }
 
@@ -141,10 +137,10 @@ class MBoxDecorationProperty extends MProperty<BoxDecoration> with SingleChanger
     // TODO: implement toCode
     return null;
   }
-
 }
 
-class MShapeDecorationProperty extends MProperty<ShapeDecoration> with SingleChangerMixin<ShapeDecoration> {
+class MShapeDecorationProperty extends MProperty<ShapeDecoration>
+    with SingleChangerMixin<ShapeDecoration> {
   @override
   Widget? buildChanger(BuildContext context, String? id) {
     // TODO: implement buildChanger
@@ -162,12 +158,10 @@ class MShapeDecorationProperty extends MProperty<ShapeDecoration> with SingleCha
     // TODO: implement copy
     return null;
   }
-  
 }
 
-class MDecorationImageProperty extends MProperty<DecorationImage> with SingleChangerMixin<DecorationImage> {
-
-
+class MDecorationImageProperty extends MProperty<DecorationImage>
+    with SingleChangerMixin<DecorationImage> {
   @override
   Widget? buildChanger(BuildContext context, String? id) {
     // TODO: implement buildChanger
@@ -185,22 +179,20 @@ class MDecorationImageProperty extends MProperty<DecorationImage> with SingleCha
     // TODO: implement copy
     return null;
   }
-
 }
 
-class MBorderProperty extends MProperty<Border> with SingleChangerMixin<Border> {
-
+class MBorderProperty extends MProperty<Border>
+    with SingleChangerMixin<Border> {
   final MBorderSideProperty top;
   final MBorderSideProperty right;
   final MBorderSideProperty bottom;
   final MBorderSideProperty left;
 
-  MBorderProperty():
-      top = MBorderSideProperty(),
-      right = MBorderSideProperty(),
-      bottom = MBorderSideProperty(),
-      left = MBorderSideProperty();
-
+  MBorderProperty()
+      : top = MBorderSideProperty(),
+        right = MBorderSideProperty(),
+        bottom = MBorderSideProperty(),
+        left = MBorderSideProperty();
 
   @override
   Widget buildChanger(BuildContext context, String? id) {
@@ -210,7 +202,7 @@ class MBorderProperty extends MProperty<Border> with SingleChangerMixin<Border> 
       value: value,
       emptyConstructor: () => Border(),
       name: "Border",
-      onChange: (dynamic it) => updateValue(it, context ,id),
+      onChange: (dynamic it) => updateValue(it, context, id),
     );
   }
 
@@ -225,20 +217,18 @@ class MBorderProperty extends MProperty<Border> with SingleChangerMixin<Border> 
     // TODO: implement copy
     return null;
   }
-
 }
 
-class MBorderSideProperty extends MProperty<BorderSide> with SingleChangerMixin<BorderSide> {
-
-
+class MBorderSideProperty extends MProperty<BorderSide>
+    with SingleChangerMixin<BorderSide> {
   final MColorProperty color;
   final MDoubleProperty width;
   final MBorderStyleProperty style;
 
-  MBorderSideProperty():
-      color = MColorProperty(),
-      width = MDoubleProperty(),
-      style = MBorderStyleProperty();
+  MBorderSideProperty()
+      : color = MColorProperty(),
+        width = MDoubleProperty(),
+        style = MBorderStyleProperty();
 
   @override
   Widget buildChanger(BuildContext context, String? id) {
@@ -263,10 +253,10 @@ class MBorderSideProperty extends MProperty<BorderSide> with SingleChangerMixin<
     // TODO: implement copy
     return null;
   }
-
 }
 
-class MBorderRadiusGeometryProperty extends MProperty<BorderRadiusGeometry> with SingleChangerMixin<BorderRadiusGeometry> {
+class MBorderRadiusGeometryProperty extends MProperty<BorderRadiusGeometry>
+    with SingleChangerMixin<BorderRadiusGeometry> {
   @override
   Widget? buildChanger(BuildContext context, String? id) {
     // TODO: implement buildChanger
@@ -284,10 +274,10 @@ class MBorderRadiusGeometryProperty extends MProperty<BorderRadiusGeometry> with
     // TODO: implement copy
     return null;
   }
-
 }
 
-class MGradientProperty extends MProperty<Gradient> with SingleChangerMixin<Gradient> {
+class MGradientProperty extends MProperty<Gradient>
+    with SingleChangerMixin<Gradient> {
   @override
   Widget? buildChanger(BuildContext context, String? id) {
     // TODO: implement buildChanger
@@ -305,5 +295,4 @@ class MGradientProperty extends MProperty<Gradient> with SingleChangerMixin<Grad
     // TODO: implement copy
     return null;
   }
-
 }

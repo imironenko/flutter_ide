@@ -3,17 +3,17 @@ import 'package:widget_maker_2_0/data/properties/value_changers/widgets/number_c
 import 'package:widget_maker_2_0/material.dart';
 import 'package:widget_maker_2_0/data/properties/meta_properties.dart';
 
-class CanvasSizeChanger extends StatelessValueChanger<CanvasSize?>{
-
-  CanvasSizeChanger({Key? key, required CanvasSize canvasSize, ValueChanged<CanvasSize?>? onUpdate}) :
-        super(key: key, value: canvasSize, onUpdate: onUpdate,nullable: true);
+class CanvasSizeChanger extends StatelessValueChanger<CanvasSize?> {
+  CanvasSizeChanger(
+      {Key? key, CanvasSize? canvasSize, ValueChanged<CanvasSize?>? onUpdate})
+      : super(key: key, value: canvasSize, onUpdate: onUpdate, nullable: true);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         DropdownButton<CanvasSize>(
-          value: CanvasSize.sizes.containsKey(value)? value: null,
+          value: CanvasSize.sizes.containsKey(value) ? value : null,
           items: CanvasSize.sizes.keys.map((canvasSize) {
             return DropdownMenuItem<CanvasSize>(
               value: canvasSize,

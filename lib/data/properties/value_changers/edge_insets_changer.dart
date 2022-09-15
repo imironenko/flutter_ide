@@ -3,24 +3,23 @@ import 'package:widget_maker_2_0/data/properties/value_changers/base.dart';
 import 'package:widget_maker_2_0/data/properties/value_changers/widgets/number_changer.dart';
 import 'package:widget_maker_2_0/material.dart';
 
-enum EdgeInsetsMode {
-  all, only, symmetrical, none
-}
+enum EdgeInsetsMode { all, only, symmetrical, none }
 
-
-class EdgeInsetsChanger extends StatelessValueChanger<EdgeInsets?>{
-
-  EdgeInsetsChanger({Key? key, this.mode, EdgeInsets? edgeInsets, ValueChanged<EdgeInsets?>? onUpdate}) :
-        super(key: key, value: edgeInsets, onUpdate: onUpdate,nullable: true);
+class EdgeInsetsChanger extends StatelessValueChanger<EdgeInsets?> {
+  EdgeInsetsChanger(
+      {Key? key,
+      this.mode,
+      EdgeInsets? edgeInsets,
+      ValueChanged<EdgeInsets?>? onUpdate})
+      : super(key: key, value: edgeInsets, onUpdate: onUpdate, nullable: true);
 
   final EdgeInsetsMode? mode;
 
   EdgeInsets get nValue => value ?? EdgeInsets.all(0);
 
   void _update({double? left, double? top, double? right, double? bottom}) {
-
     var oldInserts;
-    if(value == null) {
+    if (value == null) {
       oldInserts = EdgeInsets.all(0);
     } else {
       oldInserts = value;
@@ -37,7 +36,9 @@ class EdgeInsetsChanger extends StatelessValueChanger<EdgeInsets?>{
   }
 
   Widget buildAll(context) {
-    assert(nValue.left == nValue.right && nValue.top == nValue.bottom && nValue.top == nValue.right);
+    assert(nValue.left == nValue.right &&
+        nValue.top == nValue.bottom &&
+        nValue.top == nValue.right);
     return NumberChanger(
       allowNegative: false,
       onUpdate: (it) {
@@ -62,14 +63,16 @@ class EdgeInsetsChanger extends StatelessValueChanger<EdgeInsets?>{
             name: "horizontal",
           ),
         ),
-        SizedBox(width: 8,),
+        SizedBox(
+          width: 8,
+        ),
         Expanded(
           child: NumberChanger(
             allowNegative: false,
             onUpdate: (it) {
               _update(top: it, bottom: it);
             },
-            value: value?.top?? 0,
+            value: value?.top ?? 0,
             name: "vertical",
           ),
         ),
@@ -97,29 +100,33 @@ class EdgeInsetsChanger extends StatelessValueChanger<EdgeInsets?>{
             onUpdate: (it) {
               _update(top: it);
             },
-            value: value?.top?? 0,
+            value: value?.top ?? 0,
             name: "top",
           ),
         ),
-        SizedBox(width: 8,),
+        SizedBox(
+          width: 8,
+        ),
         Expanded(
           child: NumberChanger(
             allowNegative: false,
             onUpdate: (it) {
               _update(right: it);
             },
-            value: value?.right?? 0,
+            value: value?.right ?? 0,
             name: "right",
           ),
         ),
-        SizedBox(width: 8,),
+        const SizedBox(
+          width: 8,
+        ),
         Expanded(
           child: NumberChanger(
             allowNegative: false,
             onUpdate: (it) {
               _update(bottom: it);
             },
-            value: value?.bottom?? 0,
+            value: value?.bottom ?? 0,
             name: "bottom",
           ),
         ),
@@ -127,20 +134,17 @@ class EdgeInsetsChanger extends StatelessValueChanger<EdgeInsets?>{
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
-    switch(mode) {
+    switch (mode) {
       case EdgeInsetsMode.all:
         return buildAll(context);
       case EdgeInsetsMode.symmetrical:
         return buildSymmetrical(context);
       case EdgeInsetsMode.only:
         return buildOnly(context);
-      case EdgeInsetsMode.none:
-        return SizedBox();
+      default:
+        return const SizedBox();
     }
-    assert(false);
-    return SizedBox();
   }
 }

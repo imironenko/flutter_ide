@@ -17,10 +17,11 @@ import 'bars/palette/palette_dialog.dart';
 import 'bars/right_bar/right_bar.dart';
 
 class QuickAccessWidgetsIntent extends Intent {}
+
 class DeleteIntent extends Intent {}
 
 class MShortCutManager extends ShortcutManager {
-    /// Handles a key pressed `event` in the given `context`.
+  /// Handles a key pressed `event` in the given `context`.
   ///
   /// The optional `keysPressed` argument provides an override to keys that the
   /// [RawKeyboard] reports. If not specified, uses [RawKeyboard.keysPressed]
@@ -35,7 +36,8 @@ class MShortCutManager extends ShortcutManager {
       return KeyEventResult.ignored;
     }
     assert(context != null);
-    final LogicalKeySet keySet = keysPressed ?? LogicalKeySet.fromSet(RawKeyboard.instance.keysPressed);
+    final LogicalKeySet keySet =
+        keysPressed ?? LogicalKeySet.fromSet(RawKeyboard.instance.keysPressed);
     Intent? matchedIntent = shortcuts[keySet];
     if (matchedIntent == null) {
       // If there's not a more specific match, We also look for any keys that
@@ -51,14 +53,15 @@ class MShortCutManager extends ShortcutManager {
           pseudoKeys.add(setKey);
         }
       }
-      for(LogicalKeyboardKey it in pseudoKeys) {
+      for (LogicalKeyboardKey it in pseudoKeys) {
         //print(it.debugName);
         print(it.keyId);
       }
       matchedIntent = shortcuts[LogicalKeySet.fromSet(pseudoKeys)];
     }
     if (matchedIntent != null) {
-      final BuildContext? primaryContext = WidgetsBinding.instance!.focusManager.primaryFocus?.context;
+      final BuildContext? primaryContext =
+          WidgetsBinding.instance.focusManager.primaryFocus?.context;
       if (primaryContext == null) {
         return KeyEventResult.ignored;
       }
@@ -66,9 +69,7 @@ class MShortCutManager extends ShortcutManager {
     }
     return KeyEventResult.ignored;
   }
-
 }
-
 
 class WorkspacePage extends StatefulWidget {
   @override
@@ -76,29 +77,31 @@ class WorkspacePage extends StatefulWidget {
 }
 
 class _WorkspacePageState extends State<WorkspacePage> {
-
   bool showVisual = true;
   bool showingQuickAction = false;
 
-  final FocusScopeNode workspaceNode = FocusScopeNode(debugLabel: "Worksapce Node");
+  final FocusScopeNode workspaceNode =
+      FocusScopeNode(debugLabel: "Worksapce Node");
 
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance!.addPostFrameCallback((_) async {
-      await showNewProjectDialog(context,);
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await showNewProjectDialog(
+        context,
+      );
       //FocusScope.of(context).requestFocus(workspaceNode);
     });
   }
-
 
   @override
   void dispose() {
     super.dispose();
     workspaceNode.dispose();
   }
+
   void onSpace() async {
-    if(showingQuickAction) return;
+    if (showingQuickAction) return;
     showingQuickAction = true;
     var element = await quickChooseWidgetElement(context);
     showingQuickAction = false;
@@ -118,12 +121,12 @@ class _WorkspacePageState extends State<WorkspacePage> {
           return true;
         }),
       },
-      child: Shortcuts(
+      child: Shortcuts.manager(
         manager: MShortCutManager(),
-        shortcuts: {
-          LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.space): QuickAccessWidgetsIntent(),
-          LogicalKeySet(LogicalKeyboardKey.delete): DeleteIntent(),
-        },
+        // shortcuts: {
+        //   LogicalKeySet(LogicalKeyboardKey.control, LogicalKeyboardKey.space): QuickAccessWidgetsIntent(),
+        //   LogicalKeySet(LogicalKeyboardKey.delete): DeleteIntent(),
+        // },
         child: Focus(
           focusNode: workspaceNode,
           autofocus: true,
@@ -141,18 +144,19 @@ class _WorkspacePageState extends State<WorkspacePage> {
                 ),
                 Expanded(
                   child: SizedBox(
-                    child: showVisual? VisualWorkspace(
-                      onNewWidget: () async {
-                        // TODO no idea why this doesn't work in [LeftBar] class
-                        // somehow the pointer is absorbed with that context
-                        // pulled it up here for just now so it works for first alpha
-                        var element = await showPaletteDialog(context);
-                        BoardInteractor().insertPaletteItem(context, element);
-                      },
-                      onTemplate: () {
-
-                      },
-                    ) : CodeWorkspace(),
+                    child: showVisual
+                        ? VisualWorkspace(
+                            onNewWidget: () async {
+                              // TODO no idea why this doesn't work in [LeftBar] class
+                              // somehow the pointer is absorbed with that context
+                              // pulled it up here for just now so it works for first alpha
+                              var element = await showPaletteDialog(context);
+                              BoardInteractor()
+                                  .insertPaletteItem(context, element);
+                            },
+                            onTemplate: () {},
+                          )
+                        : CodeWorkspace(),
                   ),
                 ),
               ],
@@ -164,66 +168,62 @@ class _WorkspacePageState extends State<WorkspacePage> {
   }
 }
 
-
 class VisualWorkspace extends StatelessWidget {
-
   final VoidCallback? onNewWidget;
   final VoidCallback? onTemplate;
 
-  const VisualWorkspace({Key? key, this.onNewWidget, this.onTemplate}) : super(key: key);
+  const VisualWorkspace({Key? key, this.onNewWidget, this.onTemplate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if(constraints.maxWidth < 720) {
-          return Scaffold(
-            backgroundColor: Theme.of(context).backgroundColor,
+    return LayoutBuilder(builder: (context, constraints) {
+      if (constraints.maxWidth < 720) {
+        return Scaffold(
+          backgroundColor: Theme.of(context).backgroundColor,
           /*  drawer: Drawer(
               child: Palette(),
             ),*/
-            body: Row(
-              children: <Widget>[
-                DrawerController(
-                  child: Drawer(child: SizedBox(),),
-                  alignment: DrawerAlignment.start,
+          body: Row(
+            children: <Widget>[
+              DrawerController(
+                child: Drawer(
+                  child: SizedBox(),
                 ),
+                alignment: DrawerAlignment.start,
+              ),
+              Expanded(child: DeselectWidget(child: CanvasSpace())),
+            ],
+          ),
+          endDrawer: Drawer(
+            child: RightBar(),
+          ),
+        );
+      } else {
+        return Container(
+          color: Theme.of(context).backgroundColor,
+          child: Row(children: [
+            //Palette(),
+            LeftBar(
+              onNewWidget: onNewWidget,
+              onTemplate: onTemplate,
+            ),
+            Expanded(
+                child: Column(
+              children: <Widget>[
+                ContextToolBar(),
                 Expanded(child: DeselectWidget(child: CanvasSpace())),
               ],
-            ),
-            endDrawer: Drawer(
-              child: RightBar(),
-            ),
-          );
-
-        } else {
-          return Container(
-            color: Theme.of(context).backgroundColor,
-            child: Row(
-                children: [
-                  //Palette(),
-                  LeftBar(
-                    onNewWidget: onNewWidget,
-                    onTemplate: onTemplate,
-                  ),
-                  Expanded(child: Column(
-                    children: <Widget>[
-                      ContextToolBar(),
-                      Expanded(child: DeselectWidget(child: CanvasSpace())),
-                    ],
-                  )),
-                  /*SizedBox(
+            )),
+            /*SizedBox(
                     child: WidgetTree(),
                     width: 300,
                   ),*/
-                  RightBar(),
-                ]
-            ),
-          );
-        }
+            RightBar(),
+          ]),
+        );
       }
-    );
-
+    });
   }
 }
 
@@ -253,18 +253,20 @@ class CodeWorkspace extends StatelessWidget {
                   width: 400,
                   height: 56,
                   child: Center(
-                    child: RaisedButton(
+                    child: ElevatedButton(
                       onPressed: () async {
-                        if(kIsWeb) {
+                        if (kIsWeb) {
                           Clipboard.setData(ClipboardData(
                             text: AppScope.of(context).getCode(),
                           ));
                           return;
                         }
-                        String? path = await FilePicker.platform.getDirectoryPath();;
+                        String? path =
+                            await FilePicker.platform.getDirectoryPath();
+                        ;
                         AppScope.of(context).saveToFolder(path);
                       },
-                      child: Text(kIsWeb? "Copy to clipboard": "Export"),
+                      child: Text(kIsWeb ? "Copy to clipboard" : "Export"),
                     ),
                   ),
                 ),

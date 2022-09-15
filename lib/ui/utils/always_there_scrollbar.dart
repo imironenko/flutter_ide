@@ -43,8 +43,8 @@ class StayScrollbar extends StatefulWidget {
   _ScrollbarState createState() => _ScrollbarState();
 }
 
-
-class _ScrollbarState extends State<StayScrollbar> with TickerProviderStateMixin {
+class _ScrollbarState extends State<StayScrollbar>
+    with TickerProviderStateMixin {
   ScrollbarPainter? _materialPainter;
   TargetPlatform? _currentPlatform;
   TextDirection? _textDirection;
@@ -75,6 +75,8 @@ class _ScrollbarState extends State<StayScrollbar> with TickerProviderStateMixin
         _textDirection = Directionality.of(context);
         _materialPainter = _buildMaterialScrollbarPainter();
         break;
+      default:
+        break;
     }
   }
 
@@ -91,11 +93,11 @@ class _ScrollbarState extends State<StayScrollbar> with TickerProviderStateMixin
   bool _handleScrollNotification(ScrollNotification notification) {
     // iOS sub-delegates to the CupertinoScrollbar instead and doesn't handle
     // scroll notifications here.
-    if (_currentPlatform != TargetPlatform.iOS
-        && (notification is ScrollUpdateNotification
-            || notification is OverscrollNotification)) {
-
-      _materialPainter!.update(notification.metrics, notification.metrics.axisDirection);
+    if (_currentPlatform != TargetPlatform.iOS &&
+        (notification is ScrollUpdateNotification ||
+            notification is OverscrollNotification)) {
+      _materialPainter!
+          .update(notification.metrics, notification.metrics.axisDirection);
     }
     return false;
   }

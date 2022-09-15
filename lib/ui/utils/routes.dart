@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 ///   }
 /// ));
 class NoTransitionRoute extends PageRoute {
-
   NoTransitionRoute({required this.builder});
 
   final WidgetBuilder builder;
@@ -14,12 +13,12 @@ class NoTransitionRoute extends PageRoute {
   @override
   Color? get barrierColor => null;
 
-
   @override
   String? get barrierLabel => null;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
     return builder(context);
   }
 
@@ -31,7 +30,6 @@ class NoTransitionRoute extends PageRoute {
 }
 
 class SlideTransitionRoute extends PageRoute {
-
   SlideTransitionRoute({required this.builder});
 
   final WidgetBuilder builder;
@@ -43,9 +41,10 @@ class SlideTransitionRoute extends PageRoute {
   String? get barrierLabel => null;
 
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
     return SlideTransition(
-      //position: animation,
+      position: animation as Animation<Offset>,
       child: builder(context),
     );
   }

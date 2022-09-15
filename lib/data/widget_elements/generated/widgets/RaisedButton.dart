@@ -11,100 +11,88 @@ import 'package:widget_maker_2_0/data/properties/enum_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
-
-class RaisedButtonElement extends WidgetElement with SlotChildElementMixin {
-  RaisedButtonElement({
+class ElevatedButtonElement extends WidgetElement with SlotChildElementMixin {
+  ElevatedButtonElement({
     required String? id,
     double? elevation,
     EdgeInsets? padding,
     Color? color,
-  }) :
-    elevation = MDoubleProperty(
-        value: elevation?? null,
-        name: "elevation",
-        defaultValue: null
-    ),
+  })  : elevation = MDoubleProperty(
+            value: elevation ?? null, name: "elevation", defaultValue: null),
+        padding = MEdgeInsetsProperty(
+            value: padding ?? null, name: "padding", defaultValue: null),
+        color = MColorProperty(
+            value: color ?? null, name: "color", defaultValue: null),
+        super(id);
 
-    padding = MEdgeInsetsProperty(
-        value: padding?? null,
-        name: "padding",
-        defaultValue: null
-    ),
+  final MDoubleProperty elevation;
+  final MEdgeInsetsProperty padding;
+  final MColorProperty color;
 
-    color = MColorProperty(
-        value: color?? null,
-        name: "color",
-        defaultValue: null
-    ),
-
-
-      super(id);
-
-    final MDoubleProperty elevation;
-    final MEdgeInsetsProperty padding;
-    final MColorProperty color;
-
-    static const String CHILD = "child";
+  static const String CHILD = "child";
 
   @override
   List<ChildSlot> constructChildSlots() => [
-   SingleChildSlot(slotName: CHILD),
-  ];  
-  
+        SingleChildSlot(slotName: CHILD),
+      ];
+
   @override
   List<MProperty> get attributes => [
-    elevation,
-    padding,
-    color,
-  ];
+        elevation,
+        padding,
+        color,
+      ];
 
   @override
   Widget generateWidget() {
-    return RaisedButtonElementWidget(
+    return ElevatedButtonElementWidget(
       id: id,
     );
   }
 
-  factory RaisedButtonElement.fromMap(Map<String, dynamic> map) {
-    return RaisedButtonElement(
-        id: map["id"],
-        elevation: map["elevation"],
-        padding: map["padding"],
-        color: map["color"],
+  factory ElevatedButtonElement.fromMap(Map<String, dynamic> map) {
+    return ElevatedButtonElement(
+      id: map["id"],
+      elevation: map["elevation"],
+      padding: map["padding"],
+      color: map["color"],
     );
   }
 
   @override
-  String get name => "RaisedButton";
-
+  String get name => "ElevatedButton";
 }
 
-
- class RaisedButtonElementWidget extends StatefulWidget with ElementWidgetMixin {
-  RaisedButtonElementWidget({this.id}) : super(key: ObjectKey(id));
+class ElevatedButtonElementWidget extends StatefulWidget
+    with ElementWidgetMixin {
+  ElevatedButtonElementWidget({this.id}) : super(key: ObjectKey(id));
 
   final String? id;
 
   @override
-  _RaisedButtonElementWidgetState createState() => _RaisedButtonElementWidgetState();
+  _ElevatedButtonElementWidgetState createState() =>
+      _ElevatedButtonElementWidgetState();
 }
 
-class _RaisedButtonElementWidgetState extends State<RaisedButtonElementWidget> with ElementWidgetStateMixin<RaisedButtonElement, RaisedButtonElementWidget> {
+class _ElevatedButtonElementWidgetState
+    extends State<ElevatedButtonElementWidget>
+    with
+        ElementWidgetStateMixin<ElevatedButtonElement,
+            ElevatedButtonElementWidget> {
   @override
   Widget build(BuildContext context) {
     return wrapWithDefault(
-        child: RaisedButton(
-          child: getChildOrDragTarget(
-               childId: element!.findIdForSlot(RaisedButtonElement.CHILD),
-               data: SlotData(slotName: RaisedButtonElement.CHILD), 
-               widgetWrapper: (context, child) => sizeWidgetWrapper(context, Size(100.0,60.0), child)
-             ),        
-         elevation: element!.elevation.value,
-         padding: element!.padding.value,
-         color: element!.color.value,
-        )
-    )!;
+        // child: RaisedButton(
+        child: MaterialButton(
+      onPressed: () {},
+      child: getChildOrDragTarget(
+          childId: element!.findIdForSlot(ElevatedButtonElement.CHILD),
+          data: SlotData(slotName: ElevatedButtonElement.CHILD),
+          widgetWrapper: (context, child) =>
+              sizeWidgetWrapper(context, Size(100.0, 60.0), child)),
+      elevation: element!.elevation.value,
+      padding: element!.padding.value,
+      color: element!.color.value,
+    ))!;
   }
-
-} 
-  
+}

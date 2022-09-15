@@ -6,7 +6,6 @@ import 'package:widget_maker_2_0/data/app_scope/currently_dragging.dart';
 /// A widget which contains all dependencies which should be accessible
 /// throughout the entire app life cycle.
 class AppScope extends StatefulWidget {
-
   final Widget? child;
 
   /// This is for debugging purposes
@@ -16,7 +15,8 @@ class AppScope extends StatefulWidget {
 
   /// Only use this in debug mode
   static String resolveDebugId(String id) {
-    return debugProject!.widgetBoard!.getWidgetElementFromAnySource(id)?.name ?? "No idea";
+    return debugProject!.widgetBoard!.getWidgetElementFromAnySource(id)?.name ??
+        "No idea";
   }
 
   const AppScope({Key? key, this.child}) : super(key: key);
@@ -30,7 +30,6 @@ class AppScope extends StatefulWidget {
 }
 
 class _AppScopeState extends State<AppScope> {
-
   Project? project;
 
   @override
@@ -39,7 +38,7 @@ class _AppScopeState extends State<AppScope> {
     project = Project();
 
     print("Initing");
-    assert((){
+    assert(() {
       AppScope.debugProject = project;
 
       return true;
@@ -48,7 +47,7 @@ class _AppScopeState extends State<AppScope> {
   }
 
   void update() {
-    setState((){});
+    setState(() {});
   }
 
   @override
@@ -61,7 +60,7 @@ class _AppScopeState extends State<AppScope> {
   @override
   Widget build(BuildContext context) {
     return CurrentlyDragging(
-      child: Provider<Project?>.value(
+      child: ListenableProvider<Project?>.value(
         value: project,
         child: widget.child,
         updateShouldNotify: (old, n) => true,
@@ -69,4 +68,3 @@ class _AppScopeState extends State<AppScope> {
     );
   }
 }
-

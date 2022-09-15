@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'number_changer.dart';
 
 class RoundNumberChanger extends StatelessWidget {
-
   const RoundNumberChanger({
     Key? key,
     this.name,
@@ -15,32 +14,26 @@ class RoundNumberChanger extends StatelessWidget {
   }) : super(key: key);
 
   final String? name;
-  final ValueChanged<double>? onUpdate;
+  final ValueChanged<double?>? onUpdate;
   final double? value;
   final bool allowNegative;
   final bool showDescription;
   final bool isInt;
 
-
   @override
   Widget build(BuildContext context) {
     Widget result = NumberChanger(
-     onUpdate: onUpdate,
+      onUpdate: onUpdate,
       value: value,
       allowNegative: allowNegative,
       isInt: isInt,
       showDescription: false,
     );
 
-    if(showDescription) {
-
-    }
-    return RoundContainer(
-      child: result
-    );
+    if (showDescription) {}
+    return RoundContainer(child: result);
   }
 }
-
 
 class RoundContainer extends StatelessWidget {
   final Widget? child;
@@ -48,7 +41,9 @@ class RoundContainer extends StatelessWidget {
   final double? height;
   final Color? color;
 
-  const RoundContainer({Key? key, this.child, this.width, this.height, this.color}) : super(key: key);
+  const RoundContainer(
+      {Key? key, this.child, this.width, this.height, this.color})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,17 +53,13 @@ class RoundContainer extends StatelessWidget {
       decoration: ShapeDecoration(
         color: color,
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Colors.white
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(4))
-        ),
+            side: BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.all(Radius.circular(4))),
       ),
       child: child,
     );
   }
 }
-
 
 class NotSupportedValue extends StatelessWidget {
   @override

@@ -12,7 +12,6 @@ class ConfigurationBar extends StatefulWidget {
 }
 
 class _ConfigurationBarState extends State<ConfigurationBar> {
-
   String? id;
   WidgetBoard? boardWidget;
   StreamSubscription? subscription;
@@ -28,7 +27,7 @@ class _ConfigurationBarState extends State<ConfigurationBar> {
     id = boardWidget!.currentlySelectedValue;
     boardWidget!.registerUpdate(id, refresh);
 
-    if(subscription != null) {
+    if (subscription != null) {
       subscription!.cancel();
     }
     subscription = boardWidget!.currentlySelected.listen((it) {
@@ -36,15 +35,13 @@ class _ConfigurationBarState extends State<ConfigurationBar> {
       id = it;
       boardWidget!.registerUpdate(it, refresh);
 
-      _navigatorKey.currentState!.pushReplacement(NoTransitionRoute(
-        builder: (context) {
-          return id == null? buildEmpty(context): buildPage(context);
-        }
-      ));
+      _navigatorKey.currentState!
+          .pushReplacement(NoTransitionRoute(builder: (context) {
+        return id == null ? buildEmpty(context) : buildPage(context);
+      }));
       setState(() {});
     });
   }
-
 
   @override
   void dispose() {
@@ -61,15 +58,14 @@ class _ConfigurationBarState extends State<ConfigurationBar> {
       initialRoute: "home",
       key: _navigatorKey,
       onGenerateRoute: (RouteSettings settings) {
-        if(settings.name == "home")
+        if (settings.name == "home")
           return MaterialPageRoute(
-            builder: (context) => id == null? buildEmpty(context): buildPage(context)
-          );
+              builder: (context) =>
+                  id == null ? buildEmpty(context) : buildPage(context));
         return null;
       },
     );
   }
-
 
   Widget buildPage(BuildContext context) {
     return ListView(
@@ -82,32 +78,38 @@ class _ConfigurationBarState extends State<ConfigurationBar> {
         Divider(),
         Row(
           children: <Widget>[
-            if(!boardWidget!.getWidgetElement(id)!.isRoot)
+            if (!boardWidget!.getWidgetElement(id)!.isRoot)
               Expanded(
-                child: OutlineButton(
+                child: OutlinedButton(
                   child: Text("Remove"),
                   onPressed: () {
                     boardWidget!.removeWidget(id!);
                   },
                 ),
               ),
-            if(!boardWidget!.getWidgetElement(id)!.isRoot)
+            if (!boardWidget!.getWidgetElement(id)!.isRoot)
               Expanded(
-                child: OutlineButton(
+                child: OutlinedButton(
                   child: Text("Wrap"),
                   onPressed: () async {
-                    var it = await quickChooseWidgetElement(context, filter: (WidgetElement element) {
-                      return element.children!.length != 0;});
-                    if(it != null) {
+                    var it = await quickChooseWidgetElement(context,
+                        filter: (WidgetElement element) {
+                      return element.children!.length != 0;
+                    });
+                    if (it != null) {
                       boardWidget!.wrap(id, it.widgetElement);
                     }
                   },
                 ),
               ),
-            if (boardWidget!.canMerge(id) && !boardWidget!.getWidgetElement(id)!.isRoot)
-               Expanded(
-                child: OutlineButton(
-                  child: Text("Replace with children", style: TextStyle(fontSize: 10),),
+            if (boardWidget!.canMerge(id) &&
+                !boardWidget!.getWidgetElement(id)!.isRoot)
+              Expanded(
+                child: OutlinedButton(
+                  child: Text(
+                    "Replace with children",
+                    style: TextStyle(fontSize: 10),
+                  ),
                   onPressed: () {
                     boardWidget!.replaceWithChildren(id!);
                   },
@@ -146,9 +148,14 @@ class _ConfigurationBarState extends State<ConfigurationBar> {
   Widget buildList(BuildContext context) {
     return Column(
       key: ObjectKey(id),
-      children: boardWidget!.getWidgetElement(id)?.attributes?.map((it) => it!.getChanger(context, id))?.map((it) {
-        return it;
-      })?.toList() ?? [],
+      children: boardWidget!
+              .getWidgetElement(id)
+              ?.attributes
+              ?.map((it) => it!.getChanger(context, id))
+              .map((it) {
+            return it;
+          }).toList() ??
+          [],
     );
   }
 }

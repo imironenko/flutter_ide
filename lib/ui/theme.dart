@@ -1,18 +1,17 @@
 import 'package:widget_maker_2_0/material.dart';
 
 class MyTheme extends StatelessWidget {
-
   const MyTheme({Key? key, this.myThemeData, this.child}) : super(key: key);
 
   final MyThemeData? myThemeData;
 
   final Widget? child;
 
-
   static MyThemeData? of(BuildContext context) {
-    final _MyInheritedTheme myInheritedTheme =context.dependOnInheritedWidgetOfExactType(aspect:_MyInheritedTheme) as _MyInheritedTheme;
+    final _MyInheritedTheme? myInheritedTheme =
+        context.dependOnInheritedWidgetOfExactType(aspect: _MyInheritedTheme);
 
-    return myInheritedTheme.myTheme!.myThemeData;
+    return myInheritedTheme?.myTheme?.myThemeData;
   }
 
   @override
@@ -27,28 +26,20 @@ class MyTheme extends StatelessWidget {
   }
 }
 
-
 class _MyInheritedTheme extends InheritedWidget {
-
-
   final Widget child;
   final MyTheme? myTheme;
 
-  const _MyInheritedTheme({required this.child, this.myTheme}): super(child: child);
+  const _MyInheritedTheme({required this.child, this.myTheme})
+      : super(child: child);
 
   @override
-  bool updateShouldNotify(_MyInheritedTheme oldWidget) => myTheme!.myThemeData != oldWidget.myTheme!.myThemeData;
-
+  bool updateShouldNotify(_MyInheritedTheme oldWidget) =>
+      myTheme!.myThemeData != oldWidget.myTheme!.myThemeData;
 }
 
-
 class MyThemeData {
-
-
-
   factory MyThemeData({required ThemeData themeData}) {
-
-
     var bg = themeData.backgroundColor;
 
     return MyThemeData._(
@@ -67,36 +58,37 @@ class MyThemeData {
     );
   }
 
-
-
-  static Color alphaBlendWithWhite(Color background, double alphaInPercentage) => alphaBlend(background, Colors.white, alphaInPercentage / 100);
+  static Color alphaBlendWithWhite(
+          Color background, double alphaInPercentage) =>
+      alphaBlend(background, Colors.white, alphaInPercentage / 100);
   static Color alphaBlend(Color background, Color foreground, double alpha) {
     assert(alpha >= 0 && alpha <= 1);
 
-    var r3 = (background.red + (foreground.red - background.red) * alpha).round();
-    var g3 = (background.green + (foreground.green - background.green) * alpha).round();
-    var b3 = (background.blue + (foreground.blue - background.blue) * alpha).round();
+    var r3 =
+        (background.red + (foreground.red - background.red) * alpha).round();
+    var g3 = (background.green + (foreground.green - background.green) * alpha)
+        .round();
+    var b3 =
+        (background.blue + (foreground.blue - background.blue) * alpha).round();
 
     return Color.fromRGBO(r3, g3, b3, 1);
   }
 
-  MyThemeData._({
-    this.background0dp,
-    this.background1dp,
-    this.background2dp,
-    this.background3dp,
-    this.background4dp,
-    this.background6dp,
-    this.background8dp,
-    this.background12dp,
-    this.background16dp,
-    this.background24dp,
-    this.themeData,
-    this.selectedColor
-  });
+  MyThemeData._(
+      {this.background0dp,
+      this.background1dp,
+      this.background2dp,
+      this.background3dp,
+      this.background4dp,
+      this.background6dp,
+      this.background8dp,
+      this.background12dp,
+      this.background16dp,
+      this.background24dp,
+      this.themeData,
+      this.selectedColor});
 
   final ThemeData? themeData;
-
 
   final Color? background0dp;
   final Color? background1dp;

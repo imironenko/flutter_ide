@@ -4,12 +4,11 @@ import 'package:widget_maker_2_0/ui/pages/workspace_page/bars/left_bar/widget_tr
 import 'package:widget_maker_2_0/ui/theme.dart';
 
 class LeftBar extends StatelessWidget {
-
-
   final VoidCallback? onNewWidget;
   final VoidCallback? onTemplate;
 
-  const LeftBar({Key? key, this.onNewWidget, this.onTemplate}) : super(key: key);
+  const LeftBar({Key? key, this.onNewWidget, this.onTemplate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +19,9 @@ class LeftBar extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Expanded(child: WidgetTree()),
-          RaisedButton(
-              child: Text("New Widget (or ctrl+space)"),
-              onPressed: onNewWidget,
+          ElevatedButton(
+            child: Text("New Widget (or ctrl+space)"),
+            onPressed: onNewWidget,
           ),
         ],
       ),

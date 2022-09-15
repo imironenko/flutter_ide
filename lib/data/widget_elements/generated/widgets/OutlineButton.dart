@@ -11,43 +11,32 @@ import 'package:widget_maker_2_0/data/properties/enum_properties.dart';
 import 'package:flutter/material.dart';
 import 'package:widget_maker_2_0/data/widget_elements/wrappers/wrappers.dart';
 
-
 class OutlineButtonElement extends WidgetElement with SlotChildElementMixin {
   OutlineButtonElement({
     required String? id,
     Color? color,
     EdgeInsets? padding,
-  }) :
-    color = MColorProperty(
-        value: color?? null,
-        name: "color",
-        defaultValue: null
-    ),
+  })  : color = MColorProperty(
+            value: color ?? null, name: "color", defaultValue: null),
+        padding = MEdgeInsetsProperty(
+            value: padding ?? null, name: "padding", defaultValue: null),
+        super(id);
 
-    padding = MEdgeInsetsProperty(
-        value: padding?? null,
-        name: "padding",
-        defaultValue: null
-    ),
+  final MColorProperty color;
+  final MEdgeInsetsProperty padding;
 
-
-      super(id);
-
-    final MColorProperty color;
-    final MEdgeInsetsProperty padding;
-
-    static const String CHILD = "child";
+  static const String CHILD = "child";
 
   @override
   List<ChildSlot> constructChildSlots() => [
-   SingleChildSlot(slotName: CHILD),
-  ];  
-  
+        SingleChildSlot(slotName: CHILD),
+      ];
+
   @override
   List<MProperty> get attributes => [
-    color,
-    padding,
-  ];
+        color,
+        padding,
+      ];
 
   @override
   Widget generateWidget() {
@@ -58,42 +47,44 @@ class OutlineButtonElement extends WidgetElement with SlotChildElementMixin {
 
   factory OutlineButtonElement.fromMap(Map<String, dynamic> map) {
     return OutlineButtonElement(
-        id: map["id"],
-        color: map["color"],
-        padding: map["padding"],
+      id: map["id"],
+      color: map["color"],
+      padding: map["padding"],
     );
   }
 
   @override
   String get name => "OutlineButton";
-
 }
 
-
- class OutlineButtonElementWidget extends StatefulWidget with ElementWidgetMixin {
+class OutlineButtonElementWidget extends StatefulWidget
+    with ElementWidgetMixin {
   OutlineButtonElementWidget({this.id}) : super(key: ObjectKey(id));
 
   final String? id;
 
   @override
-  _OutlineButtonElementWidgetState createState() => _OutlineButtonElementWidgetState();
+  _OutlineButtonElementWidgetState createState() =>
+      _OutlineButtonElementWidgetState();
 }
 
-class _OutlineButtonElementWidgetState extends State<OutlineButtonElementWidget> with ElementWidgetStateMixin<OutlineButtonElement, OutlineButtonElementWidget> {
+class _OutlineButtonElementWidgetState extends State<OutlineButtonElementWidget>
+    with
+        ElementWidgetStateMixin<OutlineButtonElement,
+            OutlineButtonElementWidget> {
   @override
   Widget build(BuildContext context) {
     return wrapWithDefault(
-        child: OutlineButton(
-          child: getChildOrDragTarget(
-               childId: element!.findIdForSlot(OutlineButtonElement.CHILD),
-               data: SlotData(slotName: OutlineButtonElement.CHILD), 
-               widgetWrapper: (context, child) => sizeWidgetWrapper(context, Size(100.0,60.0), child)
-             ),        
-         color: element!.color.value,
-         padding: element!.padding.value,
-        )
-    )!;
+        // child: OutlinedButton
+        child: MaterialButton(
+      onPressed: () {},
+      child: getChildOrDragTarget(
+          childId: element!.findIdForSlot(OutlineButtonElement.CHILD),
+          data: SlotData(slotName: OutlineButtonElement.CHILD),
+          widgetWrapper: (context, child) =>
+              sizeWidgetWrapper(context, Size(100.0, 60.0), child)),
+      color: element!.color.value,
+      padding: element!.padding.value,
+    ))!;
   }
-
-} 
-  
+}

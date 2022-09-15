@@ -9,25 +9,18 @@ import 'widget_converter.dart';
 //import '../../pkg/widget_converter/lib/widget_converter.dart';
 //import '/Users/Norbert/workspace/widget_maker_2_0/pkg/widget_converter/lib/widget_converter.dart';
 
-
-
 void main() {
   debugDefaultTargetPlatformOverride = TargetPlatform.fuchsia;
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-
-
-
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-
-
-  WebSocket _socket;
+  WebSocket? _socket;
 
   @override
   void initState() {
@@ -36,16 +29,14 @@ class _MyAppState extends State<MyApp> {
     initServer();
   }
 
-
   void initServer() async {
-
     int widgetPort = 9244;
-    await HttpServer.bind(InternetAddress.loopbackIPv4, widgetPort).then((server) {
+    await HttpServer.bind(InternetAddress.loopbackIPv4, widgetPort)
+        .then((server) {
       print("Hot runner server is running on "
           "'http://${server.address.address}:$widgetPort/'");
 
-      server.transform(WebSocketTransformer())
-          .listen(handle);
+      server.transform(WebSocketTransformer()).listen(handle);
     });
   }
 
@@ -62,24 +53,24 @@ class _MyAppState extends State<MyApp> {
       ),
       home: WidgetElementCompiler(
         child: buildL(),
+        socket: _socket,
       ),
     );
   }
 }
 
 class WidgetElementCompiler extends StatefulWidget {
-
-  const WidgetElementCompiler({Key key, this.child, this.socket}) : super(key: key);
+  const WidgetElementCompiler({Key? key, required this.child, this.socket})
+      : super(key: key);
   final Widget child;
-  final WebSocket socket;
+  final WebSocket? socket;
 
   @override
   _WidgetElementCompilerState createState() => _WidgetElementCompilerState();
 }
 
 class _WidgetElementCompilerState extends State<WidgetElementCompiler> {
-
-  Map convert() {
+  Map? convert() {
     print(walk(widget.child));
     return walk(widget.child);
   }
@@ -90,8 +81,7 @@ class _WidgetElementCompilerState extends State<WidgetElementCompiler> {
     //convert();
   }
 
-
-  Map walk(Widget widget) {
+  Map? walk(Widget widget) {
     return convertWidget(widget);
     //return convert(widget);
   }
